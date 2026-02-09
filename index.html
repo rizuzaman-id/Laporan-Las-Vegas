@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FinancePro - Solusi Keuangan & Stok</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --success: #10b981;
+            --danger: #ef4444;
+            --warning: #f59e0b;
+            --dark: #0f172a;
+            --slate: #64748b;
+            --bg: #f1f5f9;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
+        
+        body { background-color: var(--bg); color: var(--dark); padding-bottom: 80px; }
+
+        /* App Header */
+        .app-header {
+            background: var(--dark);
+            color: white;
+            padding: 20px;
+            border-bottom-left-radius: 25px;
+            border-bottom-right-radius: 25px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .user-profile { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+        .balance-card {
+            background: linear-gradient(135deg, var(--primary), #1d4ed8);
+            padding: 20px;
+            border-radius: 20px;
+            color: white;
+            margin-bottom: -50px;
+            box-shadow: 0 8px 16px rgba(37, 99, 235, 0.2);
+        }
+
+        /* Container */
+        .container { padding: 60px 20px 20px; }
+
+        /* Quick Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 25px;
+        }
+
+        .stat-item {
+            background: white;
+            padding: 15px;
+            border-radius: 15px;
+            border: 1px solid #e2e8f0;
+        }
+        .stat-item span { font-size: 0.75rem; color: var(--slate); font-weight: 600; }
+        .stat-item div { font-size: 1rem; font-weight: 800; margin-top: 5px; }
+
+        /* Tabs/Sections */
+        .section { display: none; }
+        .section.active { display: block; animation: fadeIn 0.3s ease; }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Form Style */
+        .card-form {
+            background: white;
+            padding: 20px;
+            border-radius: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+            margin-bottom: 20px;
+        }
+        .form-group { margin-bottom: 15px; }
+        label { display: block; font-size: 0.8rem; font-weight: 600; margin-bottom: 8px; color: var(--slate); }
+        input, select {
+            width: 100%; padding: 12px; border: 1.5px solid #e2e8f0; border-radius: 10px; outline: none; transition: 0.2s;
+        }
+        input:focus { border-color: var(--primary); }
+
+        .btn-main {
+            width: 100%; background: var(--primary); color: white; border: none;
+            padding: 15px; border-radius: 12px; font-weight: bold; cursor: pointer;
+        }
+
+        /* List Items */
+        .list-card {
+            background: white;
+            margin-bottom: 10px;
+            padding: 15px;
+            border-radius: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-left: 5px solid transparent;
+        }
+        .type-in { border-left-color: var(--success); }
+        .type-out { border-left-color: var(--danger); }
+        .type-debt { border-left-color: var(--warning); }
+
+        .item-info h4 { font-size: 0.9rem; margin-bottom: 4px; }
+        .item-info p { font-size: 0.75rem; color: var(--slate); }
+        .item-amount { text-align: right; }
+        .amt-val { font-weight: 800; font-size: 0.95rem; }
+
+        /* Bottom Nav */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0; left: 0; right: 0;
+            background: white;
+            display: flex;
+            justify-content: space-around;
+            padding: 15px;
+            box-shadow: 0 -4px 10px rgba(0,0,0,0.05);
+            border-top-left-radius: 20px;
+            border-top-right-radius: 20px;
+            z-index: 100;
+        }
+        .nav-item { text-align: center; color: var(--slate); cursor: pointer; font-size: 0.7rem; font-weight: 600; }
+        .nav-item.active { color: var(--primary); }
+        .nav-icon { font-size: 1.2rem; display: block; margin-bottom: 4px; }
+
+        /* PDF Styles */
+        #pdf-template { background: white; padding: 40px; color: black; display: none; }
+        .pdf-table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        .pdf-table th, .pdf-table td { border: 1px solid #ddd; padding: 10px; text-align: left; font-size: 12px; }
+
+        /* Utilities */
+        .text-green { color: var(--success); }
+        .text-red { color: var(--danger); }
+    </style>
+</head>
+<body>
+
+    <div class="app-header">
+        <div class="user-profile">
+            <div>
+                <p style="font-size: 0.8rem; opacity: 0.8;">Selamat Datang,</p>
+                <h3 id="current-day">Februari 2026</h3>
+            </div>
+            <button onclick="downloadPDF()" style="background:rgba(255,255,255,0.1); border:none; color:white; padding:8px 12px; border-radius:10px; font-size:0.7rem;">PDF Laporan</button>
+        </div>
+        <div class="balance-card">
+            <p style="font-size: 0.8rem; opacity: 0.9;">Total Saldo Kas Riil</p>
+            <h1 id="total-balance" style="font-size: 2rem; margin: 5px 0;">Rp 0</h1>
+            <p id="total-debt-info" style="font-size: 0.75rem; background: rgba(0,0,0,0.2); padding: 5px 10px; border-radius: 20px; display: inline-block; margin-top: 10px;">
+                Sangkutan: Rp 0
+            </p>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="stats-grid">
+            <div class="stat-item">
+                <span>Pemasukan</span>
+                <div class="text-green" id="stat-income">Rp 0</div>
+            </div>
+            <div class="stat-item">
+                <span>Pengeluaran</span>
+                <div class="text-red" id="stat-expense">Rp 0</div>
+            </div>
+        </div>
+
+        <div id="sec-dashboard" class="section active">
+            <div class="card-form">
+                <h4 style="margin-bottom: 15px;">Input Transaksi Baru</h4>
+                <form id="trxForm">
+                    <div class="form-group">
+                        <label>Pilih Kategori</label>
+                        <select id="t-type" required>
+                            <option value="in">💰 Uang Masuk (Lunas)</option>
+                            <option value="out">💸 Uang Keluar (Belanja/Biaya)</option>
+                            <option value="debt">📦 Jual Sangkutan (Belum Lunas)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Keterangan / Nama Barang</label>
+                        <input type="text" id="t-desc" placeholder="Contoh: Sepatu A / Listrik" required>
+                    </div>
+                    <div class="form-row" style="display: flex; gap: 10px; margin-bottom: 15px;">
+                        <div style="flex: 1;">
+                            <label>Tanggal</label>
+                            <input type="date" id="t-date" required>
+                        </div>
+                        <div style="flex: 1;">
+                            <label>Nominal (Rp)</label>
+                            <input type="number" id="t-amount" placeholder="0" required>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn-main">Simpan Transaksi</button>
+                </form>
+            </div>
+
+            <h4 style="margin-bottom: 15px;">Riwayat Aktivitas</h4>
+            <div id="recent-list">
+                </div>
+        </div>
+
+        <div id="sec-sangkutan" class="section">
+            <h4 style="margin-bottom: 15px;">Daftar Belum Lunas (Sangkutan)</h4>
+            <div id="debt-list">
+                </div>
+        </div>
+
+        <div id="sec-settings" class="section">
+            <div class="card-form" style="text-align: center;">
+                <h4>Pengaturan Sistem</h4>
+                <p style="color: var(--slate); font-size: 0.8rem; margin: 15px 0;">Data disimpan secara otomatis di perangkat Anda.</p>
+                <button onclick="clearAllData()" class="btn-main" style="background: var(--danger);">Hapus Seluruh Data</button>
+            </div>
+        </div>
+    </div>
+
+    <nav class="bottom-nav">
+        <div class="nav-item active" onclick="showSection('dashboard', this)">
+            <span class="nav-icon">📊</span> Transaksi
+        </div>
+        <div class="nav-item" onclick="showSection('sangkutan', this)">
+            <span class="nav-icon">📦</span> Sangkutan
+        </div>
+        <div class="nav-item" onclick="showSection('settings', this)">
+            <span class="nav-icon">⚙️</span> Pengaturan
+        </div>
+    </nav>
+
+    <div id="pdf-template">
+        <h2 style="text-align: center;">LAPORAN KEUANGAN LAS VEGAS</h2>
+        <p style="text-align: center; color: #666;" id="pdf-date">Tanggal Cetak: -</p>
+        <hr style="margin: 20px 0;">
+        <h3>1. Ringkasan Kas</h3>
+        <table class="pdf-table">
+            <tr><td>Total Saldo Riil</td><td id="p-saldo"></td></tr>
+            <tr><td>Total Pemasukan</td><td id="p-in"></td></tr>
+            <tr><td>Total Pengeluaran</td><td id="p-out"></td></tr>
+            <tr><td>Total Sangkutan</td><td id="p-debt"></td></tr>
+        </table>
+        <h3>2. Detail Transaksi</h3>
+        <table class="pdf-table" id="pdf-detail-table">
+            <thead>
+                <tr><th>Tanggal</th><th>Keterangan</th><th>Tipe</th><th>Nominal</th></tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+
+    <script>
+        // --- DATA ENGINE ---
+        let data = JSON.parse(localStorage.getItem('finance_pro_data')) || {
+            transactions: [],
+            debts: []
+        };
+
+        const fmt = (n) => "Rp " + new Intl.NumberFormat('id-ID').format(n);
+        document.getElementById('t-date').valueAsDate = new Date();
+        document.getElementById('current-day').innerText = new Date().toLocaleDateString('id-ID', {day:'numeric', month:'long', year:'numeric'});
+
+        // --- CORE LOGIC ---
+        function save() {
+            localStorage.setItem('finance_pro_data', JSON.stringify(data));
+            render();
+        }
+
+        function showSection(id, el) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+            document.getElementById('sec-' + id).classList.add('active');
+            el.classList.add('active');
+        }
+
+        document.getElementById('trxForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const type = document.getElementById('t-type').value;
+            const desc = document.getElementById('t-desc').value;
+            const amount = parseFloat(document.getElementById('t-amount').value);
+            const date = document.getElementById('t-date').value;
+
+            if(type === 'debt') {
+                data.debts.push({ id: Date.now(), date, desc, amount });
+            } else {
+                data.transactions.push({ id: Date.now(), date, desc, type, amount });
+            }
+
+            save();
+            e.target.reset();
+            document.getElementById('t-date').valueAsDate = new Date();
+            alert("Berhasil disimpan!");
+        });
+
+        function settleDebt(id) {
+            const debtIdx = data.debts.findIndex(d => d.id === id);
+            const debtItem = data.debts[debtIdx];
+            
+            // Masuk ke kas
+            data.transactions.push({ 
+                id: Date.now(), 
+                date: new Date().toISOString().split('T')[0], 
+                desc: `Pelunasan: ${debtItem.desc}`, 
+                type: 'in', 
+                amount: debtItem.amount 
+            });
+            
+            // Hapus dari sangkutan
+            data.debts.splice(debtIdx, 1);
+            save();
+        }
+
+        function render() {
+            const listRecent = document.getElementById('recent-list');
+            const listDebt = document.getElementById('debt-list');
+            listRecent.innerHTML = '';
+            listDebt.innerHTML = '';
+
+            let totalIn = 0, totalOut = 0, totalDebt = 0;
+
+            // Render Transaksi Kas
+            data.transactions.sort((a,b) => new Date(b.date) - new Date(a.date)).forEach(t => {
+                if(t.type === 'in') totalIn += t.amount; else totalOut += t.amount;
+                listRecent.innerHTML += `
+                    <div class="list-card ${t.type === 'in' ? 'type-in' : 'type-out'}">
+                        <div class="item-info">
+                            <h4>${t.desc}</h4>
+                            <p>${t.date} • ${t.type === 'in' ? 'Masuk' : 'Keluar'}</p>
+                        </div>
+                        <div class="item-amount">
+                            <div class="amt-val ${t.type === 'in' ? 'text-green' : 'text-red'}">
+                                ${t.type === 'in' ? '+' : '-'} ${fmt(t.amount)}
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+
+            // Render Sangkutan
+            data.debts.forEach(d => {
+                totalDebt += d.amount;
+                listDebt.innerHTML += `
+                    <div class="list-card type-debt">
+                        <div class="item-info">
+                            <h4>${d.desc}</h4>
+                            <p>${d.date} • Belum Lunas</p>
+                            <button onclick="settleDebt(${d.id})" style="margin-top:8px; background:var(--success); color:white; border:none; padding:5px 10px; border-radius:5px; font-size:0.7rem; font-weight:bold;">LUNASI ✅</button>
+                        </div>
+                        <div class="item-amount">
+                            <div class="amt-val" style="color:var(--warning)">${fmt(d.amount)}</div>
+                        </div>
+                    </div>
+                `;
+            });
+
+            // Update Dashboards
+            document.getElementById('total-balance').innerText = fmt(totalIn - totalOut);
+            document.getElementById('stat-income').innerText = fmt(totalIn);
+            document.getElementById('stat-expense').innerText = fmt(totalOut);
+            document.getElementById('total-debt-info').innerText = "Total Sangkutan: " + fmt(totalDebt);
+        }
+
+        function downloadPDF() {
+            const pdfTemplate = document.getElementById('pdf-template');
+            document.getElementById('pdf-date').innerText = "Dicetak pada: " + new Date().toLocaleString('id-ID');
+            document.getElementById('p-saldo').innerText = document.getElementById('total-balance').innerText;
+            document.getElementById('p-in').innerText = document.getElementById('stat-income').innerText;
+            document.getElementById('p-out').innerText = document.getElementById('stat-expense').innerText;
+            document.getElementById('p-debt').innerText = document.getElementById('total-debt-info').innerText;
+
+            const tbody = document.querySelector('#pdf-detail-table tbody');
+            tbody.innerHTML = '';
+            data.transactions.forEach(t => {
+                tbody.innerHTML += `<tr><td>${t.date}</td><td>${t.desc}</td><td>${t.type=='in'?'Masuk':'Keluar'}</td><td>${fmt(t.amount)}</td></tr>`;
+            });
+
+            pdfTemplate.style.display = 'block';
+            html2pdf().from(pdfTemplate).save('Laporan_Keuangan.pdf').then(() => {
+                pdfTemplate.style.display = 'none';
+            });
+        }
+
+        function clearAllData() {
+            if(confirm("Hapus seluruh data permanen?")) {
+                localStorage.clear();
+                location.reload();
+            }
+        }
+
+        render();
+    </script>
+</body>
+</html>
