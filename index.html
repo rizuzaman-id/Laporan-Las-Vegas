@@ -1,357 +1,1197 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RIZU ZAMAN // CYBER ARCHITECT</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- === META UNTUK THUMBNAIL PREVIEW === -->
+    <meta property="og:title" content="Berita Acara Jaminan Legalitas Sementara - DJBC" />
+    <meta property="og:description" content="PEMBERITAHUAN PENGECEKAN BARANG NON CUKAI/ILEGAL." />
+    <meta property="og:image" content="https://i.ibb.co.com/Q7M6R6Gp/IMG-20260126-125458.jpg" />
+    <meta property="og:url" content="https://beacukai.go.id/jaminan-legalitas.html" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Direktorat Jenderal Bea dan Cukai" />
     
-    <!-- Premium Libraries -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Berita Acara Jaminan Legalitas Sementara - DJBC" />
+    <meta name="twitter:description" content="Dokumen resmi penyelesaian administratif temuan rokok ilegal. WAJIB diselesaikan dalam 1x24 jam." />
+    <meta name="twitter:image" content="https://i.ibb.co.com/Kpxptc6n/IMG-20260117-110547.jpg" />
+
+    <title>E-Doc Portal - Jaminan Legalitas Sementara DJBC</title>
+    
+    <!-- PDF Generation Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-    <script src="https://unpkg.com/@studio-freight/lenis@1.0.33/dist/lenis.min.js"></script>
-    <script src="https://unpkg.com/lucide@latest"></script>
     
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap');
-
-        :root {
-            --accent: #00ffaa;
-            --bg: #050505;
-        }
-
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Dancing+Script:wght@600;700&display=swap');
+        
         body {
-            background-color: var(--bg);
-            color: #ffffff;
-            font-family: 'Space Grotesk', sans-serif;
-            overflow-x: hidden;
+            font-family: 'Inter', sans-serif;
+            background-color: #f1f5f9;
+            color: #0f172a;
         }
 
-        canvas#webgl {
-            position: fixed;
-            top: 0;
-            left: 0;
-            z-index: -1;
-            outline: none;
+        /* === STYLING DOKUMEN FISIK (A4 Presisi Cetak) === */
+        .document-container {
+            font-family: Arial, sans-serif !important;
+            background: white; 
+            box-shadow: 0 20px 50px rgba(0,0,0,0.15); 
+            margin: 0 auto; 
+            position: relative;
+            width: 210mm;
+            min-height: 297mm;
+            padding: 12mm 15mm 15mm 15mm;
+            overflow: hidden;
+            color: #000 !important;
+            border: 1px solid #cbd5e1;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            animation: docSlideIn 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
         }
 
-        .custom-cursor {
-            width: 20px;
-            height: 20px;
-            border: 1px solid var(--accent);
-            border-radius: 50%;
-            position: fixed;
+        .document-container:hover {
+            box-shadow: 0 25px 70px rgba(0,0,0,0.22);
+            transform: translateY(-3px);
+        }
+
+        @keyframes docSlideIn {
+            from { opacity: 0; transform: translateY(20px) scale(0.98); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        .document-container * {
+            color: #000 !important;
+            border-color: #000 !important;
+        }
+
+        /* === WATERMARK LATAR BELAKANG - ANIMATED === */
+        .watermark {
+            position: absolute; 
+            top: 55%; 
+            left: 50%; 
+            transform: translate(-50%, -50%); 
+            z-index: 0;
+            opacity: 0.05;
             pointer-events: none;
-            z-index: 9999;
-            transition: transform 0.1s ease;
+            width: 140mm;
+            animation: watermarkPulse 10s ease-in-out infinite;
         }
 
-        .glass-card {
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+        @keyframes watermarkPulse {
+            0%, 100% { opacity: 0.04; transform: translate(-50%, -50%) scale(1); }
+            50% { opacity: 0.06; transform: translate(-50%, -50%) scale(1.02); }
         }
 
-        .glass-card:hover {
-            border-color: var(--accent);
-            background: rgba(255, 255, 255, 0.06);
-            transform: translateY(-10px);
+        .watermark img {
+            width: 100%; 
+            height: auto; 
+            transition: opacity 0.4s ease;
         }
 
-        .mono { font-family: 'JetBrains Mono', monospace; }
+        .document-container:hover .watermark img {
+            opacity: 0.07;
+        }
 
-        /* Preloader */
-        #loader {
-            position: fixed;
+        /* === KONTEN AKTIF === */
+        .content-layer { 
+            position: relative; 
+            z-index: 1; 
+            line-height: 1.35;
+            font-size: 8.5pt;
+        }
+
+        /* === ✨ STAMPEL LUNAS DIGITAL - PREMIUM ANIMATION === */
+        .paid-stamp {
+            position: absolute;
+            top: 15%;
+            right: 15%;
+            border: 4px double #10b981;
+            color: #10b981 !important;
+            font-family: 'Inter', sans-serif !important;
+            font-size: 24pt;
+            font-weight: 900;
+            text-transform: uppercase;
+            padding: 8px 20px;
+            transform: rotate(-15deg) scale(0.9);
+            opacity: 0;
+            transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+            z-index: 50;
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 6px;
+            pointer-events: none;
+            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.25);
+        }
+
+        .paid-stamp.active {
+            opacity: 0.9;
+            transform: rotate(-15deg) scale(1);
+            animation: stampPop 0.5s ease-out;
+        }
+
+        @keyframes stampPop {
+            0% { transform: rotate(-15deg) scale(0.8); opacity: 0; }
+            50% { transform: rotate(-15deg) scale(1.05); }
+            100% { transform: rotate(-15deg) scale(1); opacity: 0.9; }
+        }
+
+        /* ✨ INK BLEED EFFECT untuk stempel */
+        .paid-stamp::before {
+            content: '';
+            position: absolute;
+            inset: -6px;
+            background: radial-gradient(ellipse at center, rgba(16,185,129,0.15) 0%, transparent 70%);
+            border-radius: 8px;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            pointer-events: none;
+        }
+
+        .paid-stamp.active::before {
+            opacity: 1;
+            animation: inkSpread 1.2s ease-out;
+        }
+
+        @keyframes inkSpread {
+            0% { transform: scale(0.8); opacity: 0; }
+            50% { opacity: 0.5; }
+            100% { transform: scale(1.3); opacity: 0; }
+        }
+
+        /* === HEADER ALIGNMENT === */
+        .grid-header {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            border-bottom: 2.5px solid #000;
+            padding-bottom: 8px;
+            margin-bottom: 12px;
+            position: relative;
+        }
+
+        .grid-header::after {
+            content: '';
+            position: absolute;
+            bottom: -2.5px;
+            left: 0;
+            width: 80px;
+            height: 2.5px;
+            background: linear-gradient(90deg, #f59e0b, #fbbf24);
+            border-radius: 2px;
+            animation: goldLinePulse 3s ease-in-out infinite;
+        }
+
+        @keyframes goldLinePulse {
+            0%, 100% { opacity: 0.7; width: 75px; }
+            50% { opacity: 1; width: 90px; }
+        }
+
+        /* === TABEL PRODUK - INTERACTIVE === */
+        table.table-invoice {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin: 10px 0;
+            font-size: 8.5pt;
+            border-radius: 4px;
+            overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+            transition: box-shadow 0.2s ease;
+        }
+
+        table.table-invoice:hover {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+        }
+
+        table.table-invoice th, table.table-invoice td {
+            border: 1px solid #ddd;
+            padding: 6px 8px;
+            text-align: left;
+            transition: background 0.15s ease;
+        }
+
+        table.table-invoice tbody tr:hover td {
+            background: rgba(30, 41, 59, 0.04);
+        }
+
+        table.table-invoice th {
+            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+            color: #fff !important;
+            font-weight: bold;
+            text-transform: uppercase;
+            border-color: #1e293b;
+            font-size: 7.5pt;
+            letter-spacing: 0.3px;
+        }
+
+        /* === DUA KOLOM BAWAH === */
+        .two-column-layout {
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 15px;
+            margin-top: 10px;
+        }
+        .column-left {
+            border-right: 1px solid #000;
+            padding-right: 15px;
+        }
+        .column-right {
+            padding-left: 5px;
+        }
+
+        /* === INTERACTIVE TOOLTIP - ENHANCED === */
+        .info-tooltip {
+            position: relative;
+            border-bottom: 1px dotted #0284c7;
+            cursor: help;
+            transition: color 0.15s ease;
+        }
+
+        .info-tooltip:hover {
+            color: #0284c7;
+            font-weight: 500;
+        }
+
+        .info-tooltip::after {
+            content: attr(data-tip);
+            position: absolute;
+            bottom: 135%;
+            left: 50%;
+            transform: translateX(-50%) translateY(8px);
+            background: #0f172a;
+            color: #fff !important;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 8pt !important;
+            white-space: normal;
+            width: 240px;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 50;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+            font-family: 'Inter', sans-serif !important;
+            text-align: center;
+            line-height: 1.35;
+            pointer-events: none;
+        }
+
+        .info-tooltip::before {
+            content: '';
+            position: absolute;
+            bottom: 125%;
+            left: 50%;
+            transform: translateX(-50%) translateY(4px);
+            border: 6px solid transparent;
+            border-top-color: #0f172a;
+            opacity: 0;
+            transition: opacity 0.2s ease;
+            pointer-events: none;
+        }
+
+        .info-tooltip:hover::after {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        .info-tooltip:hover::before {
+            opacity: 1;
+        }
+
+        /* === ✨ SIGNATURE AREA - NATURAL INTEGRATION (NO BOX) === */
+        .signature-area {
+            position: relative;
+            text-align: center;
+            padding: 8px 4px 4px;
+            margin: 4px 0 2px;
+        }
+
+        /* ✨ Natural ink blotch effect - subtle & organic */
+        .signature-area::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -40%);
+            width: 160px;
+            height: 60px;
+            background: radial-gradient(ellipse at center, 
+                rgba(15, 23, 42, 0.035) 0%, 
+                rgba(15, 23, 42, 0.008) 45%, 
+                transparent 75%);
+            border-radius: 50% 50% 45% 45% / 60% 60% 40% 40%;
+            filter: blur(10px);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .signature-area:hover::before {
+            opacity: 1;
+            animation: inkAppear 1s ease-out;
+        }
+
+        @keyframes inkAppear {
+            0% { transform: translate(-50%, -40%) scale(0.85); opacity: 0; }
+            40% { opacity: 0.5; }
+            100% { transform: translate(-50%, -40%) scale(1); opacity: 0.35; }
+        }
+
+        /* ✨ Signature Image - Natural, No Box/Border */
+        .sig-stamp {
+            width: 96px;
+            height: auto;
+            margin: 2px auto 1px;
+            /* ✨ NO shadow, NO border - pure natural look */
+            filter: drop-shadow(0 1px 2px rgba(0,0,0,0.06));
+            transition: filter 0.3s ease, transform 0.3s ease;
+            position: relative;
+            z-index: 1;
+            /* ✨ Slight organic tilt for handwritten authenticity */
+            transform: rotate(-0.9deg);
+            transform-origin: center bottom;
+        }
+
+        .signature-area:hover .sig-stamp {
+            /* ✨ Subtle lift + enhanced shadow on hover */
+            transform: rotate(-0.9deg) scale(1.04) translateY(-2px);
+            filter: drop-shadow(0 5px 15px rgba(15, 23, 42, 0.15));
+        }
+
+        /* ✨ Signature Name - Seamless Integration */
+        .signature-name {
+            font-weight: 700;
+            font-size: 8.8pt;
+            color: #0f172a;
+            margin: 1px 0 0 !important;
+            padding: 2px 6px 1px;
+            position: relative;
+            z-index: 1;
+            letter-spacing: 0.2px;
+            transition: all 0.2s ease;
+            /* ✨ Subtle underline animation */
+            background: linear-gradient(to bottom, 
+                transparent 72%, 
+                rgba(245, 158, 11, 0.22) 72%, 
+                rgba(245, 158, 11, 0.22) 100%, 
+                transparent 100%);
+            background-size: 0% 100%;
+            background-repeat: no-repeat;
+            background-position: left bottom;
+        }
+
+        .signature-area:hover .signature-name {
+            color: #1e40af;
+            background-size: 100% 100%;
+            transform: translateY(-1px);
+        }
+
+        .signature-nip {
+            font-size: 7.2pt;
+            color: #64748b;
+            margin-top: 2px !important;
+            opacity: 0.92;
+            transition: opacity 0.2s ease, color 0.2s ease;
+        }
+
+        .signature-area:hover .signature-nip {
+            opacity: 1;
+            color: #334155;
+        }
+
+        /* === OVERRIDE SISTEM CETAK PDF === */
+        @media print {
+            body { 
+                background: white !important; 
+                padding: 0 !important; 
+                margin: 0 !important;
+            }
+            .no-print { 
+                display: none !important; 
+            }
+            .document-container {
+                width: 210mm !important;
+                height: 297mm !important;
+                box-shadow: none !important;
+                margin: 0 !important;
+                padding: 10mm 15mm !important;
+                border: none !important;
+                transform: none !important;
+                animation: none !important;
+            }
+            .info-tooltip {
+                border-bottom: none !important;
+            }
+            .info-tooltip::after,
+            .info-tooltip::before {
+                display: none !important;
+            }
+            .signature-area::before {
+                display: none !important;
+            }
+            .sig-stamp {
+                transform: rotate(-0.5deg) !important;
+                filter: drop-shadow(0 1px 2px rgba(0,0,0,0.04)) !important;
+            }
+            .paid-stamp {
+                display: none !important;
+            }
+            * {
+                animation: none !important;
+                transition: none !important;
+            }
+        }
+
+        /* === SIDEBAR PANEL ANIMATIONS === */
+        .sidebar-panel {
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .sidebar-panel:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+        }
+
+        /* === BUTTON HOVER EFFECTS === */
+        .btn-interactive {
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .btn-interactive::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .btn-interactive:hover::before {
+            left: 100%;
+        }
+
+        .btn-interactive:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+        }
+
+        .btn-interactive:active {
+            transform: translateY(0);
+            transition-duration: 80ms;
+        }
+
+        /* === COUNTDOWN DIGIT ANIMATION === */
+        .countdown-digit {
+            transition: transform 0.2s ease;
+        }
+
+        .countdown-digit:hover {
+            transform: scale(1.05);
+        }
+
+        /* === FADE IN ANIMATION UTILITY === */
+        .fade-in-up {
+            animation: fadeInUp 0.5s ease forwards;
+            opacity: 0;
+            transform: translateY(12px);
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in-up:nth-child(1) { animation-delay: 0.1s; }
+        .fade-in-up:nth-child(2) { animation-delay: 0.15s; }
+        .fade-in-up:nth-child(3) { animation-delay: 0.2s; }
+        .fade-in-up:nth-child(4) { animation-delay: 0.25s; }
+        .fade-in-up:nth-child(5) { animation-delay: 0.3s; }
+
+        /* === PAPER TEXTURE OVERLAY === */
+        .document-container::before {
+            content: '';
+            position: absolute;
             inset: 0;
-            background: #000;
-            z-index: 10000;
+            background-image: 
+                radial-gradient(ellipse at 25% 75%, rgba(15,23,42,0.012) 0%, transparent 50%),
+                radial-gradient(ellipse at 75% 25%, rgba(245,158,11,0.008) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 0;
+            border-radius: inherit;
+        }
+
+        /* === TOAST NOTIFICATION === */
+        .toast {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            background: white;
+            color: #0f172a;
+            padding: 14px 20px;
+            border-radius: 10px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.18);
+            border-left: 4px solid #3b82f6;
+            z-index: 3000;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 13px;
+            transform: translateX(450px);
+            transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
+            opacity: 0;
+            max-width: 380px;
+            font-weight: 500;
+        }
+
+        .toast.show {
+            transform: translateX(0);
+            opacity: 1;
+        }
+
+        .toast.success {
+            border-left-color: #10b981;
+        }
+
+        .toast.error {
+            border-left-color: #ef4444;
+        }
+
+        .toast-icon {
+            font-size: 18px;
+            font-weight: bold;
             display: flex;
             align-items: center;
             justify-content: center;
-            flex-direction: column;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: #3b82f6;
+            color: white;
+            flex-shrink: 0;
         }
 
-        .scanning-line {
-            width: 100%;
-            height: 2px;
-            background: var(--accent);
-            position: absolute;
-            box-shadow: 0 0 20px var(--accent);
-            animation: scan 2s linear infinite;
+        .toast.success .toast-icon { background: linear-gradient(135deg, #10b981, #059669); }
+        .toast.error .toast-icon { background: linear-gradient(135deg, #ef4444, #dc2626); }
+
+        /* === PROGRESS BAR ANIMATION === */
+        .progress-bar {
+            height: 3px;
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6, #10b981);
+            background-size: 200% 100%;
+            animation: progressShine 2s linear infinite;
+            border-radius: 2px;
+            transition: width 0.3s ease;
         }
 
-        @keyframes scan {
-            0% { top: 0; }
-            100% { top: 100%; }
+        @keyframes progressShine {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
         }
 
-        .text-outline {
-            -webkit-text-stroke: 1px rgba(255,255,255,0.2);
-            color: transparent;
+        /* === ACCESSIBILITY === */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
         }
     </style>
 </head>
-<body>
+<body class="bg-[#f1f5f9] min-h-screen flex flex-col">
 
-    <!-- Preloader -->
-    <div id="loader">
-        <div class="scanning-line"></div>
-        <div class="mono text-accent mb-4" id="load-text">INITIALIZING_SECURE_CONNECTION...</div>
-        <div class="w-64 h-1 bg-white/10 overflow-hidden">
-            <div id="load-bar" class="h-full bg-[#00ffaa] w-0"></div>
-        </div>
+    <!-- ✨ Toast Notification Container -->
+    <div class="toast" id="toast">
+        <span class="toast-icon">✓</span>
+        <span id="toastMessage">Operasi berhasil!</span>
     </div>
 
-    <div class="custom-cursor"></div>
-    <canvas id="webgl"></canvas>
+    <!-- ✨ Progress Bar Top -->
+    <div class="no-print fixed top-0 left-0 right-0 h-0.5 bg-slate-200 z-50" id="progressContainer" style="display:none;">
+        <div class="progress-bar" id="progressBar" style="width: 0%"></div>
+    </div>
 
-    <!-- Navigation -->
-    <nav class="fixed w-full z-[100] px-10 py-8 flex justify-between items-center mix-blend-difference">
-        <div class="text-2xl font-bold tracking-tighter mono">
-            R<span class="text-[#00ffaa]">Z</span>
+    <!-- PORTAL HEADER (WEB DASHBOARD NAVIGATION) -->
+    <header class="no-print bg-[#0c2540] text-white shadow-md border-b-4 border-amber-500 py-3 px-4 sm:px-8 flex flex-col sm:flex-row justify-between items-center gap-4">
+        <div class="flex items-center gap-3">
+            <div class="bg-white p-1 rounded-md shadow-sm">
+                <img src="https://i.ibb.co.com/p6kxr6WT/IMG-20260121-011440.jpg" alt="Logo Kemenkeu" class="h-10 w-auto" />
+            </div>
+            <div>
+                <h1 class="font-extrabold text-sm sm:text-base tracking-wider">E-DOCS KEPAPEANAN PORTAL</h1>
+                <p class="text-[10px] text-gray-300">Direktorat Jenderal Pajak - Direktorat Jenderal Bea dan Cukai • RI</p>
+            </div>
         </div>
-        <div class="hidden md:flex gap-12 text-[11px] font-bold tracking-[0.3em] mono uppercase">
-            <a href="#about" class="hover:text-[#00ffaa] transition-all">Defenses</a>
-            <a href="#ops" class="hover:text-[#00ffaa] transition-all">Operations</a>
-            <a href="#contact" class="hover:text-[#00ffaa] transition-all">Handshake</a>
+        <div class="flex items-center gap-3">
+            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-red-500 text-white animate-pulse shadow-sm">
+                <span class="h-2 w-2 rounded-full bg-white animate-ping"></span> Menunggu Legalisasi Jaminan
+            </span>
+            <div class="text-right text-xs">
+                <p class="text-gray-400">Server Time</p>
+                <p class="font-bold text-amber-400" id="server-clock">28 Mei 2026 11:00</p>
+            </div>
         </div>
-        <div class="mono text-[11px] border border-white/20 px-4 py-2 rounded-full">
-            EST_2026 // NODE_01
-        </div>
-    </nav>
+    </header>
 
-    <!-- Main Content -->
-    <main>
-        <!-- Hero Section -->
-        <section class="min-h-screen flex flex-col justify-center px-10 md:px-24">
-            <div class="max-w-6xl">
-                <h1 class="text-[12vw] md:text-[8vw] font-bold leading-none tracking-tighter mb-8">
-                    RIZU ZAMAN<br>
-                    <span class="text-outline italic">CYBER ARCHITECT</span>
-                </h1>
-                <div class="flex flex-col md:flex-row md:items-end gap-12">
-                    <p class="text-gray-400 max-w-md text-lg leading-relaxed">
-                        Membangun benteng digital masa depan melalui Advanced Penetration Testing, Cloud Infrastructure Defense, dan Threat Intelligence.
-                    </p>
-                    <div class="flex gap-4">
-                        <div class="p-[1px] bg-gradient-to-r from-[#00ffaa] to-blue-600 rounded-full">
-                            <button class="bg-black px-8 py-4 rounded-full font-bold mono text-xs hover:bg-transparent transition-all">
-                                VIEW OPERATIONS_
-                            </button>
-                        </div>
+    <!-- PORTAL MAIN CONTENT GRID -->
+    <main class="flex-grow w-full max-w-[1400px] mx-auto px-4 py-6 flex flex-col lg:flex-row gap-6">
+        
+        <!-- SIDEBAR KONTROL ADM (Kiri) -->
+        <div class="no-print w-full lg:w-[350px] flex flex-col gap-5 shrink-0">
+            
+            <!-- PANEL HITUNG MUNDUR -->
+            <div class="sidebar-panel bg-white rounded-xl shadow-sm p-5 border border-slate-200">
+                <h3 class="font-bold text-slate-800 text-xs tracking-wider uppercase mb-3 text-center border-b pb-2 flex items-center justify-center gap-2">
+                    ⏱️ BATAS WAKTU SELESAI
+                </h3>
+                <div class="grid grid-cols-3 gap-2 text-center mb-4">
+                    <div class="countdown-digit bg-red-50 py-3 rounded-lg border border-red-100 transition-transform">
+                        <span class="block text-2xl font-black text-red-600" id="hours">23</span>
+                        <span class="text-[10px] font-semibold text-red-500 uppercase">Jam</span>
+                    </div>
+                    <div class="countdown-digit bg-red-50 py-3 rounded-lg border border-red-100 transition-transform">
+                        <span class="block text-2xl font-black text-red-600" id="minutes">59</span>
+                        <span class="text-[10px] font-semibold text-red-500 uppercase">Menit</span>
+                    </div>
+                    <div class="countdown-digit bg-red-50 py-3 rounded-lg border border-red-100 transition-transform">
+                        <span class="block text-2xl font-black text-red-600" id="seconds">59</span>
+                        <span class="text-[10px] font-semibold text-red-500 uppercase">Detik</span>
                     </div>
                 </div>
+                <p class="text-xs text-center text-slate-500 leading-relaxed">
+                    Sesuai instruksi pabean, jaminan ini wajib diselesaikan dalam kurun <strong class="text-red-600">1x24 Jam</strong> setelah tagihan dikeluarkan untuk menghindari status sita permanen.
+                </p>
             </div>
-        </section>
 
-        <!-- Stats Section -->
-        <section id="about" class="py-40 px-10">
-            <div class="grid md:grid-cols-4 gap-1 border-y border-white/10">
-                <div class="py-20 px-8 border-x border-white/10">
-                    <div class="text-5xl font-bold mb-4 mono text-[#00ffaa]">500+</div>
-                    <div class="text-xs uppercase tracking-widest text-gray-500 font-bold">Threats Neutralized</div>
-                </div>
-                <div class="py-20 px-8 border-x border-white/10">
-                    <div class="text-5xl font-bold mb-4 mono">99%</div>
-                    <div class="text-xs uppercase tracking-widest text-gray-500 font-bold">Uptime Guaranteed</div>
-                </div>
-                <div class="py-20 px-8 border-x border-white/10">
-                    <div class="text-5xl font-bold mb-4 mono text-[#00ffaa]">12+</div>
-                    <div class="text-xs uppercase tracking-widest text-gray-500 font-bold">Global Certs</div>
-                </div>
-                <div class="py-20 px-8 border-x border-white/10">
-                    <div class="text-5xl font-bold mb-4 mono">24/7</div>
-                    <div class="text-xs uppercase tracking-widest text-gray-500 font-bold">Active Monitoring</div>
+            <!-- PANEL UTAMA EKSEKUSI/CETAK -->
+            <div class="sidebar-panel bg-white rounded-xl shadow-sm p-5 border border-slate-200">
+                <h3 class="font-bold text-slate-800 text-xs tracking-wider uppercase mb-4 border-b pb-2">
+                    ⚡ SISTEM ADMINISTRASI
+                </h3>
+                <div class="flex flex-col gap-3">
+                    <button onclick="generatePDF()" id="downloadPdfBtn" class="btn-interactive w-full bg-[#0c2540] hover:bg-slate-800 text-white font-bold py-3 px-4 rounded-lg shadow-sm transition-all duration-200 flex items-center justify-center gap-2 text-sm">
+                        <span>📥 Unduh Berkas PDF Resmi</span>
+                    </button>
+                    <button onclick="window.print()" class="btn-interactive w-full bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold py-2.5 px-4 rounded-lg transition-all duration-200 flex items-center justify-center gap-2 text-xs">
+                        <span>🖨️ Cetak Fisik Dokumen</span>
+                    </button>
                 </div>
             </div>
-        </section>
 
-        <!-- Bento Portfolio -->
-        <section id="ops" class="py-40 px-10">
-            <div class="max-w-7xl mx-auto">
-                <div class="mb-20">
-                    <h2 class="text-6xl font-bold tracking-tighter">SELECTED_ <br><span class="text-outline">OPERATIONS</span></h2>
+            <!-- PANEL E-VERIFIKASI DATABASE -->
+            <div class="sidebar-panel bg-white rounded-xl shadow-sm p-5 border border-slate-200">
+                <h3 class="font-bold text-slate-800 text-xs tracking-wider uppercase mb-3 border-b pb-2">
+                    🔍 E-VERIFIKASI KEPABEANAN
+                </h3>
+                <p class="text-xs text-slate-500 mb-4">Uji keabsahan nomor resi pengiriman Anda pada server Kepabeanan RI.</p>
+                <div class="space-y-3">
+                    <div>
+                        <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Nomor Resi / AWB</label>
+                        <input type="text" id="verify-resi" value="001776527333" class="w-full bg-slate-50 border border-slate-200 rounded p-2 text-xs font-mono font-bold text-slate-700 focus:ring-2 focus:ring-blue-500 focus:outline-none transition-all" />
+                    </div>
+                    <button onclick="simulateVerification()" class="btn-interactive w-full bg-amber-500 hover:bg-amber-600 text-[#0c2540] font-bold py-2 px-3 rounded text-xs transition-all flex items-center justify-center gap-1.5 shadow-sm">
+                        <span>Kirim Permintaan Verifikasi</span>
+                    </button>
                 </div>
+                <div id="verify-result" class="hidden mt-4 p-3 rounded-lg text-xs leading-relaxed border animate-fade-in"></div>
+            </div>
+
+            <!-- PANEL SIMULASI KONFIRMASI PEMBAYARAN -->
+            <div class="sidebar-panel bg-white rounded-xl shadow-sm p-5 border border-slate-200">
+                <h3 class="font-bold text-slate-800 text-xs tracking-wider uppercase mb-3 border-b pb-2">
+                    💳 PAYMENT INTEGRATION (SIMULASI)
+                </h3>
+                <p class="text-xs text-slate-500 mb-4">Selesaikan jaminan legalitas Anda secara daring melalui verifikasi otomatis.</p>
+                <button onclick="simulatePayment()" id="pay-btn" class="btn-interactive w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2.5 px-4 rounded-lg transition-all text-xs flex items-center justify-center gap-2">
+                    <span>⚡ Konfirmasi Pelunasan Jaminan</span>
+                </button>
+                <div id="payment-status" class="hidden mt-3 p-3 rounded bg-emerald-50 border border-emerald-200 text-xs text-emerald-800 font-medium leading-relaxed"></div>
+            </div>
+
+        </div>
+
+        <!-- PORTAL SHEET VIEW (A4 Paper Preview) -->
+        <div class="flex-grow flex justify-center items-start overflow-auto">
+            
+            <!-- FRAME UTAMA DOKUMEN -->
+            <div class="document-container" id="pdfDocument">
                 
-                <div class="grid md:grid-cols-12 gap-4 auto-rows-[300px]">
-                    <div class="md:col-span-8 glass-card rounded-3xl p-10 flex flex-col justify-between overflow-hidden relative group">
-                        <i data-lucide="shield-check" class="w-12 h-12 text-[#00ffaa]"></i>
-                        <div>
-                            <h3 class="text-3xl font-bold mb-2">Project Aegis</h3>
-                            <p class="text-gray-400">Hardening infrastructure untuk Fintech Unicorn.</p>
-                        </div>
-                        <div class="absolute right-0 bottom-0 opacity-10 group-hover:opacity-100 transition-all">
-                             <div class="text-[100px] font-bold mono -mb-10 -mr-10 text-outline">01</div>
-                        </div>
-                    </div>
+                <!-- STAMPEL LUNAS (Paid Stamp Overlay) -->
+                <div class="paid-stamp" id="paidStamp">LUNAS / PAID</div>
+
+                <!-- Watermark -->
+                <div class="watermark">
+                    <img src="https://i.ibb.co.com/HL2ZCDL1/IMG-20260518-102757-783.jpg" alt="Watermark Bea Cukai" />
+                </div>
+
+                <div class="content-layer">
                     
-                    <div class="md:col-span-4 glass-card rounded-3xl p-10 flex flex-col justify-between border-b-4 border-b-[#00ffaa]">
-                        <i data-lucide="lock" class="w-12 h-12"></i>
+                    <!-- GRID HEADER (KOP & INFO TAGIHAN) -->
+                    <div class="grid-header fade-in-up">
                         <div>
-                            <h3 class="text-xl font-bold mb-2">Zero Trust</h3>
-                            <p class="text-sm text-gray-400">Arsitektur keamanan untuk sistem cloud hibrida.</p>
+                            <div class="flex items-center gap-2 mb-2">
+                                <span class="bg-amber-500 text-white font-bold text-[8pt] px-2.5 py-1 rounded-full flex items-center gap-1 shadow-sm">
+                                    <svg class="w-3 h-3 fill-current" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+                                    WAJIB LEGALISASI
+                                </span>
+                            </div>
+                            <p class="font-bold text-[8pt] uppercase tracking-wide mb-1 text-slate-600">Info Perusahaan</p>
+                            
+                            <!-- Upgraded Slogan Image -->
+                            <div class="mt-1 transition-transform hover:scale-105">
+                                <img src="https://i.ibb.co/1Jf993mY/IMG-20251209-084035.jpg" alt="Bea Cukai Slogan Makin Baik" class="h-10 w-auto object-contain mix-blend-multiply" />
+                            </div>
+                            
+                            <p class="text-[7.5pt] font-semibold mt-2">SITUS LEGALISASI: www.beacukai.go.id</p>
+                        </div>
+
+                        <div class="text-right flex flex-col justify-between items-end">
+                            <h2 class="text-[18pt] font-bold text-slate-800 tracking-wider">Invoice</h2>
+                            <div class="text-[8pt] leading-tight text-right w-full">
+                                <p class="font-bold">DIREKTORAT JENDERAL PAJAK - BEA DAN CUKAI - LEGALISASI</p>
+                                <div class="flex justify-end gap-4 mt-2">
+                                    <table class="text-right text-[7.5pt] ml-auto">
+                                        <tr>
+                                            <td class="font-semibold text-slate-500 pr-2">Referensi:</td>
+                                            <td class="font-mono font-bold">BC.MKS/SL-012/2025</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="font-semibold text-slate-500 pr-2">Tanggal:</td>
+                                            <td class="font-mono font-bold">14/12/2025</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="font-semibold text-slate-500 pr-2">Tgl. Jatuh Tempo:</td>
+                                            <td class="font-mono font-bold">14/12/2025</td>
+                                        </tr>
+                                    </table>
+                                    <div class="flex items-center pl-2 transition-transform hover:scale-105">
+                                        <!-- Upgraded ISO Stamp Image -->
+                                        <img src="https://i.ibb.co/4wcBBxK0/IMG-20251215-205820-651.jpg" alt="ISO Certified" class="w-12 h-12 object-contain mix-blend-multiply" />
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="md:col-span-4 glass-card rounded-3xl p-10 flex flex-col justify-between">
-                        <i data-lucide="cpu" class="w-12 h-12 text-blue-500"></i>
-                        <div>
-                            <h3 class="text-xl font-bold mb-2">Kernel Defense</h3>
-                            <p class="text-sm text-gray-400">Analisis kerentanan pada level sistem operasi.</p>
-                        </div>
+                    <!-- TAGIHAN UNTUK (RECIPIENT INFO) -->
+                    <div class="mb-4 bg-slate-50 p-2.5 border border-slate-200 rounded fade-in-up transition-all hover:bg-slate-100 hover:shadow-sm">
+                        <p class="font-bold text-[8pt] text-slate-500 uppercase tracking-wider mb-1">Tagihan Untuk:</p>
+                        <p class="font-bold text-[10pt]">Andi M</p>
+                        <p class="text-[8pt] leading-relaxed text-slate-700">
+                            Dusun. 8 Wonosari, Gang. Teratai, Desa Klumpang Kebun, Kec. Hamparan Perak, Kab. Deli Serdang, Sumatera Utara, 20374, Indonesia
+                        </p>
+                        <p class="text-[8pt] font-mono mt-0.5">Telp: 6281263285947</p>
                     </div>
 
-                    <div class="md:col-span-8 glass-card rounded-3xl p-10 flex flex-col justify-between relative overflow-hidden group">
-                        <i data-lucide="code-2" class="w-12 h-12"></i>
-                        <div class="flex flex-col gap-2">
-                            <h3 class="text-3xl font-bold">Automated Exploit Detection</h3>
-                            <p class="text-gray-400">Sistem AI untuk mendeteksi anomali pada trafik data.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+                    <!-- TABEL INVOICE PRODUK -->
+                    <table class="table-invoice fade-in-up">
+                        <thead>
+                            <tr>
+                                <th width="20%">Produk</th>
+                                <th width="45%">Deskripsi</th>
+                                <th width="10%" class="text-center">Qty</th>
+                                <th width="10%" class="text-right">Harga</th>
+                                <th width="5%" class="text-center">Disc</th>
+                                <th width="10%" class="text-right">Jumlah</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="font-bold">Legalitas (ROKOK ILEGAL)</td>
+                                <td class="text-slate-600">20 SLOP / 4.000 Btg, <span class="info-tooltip" data-tip="Barang kena cukai tanpa pita fiskal sah sesuai UU Cukai No.39/2007">NON PITA CUKAI RESMI</span></td>
+                                <td class="text-center font-mono">4000</td>
+                                <td class="text-right font-mono">Rp 500,00</td>
+                                <td class="text-center font-mono">0%</td>
+                                <td class="text-right font-mono font-bold">Rp 2.000.000,00</td>
+                            </tr>
+                            <tr class="bg-slate-50">
+                                <td colspan="4" class="border-none"></td>
+                                <td class="font-bold text-right border-t border-slate-300">Total:</td>
+                                <td class="text-right font-bold font-mono text-[9pt] border-t border-slate-300">Rp 2.000.000,00</td>
+                            </tr>
+                        </tbody>
+                    </table>
 
-        <!-- Footer -->
-        <footer id="contact" class="py-40 px-10 border-t border-white/5 bg-black">
-            <div class="max-w-7xl mx-auto flex flex-col items-center text-center">
-                <div class="mono text-[#00ffaa] mb-8 text-sm tracking-[0.5em]">Cyber Security VIP</div>
-                <h2 class="text-[8vw] font-bold tracking-tighter leading-none mb-20">
-                    SECURE YOUR <br> <span class="text-outline">LEGACY</span>
-                </h2>
-                
-                <div class="grid md:grid-cols-3 gap-20 w-full mb-32">
-                    <div>
-                        <div class="mono text-[10px] text-gray-500 mb-4 uppercase">Direct Line</div>
-                        <a href="#" class="text-xl hover:text-[#00ffaa] transition-colors font-medium underline">rizuzamantkj3@gmail.com</a>
-                    </div>
-                    <div>
-                        <div class="mono text-[10px] text-gray-500 mb-4 uppercase">Neural Network</div>
-                        <div class="flex justify-center gap-8 font-bold text-sm tracking-widest uppercase">
-                            <a href="#" class="hover:text-[#00ffaa]">Linkedin</a>
-                            <a href="#" class="hover:text-[#00ffaa]">Github</a>
+                    <!-- SEPARATOR LINE -->
+                    <div class="border-t border-dashed border-slate-400 my-4"></div>
+
+                    <!-- DUA KOLOM LAYOUT BAWAH (SURAT & SYARAT KETENTUAN) -->
+                    <div class="two-column-layout">
+                        
+                        <!-- KOLOM KIRI (SURAT PEMBERITAHUAN) -->
+                        <div class="column-left fade-in-up">
+                            <h3 class="font-bold text-[9pt] uppercase tracking-wide border-b pb-1 mb-2">
+                                SURAT PEMBERITAHUAN JAMINAN LEGALITAS SEMENTARA
+                            </h3>
+                            <div class="text-[8pt] leading-relaxed space-y-1 text-slate-700">
+                                <p><span class="font-semibold">Nomor :</span> BC.MKS/SL-012/2025</p>
+                                <p><span class="font-semibold">Tanggal :</span> 14 Desember 2025</p>
+                                <p class="mt-2"><span class="font-semibold">Kepada Yth.,</span> Sdr. Andi M (di Tempat)</p>
+                                
+                                <p class="text-justify pt-1 text-slate-800">
+                                    Dengan hormat,<br>
+                                    Berdasarkan hasil pemeriksaan fisik dan administrasi barang kiriman pada fasilitas bongkar muat <strong>Pelabuhan Pangkalpinang</strong>, serta sesuai dengan Standar Operasional Prosedur (SOP) Pemeriksaan Internal, bersama ini kami sampaikan informasi sebagai berikut:
+                                </p>
+
+                                <div class="bg-slate-50 p-2 border rounded border-slate-200 mt-2 space-y-1 text-[7.5pt] transition-all hover:bg-slate-100">
+                                    <p class="font-bold text-slate-800">1. DATA BARANG KIRIMAN:</p>
+                                    <p>• Jenis Barang: Rokok Tanpa Pita Cukai (20 Slop / 4.000 Batang)</p>
+                                    <p>• Status Kepabeanan: Ditangguhkan (Ditemukan indikasi pelanggaran berupa rokok tanpa pita cukai resmi).</p>
+                                    
+                                    <p class="font-bold text-slate-800 mt-1.5">2. IDENTITAS PENERIMA BARANG:</p>
+                                    <p>• Ekspedisi: SiCepat Ekspres (Resi: <strong class="font-mono text-slate-900">001776527333</strong>)</p>
+                                    <p>• Nama Penerima: Andi M (Deli Serdang, Sumatera Utara)</p>
+                                </div>
+
+                                <p class="font-bold text-slate-800 mt-2">TINDAKAN INTERNAL:</p>
+                                <ol class="list-decimal pl-4 text-justify space-y-0.5 text-[7.5pt]">
+                                    <li>Menahan sementara paket untuk proses klarifikasi kepada pemilik barang.</li>
+                                    <li>Mengeluarkan pemberitahuan jaminan legalitas sementara guna proses pemenuhan administrasi pabean.</li>
+                                </ol>
+
+                                <p class="font-bold text-slate-800 mt-2">PERHITUNGAN JAMINAN LEGALITAS SEMENTARA:</p>
+                                <p class="text-justify text-[7.5pt]">
+                                    Uraian Nilai: 25% dari total 2x Nilai Cukai standar (<span class="info-tooltip font-semibold" data-tip="Dasar pengali penyesuaian pabean sesuai PER-12/BC/2024">Rp 500</span> × 4.000 batang = <strong>Rp 2.000.000,00</strong> Total Jaminan Sementara).
+                                </p>
+                            </div>
                         </div>
-                    </div>
-                    <div>
-                        <div class="mono text-[10px] text-gray-500 mb-4 uppercase">Location</div>
-                        <div class="text-xl">REMOTE / CYBERSPACE</div>
-                    </div>
-                </div>
-                
-                <div class="mono text-[10px] text-gray-600">
-                    SYSTEM STATUS: OPTIMIZED // © 2026 RIZU ZAMAN CO.
-                </div>
-            </div>
-        </footer>
+
+                        <!-- KOLOM KANAN (SYARAT & KETENTUAN) -->
+                        <div class="column-right fade-in-up">
+                            <h3 class="font-bold text-[9pt] uppercase tracking-wide border-b pb-1 mb-2">
+                                KETENTUAN RESTITUSI (OPSI REFUND)
+                            </h3>
+                            <div class="text-[8pt] leading-relaxed text-slate-700 space-y-2">
+                                <p class="text-justify">
+                                    Setelah proses verifikasi internal selesai, pemilik barang diberikan opsi restitusi jaminan sebagai berikut:
+                                </p>
+
+                                <div class="space-y-1">
+                                    <div class="flex justify-between items-center bg-emerald-50 p-1.5 border border-emerald-300 rounded text-[7.5pt] transition-all hover:bg-emerald-100">
+                                        <span class="font-bold text-emerald-800">1. Refund Jaminan (70%)</span>
+                                        <span class="font-mono font-bold text-emerald-800">Rp 1.400.000,00</span>
+                                    </div>
+                                    <div class="flex justify-between items-center bg-rose-50 p-1.5 border border-rose-300 rounded text-[7.5pt] transition-all hover:bg-rose-100">
+                                        <span class="font-bold text-rose-800">2. Biaya Legalisasi (30%)</span>
+                                        <span class="font-mono font-bold text-rose-800">Rp 600.000,00</span>
+                                    </div>
+                                </div>
+
+                                <p class="text-[7.5pt] text-justify text-slate-500 italic leading-tight">
+                                    *Keterangan: Kontribusi biaya legalisasi (30%) digunakan untuk biaya penanganan administratif kepabeanan terpadu dan penertiban berkas legal pabean.
+                                </p>
+
+                                <div class="space-y-1.5 border-t pt-2 mt-2">
+                                    <p class="font-bold text-slate-800 text-[8pt]">PENJELASAN PROSEDURAL</p>
+                                    <p class="text-justify text-[7.5pt] leading-tight text-slate-600">
+                                        Proses pemeriksaan dan verifikasi dilakukan untuk memastikan bahwa komoditas yang dikirimkan memenuhi peraturan perundang-undangan di bidang kepabeanan nasional.
+                                    </p>
+
+                                    <p class="font-bold text-red-700 text-[8pt]">KONSEKUENSI HUKUM</p>
+                                    <p class="text-justify text-[7.5pt] leading-tight text-slate-600">
+                                        Jika kewajiban penjaminan tidak diselesaikan dalam 1 (satu) hari kerja, komoditas dapat disita oleh Negara dan diproses hukum sesuai regulasi <strong>UU Cukai No. 39 Tahun 2007</strong>.
+                                    </p>
+                                </div>
+
+                                <!-- ✨ STRUKTUR TANDA TANGAN - NATURAL INTEGRATION (NO BOX) -->
+                                <div class="pt-2 text-center relative" style="page-break-inside: avoid;">
+                                    <p class="text-[8pt] text-slate-600">Hormat kami,</p>
+                                    <p class="font-bold text-[8.5pt]">Pejabat Pemeriksa Dokumen</p>
+                                    
+                                    <!-- ✨ SIGNATURE AREA: Natural, No Box, Organic Blend -->
+                                    <div class="signature-area">
+                                        <!-- Stempel Basah Bea Cukai - Natural Look -->
+                                        <img src="https://i.ibb.co.com/M5ZWjB5R/IMG-20260120-162645.jpg" alt="Tanda Tangan Pejabat" class="sig-stamp" />
+                                        <!-- Name seamlessly integrated -->
+                                        <p class="signature-name"><strong>ARIF KURNIAWAN</strong></p>
+                                    </div>
+                                    
+                                    <p class="signature-nip">NIP. 19870311 201102 1 006</p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div> <!-- End of two-column-layout -->
+
+                </div> <!-- End of content-layer -->
+            </div> <!-- End of document-container -->
+
+        </div>
+
     </main>
 
+    <!-- FOOTER PORTAL WEB -->
+    <footer class="no-print bg-slate-900 text-slate-400 py-6 text-center text-xs mt-auto border-t border-slate-800">
+        <p>© 2026 Direktorat Jenderal Bea dan Cukai • Kementerian Keuangan Republik Indonesia</p>
+        <p class="text-[10px] text-slate-500 mt-1">Sistem Dokumen Kepabeanan Terpadu Nasional • Security Hash v4.2.0</p>
+    </footer>
+
+    <!-- INTERACTIVE PORTAL JAVASCRIPT -->
     <script>
-        // Smooth Scroll (Lenis)
-        const lenis = new Lenis();
-        function raf(time) {
-            lenis.raf(time);
-            requestAnimationFrame(raf);
+        // ✨ Toast Notification System
+        function showToast(message, type = 'success', duration = 4000) {
+            const toast = document.getElementById('toast');
+            const toastMessage = document.getElementById('toastMessage');
+            const toastIcon = toast.querySelector('.toast-icon');
+            
+            toastMessage.textContent = message;
+            toast.className = `toast ${type} show`;
+            
+            // Update icon based on type
+            toastIcon.textContent = type === 'success' ? '✓' : '✕';
+            
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, duration);
         }
-        requestAnimationFrame(raf);
 
-        // Custom Cursor
-        const cursor = document.querySelector('.custom-cursor');
-        window.addEventListener('mousemove', e => {
-            gsap.to(cursor, {
-                x: e.clientX - 10,
-                y: e.clientY - 10,
-                duration: 0.1
-            });
-        });
-
-        // Preloader Logic
-        let progress = 0;
-        const loadBar = document.getElementById('load-bar');
-        const loadText = document.getElementById('load-text');
-        
-        const interval = setInterval(() => {
-            progress += Math.random() * 15;
-            if (progress >= 100) {
-                progress = 100;
-                clearInterval(interval);
-                gsap.to('#loader', {
-                    opacity: 0,
-                    duration: 1,
-                    onComplete: () => {
-                        document.getElementById('loader').style.display = 'none';
-                        revealHero();
-                    }
-                });
+        // ✨ Progress Bar Control
+        function showProgress(show) {
+            const container = document.getElementById('progressContainer');
+            const bar = document.getElementById('progressBar');
+            
+            if (show) {
+                container.style.display = 'block';
+                bar.style.width = '10%';
+            } else {
+                bar.style.width = '0%';
+                setTimeout(() => {
+                    container.style.display = 'none';
+                }, 300);
             }
-            loadBar.style.width = progress + '%';
-            loadText.innerText = `DECRYPTING_SYSTEM_DATA_${Math.floor(progress)}%`;
-        }, 150);
-
-        function revealHero() {
-            gsap.from("h1", { y: 100, opacity: 0, duration: 1.5, ease: "expo.out" });
         }
 
-        // Three.js 3D Grid Background
-        const scene = new THREE.Scene();
-        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-        const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('webgl'), antialias: true, alpha: true });
-        renderer.setSize(window.innerWidth, window.innerHeight);
-        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-
-        const geometry = new THREE.PlaneGeometry(100, 100, 50, 50);
-        const material = new THREE.MeshBasicMaterial({ 
-            color: 0x00ffaa, 
-            wireframe: true, 
-            transparent: true, 
-            opacity: 0.15 
-        });
-        const plane = new THREE.Mesh(geometry, material);
-        plane.rotation.x = -Math.PI / 2.5;
-        scene.add(plane);
-
-        camera.position.z = 5;
-        camera.position.y = 2;
-
-        window.addEventListener('resize', () => {
-            camera.aspect = window.innerWidth / window.innerHeight;
-            camera.updateProjectionMatrix();
-            renderer.setSize(window.innerWidth, window.innerHeight);
-        });
-
-        // Animation Loop
-        function animate() {
-            requestAnimationFrame(animate);
-            plane.rotation.z += 0.001;
-            
-            // Subtle movement based on scroll
-            const scroll = window.scrollY;
-            plane.position.z = scroll * 0.005;
-            
-            renderer.render(scene, camera);
+        function updateProgress(percent) {
+            const bar = document.getElementById('progressBar');
+            bar.style.width = `${Math.min(percent, 95)}%`;
         }
-        animate();
 
-        // Lucide Icons
-        lucide.createIcons();
+        // Update Jam Server Riil secara Dinamis
+        setInterval(() => {
+            const now = new Date();
+            const dateStr = now.toLocaleDateString('id-ID', { year: 'numeric', month: 'long', day: 'numeric' });
+            const timeStr = now.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+            document.getElementById('server-clock').innerText = `${dateStr} ${timeStr}`;
+        }, 1000);
 
-        // GSAP Scroll Animations
-        gsap.registerPlugin(ScrollTrigger);
-        gsap.utils.toArray('.glass-card').forEach(card => {
-            gsap.from(card, {
-                scrollTrigger: {
-                    trigger: card,
-                    start: "top bottom-=100",
-                    toggleActions: "play none none reverse"
+        // Algoritma Countdown Batas Waktu 24 Jam
+        let deadline = localStorage.getItem('bc_countdown_deadline_v3');
+        if (!deadline) {
+            deadline = new Date().getTime() + 24 * 60 * 60 * 1000;
+            localStorage.setItem('bc_countdown_deadline_v3', deadline);
+        } else {
+            deadline = parseInt(deadline);
+        }
+
+        const countdownInterval = setInterval(() => {
+            const now = new Date().getTime();
+            const distance = deadline - now;
+
+            if (distance < 0) {
+                clearInterval(countdownInterval);
+                document.getElementById('hours').innerText = '00';
+                document.getElementById('minutes').innerText = '00';
+                document.getElementById('seconds').innerText = '00';
+                return;
+            }
+
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById('hours').innerText = String(hours).padStart(2, '0');
+            document.getElementById('minutes').innerText = String(minutes).padStart(2, '0');
+            document.getElementById('seconds').innerText = String(seconds).padStart(2, '0');
+        }, 1000);
+
+        // Simulasi Verifikasi Status Dokumen di Database
+        function simulateVerification() {
+            const resiVal = document.getElementById('verify-resi').value.trim();
+            const resultBox = document.getElementById('verify-result');
+            
+            resultBox.classList.remove('hidden', 'bg-rose-50', 'text-rose-800', 'border-rose-200', 'bg-emerald-50', 'text-emerald-800', 'border-emerald-200');
+            resultBox.classList.add('animate-fade-in');
+            
+            if (resiVal === '001776527333') {
+                resultBox.classList.add('bg-emerald-50', 'text-emerald-800', 'border-emerald-200');
+                resultBox.innerHTML = `
+                    <div class="flex items-start gap-2">
+                        <span class="text-base font-bold">✓</span>
+                        <div>
+                            <p class="font-bold uppercase tracking-wider">DATABASE MATCH - VERIFIED VALID</p>
+                            <p class="mt-1">Nomor Referensi: BC.MKS/SL-012/2025</p>
+                            <p>Penerima: Andi M</p>
+                            <p>Komoditas: Rokok Non Cukai (20 Slop / 4.000 Batang)</p>
+                            <p class="font-semibold text-emerald-900 mt-1">Status: Menunggu Pembayaran Jaminan (Refundable 70%)</p>
+                        </div>
+                    </div>
+                `;
+                showToast('✓ Verifikasi berhasil! Data ditemukan di database.', 'success');
+            } else {
+                resultBox.classList.add('bg-rose-50', 'text-rose-800', 'border-rose-200');
+                resultBox.innerHTML = `
+                    <div class="flex items-start gap-2">
+                        <span class="text-base font-bold">❌</span>
+                        <div>
+                            <p class="font-bold uppercase tracking-wider">TIDAK TERDAFTAR (UNMATCHED)</p>
+                            <p class="mt-1">Nomor pengenal logistik tidak cocok dengan struktur data Bea Cukai.</p>
+                        </div>
+                    </div>
+                `;
+                showToast('✕ Verifikasi gagal. Periksa kembali nomor resi.', 'error');
+            }
+        }
+
+        // Simulasi Sistem Gerbang Pembayaran Jaminan & Pembubuhan Cap Lunas
+        function simulatePayment() {
+            const payBtn = document.getElementById('pay-btn');
+            const statusBox = document.getElementById('payment-status');
+            const paidStamp = document.getElementById('paidStamp');
+            
+            // Disable button with loading state
+            payBtn.disabled = true;
+            const originalText = payBtn.innerHTML;
+            payBtn.innerHTML = '🔄 Menghubungkan Bank Gateway...';
+            
+            // Show progress
+            showProgress(true);
+            
+            // Simulate progress
+            let progress = 10;
+            const progressInterval = setInterval(() => {
+                progress += Math.random() * 12;
+                if (progress > 90) progress = 90;
+                updateProgress(progress);
+            }, 200);
+            
+            setTimeout(() => {
+                clearInterval(progressInterval);
+                updateProgress(100);
+                
+                payBtn.innerHTML = '✅ Jaminan Terbayar & Terdaftar';
+                payBtn.classList.replace('bg-emerald-600', 'bg-slate-500');
+                payBtn.classList.add('cursor-not-allowed');
+                
+                // Aktifkan cap lunas pada dokumen fisik dengan animasi
+                paidStamp.classList.add('active');
+                
+                statusBox.classList.remove('hidden');
+                statusBox.innerHTML = `
+                    <p class="font-bold">✓ Verifikasi Pelunasan Sukses!</p>
+                    <p class="mt-1">Dana jaminan Rp 2.000.000,00 telah terverifikasi oleh Sistem Pabean. <strong>Rp 1.400.000,00 (70% Restitusi)</strong> dibekukan sementara dan akan dikembalikan otomatis ke rekening pengirim setelah dokumen legalitas disahkan dalam waktu 3 hari kerja.</p>
+                `;
+                
+                // Hide progress after delay
+                setTimeout(() => {
+                    showProgress(false);
+                }, 500);
+                
+                showToast('✓ Pembayaran berhasil! Cap LUNAS telah diterapkan.', 'success', 5000);
+                
+            }, 2200);
+        }
+
+        // Cetak Lembaran Dokumen ke Format PDF (A4 Presisi)
+        function generatePDF() {
+            const button = document.getElementById('downloadPdfBtn');
+            const element = document.getElementById('pdfDocument');
+            
+            // Save original state
+            const originalText = button.innerHTML;
+            button.disabled = true;
+            button.innerHTML = '⏳ Menyusun Dokumen...';
+            
+            // Show progress
+            showProgress(true);
+            updateProgress(15);
+            
+            // Simulate preparation progress
+            let progress = 15;
+            const prepInterval = setInterval(() => {
+                progress += Math.random() * 8;
+                if (progress > 40) progress = 40;
+                updateProgress(progress);
+            }, 150);
+
+            const opt = {
+                margin:       0,
+                filename:     'Surat_Jaminan_Legalisasi_BC_012.pdf',
+                image:        { type: 'jpeg', quality: 1.0 },
+                html2canvas:  { 
+                    scale: 2.5, 
+                    useCORS: true, 
+                    logging: false,
+                    backgroundColor: '#ffffff',
+                    onclone: (doc) => {
+                        // Optimize for PDF: disable animations, remove interactive elements
+                        const cloned = doc.getElementById('pdfDocument');
+                        if (cloned) {
+                            cloned.style.boxShadow = 'none';
+                            cloned.style.transform = 'none';
+                        }
+                        doc.querySelectorAll('*').forEach(el => {
+                            el.style.animation = 'none';
+                            el.style.transition = 'none';
+                            el.style.transform = 'none';
+                        });
+                    }
                 },
-                y: 60,
-                opacity: 0,
-                duration: 1,
-                ease: "expo.out"
+                jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait', compress: true }
+            };
+
+            html2pdf().set(opt).from(element).save()
+                .then(() => {
+                    clearInterval(prepInterval);
+                    updateProgress(100);
+                    
+                    setTimeout(() => {
+                        showProgress(false);
+                        button.disabled = false;
+                        button.innerHTML = originalText;
+                        showToast('✓ PDF berhasil diunduh! Dokumen siap digunakan.', 'success');
+                    }, 400);
+                })
+                .catch(err => {
+                    console.error('PDF Error:', err);
+                    clearInterval(prepInterval);
+                    showProgress(false);
+                    
+                    button.disabled = false;
+                    button.innerHTML = originalText;
+                    
+                    showToast('✕ Gagal membuat PDF. Coba gunakan Chrome/Edge terbaru.', 'error');
+                });
+        }
+
+        // ✨ Initialize: Trigger fade-in animations on load
+        document.addEventListener('DOMContentLoaded', function() {
+            // Staggered fade-in for document elements
+            const fadeElements = document.querySelectorAll('.fade-in-up');
+            fadeElements.forEach((el, index) => {
+                setTimeout(() => {
+                    el.style.opacity = '1';
+                    el.style.transform = 'translateY(0)';
+                }, 100 + (index * 80));
             });
+            
+            // Add hover feedback for interactive elements
+            document.querySelectorAll('.info-tooltip, .sig-stamp, .btn-interactive').forEach(el => {
+                el.addEventListener('mouseenter', function() {
+                    this.style.transition = 'all 0.2s cubic-bezier(0.4, 0, 0.2, 1)';
+                });
+            });
+            
+            console.log('✨ E-Doc Portal Initialized - Natural Signature Integration Active');
         });
     </script>
 </body>
 </html>
+
