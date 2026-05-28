@@ -18,46 +18,72 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
     
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
         
         :root {
             --doc-width: 210mm;
             --doc-height: 297mm;
             --doc-padding: 15mm 18mm 18mm 18mm;
             --primary-dark: #0a192f;
+            --primary-deeper: #061220;
             --accent-gold: #d97706;
-            --bg-portal: #f8fafc;
+            --accent-gold-light: #f59e0b;
+            --bg-portal: #f1f5f9;
+            --glass-border: rgba(255,255,255,0.08);
+            --success: #059669;
+            --danger: #dc2626;
         }
 
-        * { -webkit-tap-highlight-color: transparent; }
+        * { -webkit-tap-highlight-color: transparent; box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
 
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             background-color: var(--bg-portal);
-            background-image: radial-gradient(#cbd5e1 1px, transparent 1px);
-            background-size: 24px 24px;
+            background-image: 
+                radial-gradient(circle at 20% 50%, rgba(217, 119, 6, 0.03) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(5, 150, 105, 0.03) 0%, transparent 50%),
+                radial-gradient(#e2e8f0 1px, transparent 1px);
+            background-size: 100% 100%, 100% 100%, 20px 20px;
             color: #0f172a;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
         }
 
-        /* === PREMIUM HEADER === */
+        /* === PREMIUM HEADER SYSTEM === */
         .glass-header {
-            background: rgba(10, 25, 47, 0.98);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border-bottom: 4px solid var(--accent-gold);
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-deeper) 100%);
+            border-bottom: 3px solid;
+            border-image: linear-gradient(90deg, var(--accent-gold), var(--accent-gold-light), var(--accent-gold)) 1;
             position: sticky;
             top: 0;
             z-index: 50;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
         }
 
-        /* === DOCUMENT WRAPPER === */
+        .glass-header::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.02'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            pointer-events: none;
+        }
+
+        .header-badge {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(5, 150, 105, 0.08));
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            backdrop-filter: blur(8px);
+        }
+
+        /* === ENHANCED DOCUMENT WRAPPER === */
         .document-wrapper {
-            padding: 20px 0;
+            padding: 24px 0;
             display: flex;
             justify-content: center;
             align-items: flex-start;
@@ -68,16 +94,28 @@
         .document-container {
             font-family: 'Times New Roman', Times, serif !important;
             background: #ffffff; 
-            box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.2); 
+            box-shadow: 
+                0 25px 50px -12px rgba(0, 0, 0, 0.15),
+                0 0 0 1px rgba(0, 0, 0, 0.05),
+                inset 0 1px 0 rgba(255,255,255,0.8);
             position: relative;
             width: var(--doc-width);
             min-height: var(--doc-height);
             padding: var(--doc-padding);
             color: #000 !important;
-            border: 1px solid #e2e8f0;
+            border: 1px solid #d1d5db;
             border-radius: 4px;
             flex-shrink: 0;
             overflow: hidden;
+        }
+
+        .document-container::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #1e40af, #3b82f6, #1e40af);
+            z-index: 5;
         }
 
         .document-container * {
@@ -99,9 +137,8 @@
         .watermark img {
             width: 100%; 
             height: auto; 
-            /* Teknik blending agar menyatu dengan kertas seperti cetakan asli */
             mix-blend-mode: multiply; 
-            opacity: 0.12; 
+            opacity: 0.10; 
             filter: grayscale(100%) contrast(150%);
         }
 
@@ -130,16 +167,18 @@
             pointer-events: none;
             border-radius: 6px;
             background: repeating-linear-gradient(45deg, rgba(255,255,255,0.8), rgba(255,255,255,0.8) 10px, rgba(255,255,255,0.95) 10px, rgba(255,255,255,0.95) 20px);
+            text-shadow: 1px 1px 0 rgba(0,0,0,0.1);
         }
 
         .paid-stamp.active {
-            animation: stampSlam 0.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+            animation: stampSlam 0.6s cubic-bezier(0.25, 1, 0.5, 1) forwards;
         }
 
         @keyframes stampSlam {
-            0% { transform: scale(3) rotate(-25deg); opacity: 0; }
-            50% { transform: scale(0.95) rotate(-15deg); opacity: 1; }
-            100% { transform: scale(1) rotate(-15deg); opacity: 0.9; }
+            0% { transform: scale(3.5) rotate(-25deg); opacity: 0; }
+            30% { transform: scale(0.9) rotate(-15deg); opacity: 1; }
+            50% { transform: scale(1.05) rotate(-14deg); }
+            100% { transform: scale(1) rotate(-15deg); opacity: 0.92; }
         }
 
         /* === LAYOUT GRID DESKTOP === */
@@ -188,10 +227,11 @@
         }
 
         table.table-invoice th {
-            background-color: #1e293b;
+            background: linear-gradient(180deg, #1e293b, #0f172a);
             color: #fff !important;
             font-weight: bold;
             text-transform: uppercase;
+            letter-spacing: 0.02em;
         }
 
         /* === SIGNATURE AREA === */
@@ -209,34 +249,266 @@
             transform: rotate(-1.5deg);
         }
 
-        /* === SIDEBAR PORTAL UI === */
+        /* === PREMIUM SIDEBAR === */
         .sidebar-panel {
             background: #fff;
             border: 1px solid #e2e8f0;
-            border-radius: 12px;
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+            border-radius: 16px;
+            box-shadow: 
+                0 10px 40px -10px rgba(0, 0, 0, 0.08),
+                0 1px 3px rgba(0, 0, 0, 0.04);
             position: sticky;
             top: 90px; 
+            overflow: hidden;
         }
 
-        /* Modal Animation */
+        .sidebar-panel::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent-gold), var(--accent-gold-light));
+        }
+
+        /* === PROGRESS TIMELINE === */
+        .timeline-step {
+            position: relative;
+            padding-left: 28px;
+            padding-bottom: 16px;
+        }
+        .timeline-step::before {
+            content: '';
+            position: absolute;
+            left: 9px;
+            top: 22px;
+            bottom: 0;
+            width: 2px;
+            background: #e2e8f0;
+        }
+        .timeline-step:last-child::before { display: none; }
+        .timeline-step.completed::before { background: #059669; }
+        .timeline-dot {
+            position: absolute;
+            left: 0;
+            top: 2px;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            font-weight: bold;
+            border: 2px solid #e2e8f0;
+            background: #fff;
+            color: #94a3b8;
+            transition: all 0.4s ease;
+        }
+        .timeline-step.completed .timeline-dot {
+            border-color: #059669;
+            background: #059669;
+            color: #fff;
+            box-shadow: 0 0 0 4px rgba(5, 150, 105, 0.15);
+        }
+        .timeline-step.active .timeline-dot {
+            border-color: #d97706;
+            background: #fef3c7;
+            color: #d97706;
+            box-shadow: 0 0 0 4px rgba(217, 119, 6, 0.15);
+            animation: pulse-dot 2s infinite;
+        }
+        @keyframes pulse-dot {
+            0%, 100% { box-shadow: 0 0 0 4px rgba(217, 119, 6, 0.15); }
+            50% { box-shadow: 0 0 0 8px rgba(217, 119, 6, 0.08); }
+        }
+
+        /* === COUNTDOWN ENHANCED === */
+        .countdown-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+        }
+        .countdown-cell {
+            background: linear-gradient(135deg, #fef2f2, #fff1f2);
+            border: 1px solid #fecaca;
+            border-radius: 12px;
+            padding: 12px 8px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .countdown-cell::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #ef4444, #dc2626);
+        }
+        .countdown-value {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: #dc2626;
+            line-height: 1;
+        }
+        .countdown-label {
+            font-size: 9px;
+            font-weight: 700;
+            color: #64748b;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-top: 4px;
+        }
+
+        /* === BUTTON ENHANCEMENTS === */
+        .btn-primary-action {
+            background: linear-gradient(135deg, #059669, #047857);
+            border: none;
+            color: #fff;
+            font-weight: 700;
+            padding: 14px 20px;
+            border-radius: 12px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 14px rgba(5, 150, 105, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            position: relative;
+            overflow: hidden;
+        }
+        .btn-primary-action::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+            transition: left 0.5s ease;
+        }
+        .btn-primary-action:hover::before { left: 100%; }
+        .btn-primary-action:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(5, 150, 105, 0.35);
+        }
+        .btn-primary-action:active { transform: translateY(0) scale(0.98); }
+
+        .btn-secondary-action {
+            background: #f8fafc;
+            border: 1.5px solid #e2e8f0;
+            color: #475569;
+            font-weight: 600;
+            padding: 10px 14px;
+            border-radius: 10px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+        .btn-secondary-action:hover {
+            background: #f1f5f9;
+            border-color: #cbd5e1;
+            transform: translateY(-1px);
+        }
+
+        /* === VERIFICATION INPUT === */
+        .verify-input-group {
+            position: relative;
+        }
+        .verify-input-group input {
+            width: 100%;
+            background: #f8fafc;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 12px 14px 12px 40px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 13px;
+            font-weight: 600;
+            color: #1e293b;
+            transition: all 0.3s ease;
+        }
+        .verify-input-group input:focus {
+            border-color: #3b82f6;
+            background: #fff;
+            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
+            outline: none;
+        }
+        .verify-input-group .input-icon {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #94a3b8;
+        }
+
+        /* === STATUS INDICATOR === */
+        .status-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.02em;
+        }
+        .status-pending {
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.1), rgba(217, 119, 6, 0.05));
+            border: 1px solid rgba(245, 158, 11, 0.3);
+            color: #b45309;
+        }
+        .status-completed {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(5, 150, 105, 0.05));
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            color: #047857;
+        }
+
+        /* === MODAL ANIMATION === */
         .modal-overlay {
             transition: opacity 0.3s ease-out;
         }
         .modal-content {
-            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s ease-out;
+            transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s ease-out;
+        }
+
+        /* === QR SCANNING ANIMATION === */
+        @keyframes scanning {
+            0%, 100% { top: 0; opacity: 0.7; }
+            50% { top: calc(100% - 4px); opacity: 1; }
+        }
+
+        /* === SECURITY BADGE ANIMATION === */
+        @keyframes shield-pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.7; transform: scale(1.05); }
+        }
+
+        /* === TOAST ENHANCED === */
+        .toast-notification {
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
         }
 
         /* === MOBILE RESPONSIVE === */
         @media (max-width: 1024px) {
             .sidebar-panel { position: static; margin-bottom: 20px; }
-            .document-wrapper { padding: 10px 0; }
+            .document-wrapper { padding: 12px 0; }
         }
 
         @media (max-width: 768px) {
             .glass-header { padding: 12px 16px; flex-direction: column; align-items: flex-start; gap: 12px; }
-            .header-right-panel { width: 100%; justify-content: space-between; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 8px; }
-            .document-container { width: 100%; max-width: 100%; min-height: auto; padding: 20px 16px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border: none; }
+            .header-right-panel { width: 100%; justify-content: space-between; border-top: 1px solid rgba(255,255,255,0.08); padding-top: 10px; }
+            .document-container { 
+                width: 100%; max-width: 100%; min-height: auto; 
+                padding: 20px 16px; border-radius: 12px; 
+                box-shadow: 0 4px 20px rgba(0,0,0,0.06); 
+                border: none; 
+            }
+            .document-container::before { border-radius: 12px 12px 0 0; }
             .content-layer { font-size: 13px; line-height: 1.6; }
             .grid-header { grid-template-columns: 1fr; gap: 16px; text-align: center; border-bottom: 2px solid #000; padding-bottom: 15px; }
             .grid-header > div:last-child { align-items: center !important; }
@@ -255,14 +527,23 @@
             .text-\[8\.5pt\] { font-size: 13px !important; }
             .text-\[8pt\] { font-size: 12px !important; }
             .text-\[7\.5pt\] { font-size: 11px !important; }
-            .mobile-action-bar { position: fixed; bottom: 0; left: 0; width: 100%; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); border-top: 1px solid #e2e8f0; padding: 12px 16px; box-shadow: 0 -4px 15px rgba(0,0,0,0.05); z-index: 100; display: flex; gap: 10px; }
-            body { padding-bottom: 80px; }
+            .mobile-action-bar { 
+                position: fixed; bottom: 0; left: 0; width: 100%; 
+                background: rgba(255, 255, 255, 0.98); 
+                backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+                border-top: 1px solid #e2e8f0; 
+                padding: 12px 16px; padding-bottom: max(12px, env(safe-area-inset-bottom));
+                box-shadow: 0 -8px 30px rgba(0,0,0,0.08); 
+                z-index: 100; display: flex; gap: 10px; 
+            }
+            body { padding-bottom: 90px; }
             .desktop-actions { display: none; }
+            .countdown-value { font-size: 1.3rem; }
         }
 
         @media (min-width: 769px) { .mobile-action-bar { display: none; } }
 
-        /* === PRINT OPTIMIZATION (STRICT DESKTOP FORCING) === */
+        /* === PRINT OPTIMIZATION === */
         @media print {
             @page { margin: 0; size: A4 portrait; }
             body { background: white !important; padding: 0 !important; margin: 0 !important; }
@@ -273,6 +554,7 @@
                 box-shadow: none !important; margin: 0 !important;
                 padding: 15mm 18mm !important; border: none !important; border-radius: 0 !important;
             }
+            .document-container::before { display: none !important; }
             .content-layer { font-size: 8.5pt !important; line-height: 1.4 !important; }
             .grid-header { grid-template-columns: 1.2fr 0.8fr !important; text-align: left !important; border-bottom: 3px solid #000 !important; padding-bottom: 10px !important; }
             .grid-header > div:last-child { align-items: flex-end !important; }
@@ -293,148 +575,283 @@
             }
             .watermark img { opacity: 0.1 !important; }
         }
+
+        /* === LOADING SKELETON === */
+        .skeleton-pulse {
+            background: linear-gradient(90deg, #f1f5f9 25%, #e2e8f0 50%, #f1f5f9 75%);
+            background-size: 200% 100%;
+            animation: skeleton-loading 1.5s infinite;
+        }
+        @keyframes skeleton-loading {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+
+        /* === INTEGRITY HASH DISPLAY === */
+        .hash-display {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 9px;
+            color: #64748b;
+            word-break: break-all;
+            background: #f8fafc;
+            padding: 8px 10px;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+            line-height: 1.4;
+        }
+
+        /* === FLOATING SECURITY INDICATOR === */
+        .security-float {
+            position: fixed;
+            bottom: 90px;
+            right: 16px;
+            z-index: 90;
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 50px;
+            padding: 8px 14px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            border: 1px solid #e2e8f0;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 10px;
+            font-weight: 600;
+            color: #059669;
+            animation: float-gentle 3s ease-in-out infinite;
+        }
+        @keyframes float-gentle {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-4px); }
+        }
+        @media (min-width: 769px) { .security-float { display: none; } }
     </style>
 </head>
 <body>
 
-    <!-- NOTIFIKASI TOAST -->
-    <div id="toast" class="fixed top-24 right-4 sm:right-8 transform translate-x-[150%] transition-transform duration-300 z-[1000] bg-white border-l-4 border-emerald-500 shadow-xl rounded-md px-4 py-3 flex items-center gap-3 w-[90%] sm:w-auto max-w-sm">
-        <div class="bg-emerald-100 rounded-full p-1 shrink-0"><svg class="w-5 h-5 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg></div>
+    <!-- TOAST NOTIFICATION -->
+    <div id="toast" class="toast-notification fixed top-24 right-4 sm:right-8 transform translate-x-[150%] transition-transform duration-300 z-[1000] bg-white/95 border-l-4 border-emerald-500 shadow-2xl rounded-xl px-5 py-4 flex items-center gap-3 w-[90%] sm:w-auto max-w-sm">
+        <div class="bg-emerald-100 rounded-full p-1.5 shrink-0"><svg class="w-5 h-5 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg></div>
         <p id="toast-msg" class="text-sm font-semibold text-slate-700 leading-snug">Berhasil</p>
     </div>
 
-    <!-- HEADER PORTAL (SECURE DASHBOARD) -->
-    <header class="no-print glass-header py-3.5 px-4 sm:px-8 flex flex-col sm:flex-row justify-between items-center text-white">
-        <div class="flex items-center gap-3 w-full sm:w-auto">
-            <div class="bg-white p-1.5 rounded-lg shadow-sm shrink-0">
-                <img src="https://i.ibb.co.com/p6kxr6WT/IMG-20260121-011440.jpg" alt="Logo Kemenkeu" class="h-8 sm:h-10 w-auto" />
+    <!-- PREMIUM HEADER -->
+    <header class="no-print glass-header py-4 px-4 sm:px-8 flex flex-col sm:flex-row justify-between items-center text-white relative">
+        <div class="flex items-center gap-3.5 w-full sm:w-auto relative z-10">
+            <div class="bg-white p-1.5 rounded-xl shadow-lg shrink-0 ring-2 ring-white/20">
+                <img src="https://i.ibb.co.com/p6kxr6WT/IMG-20260121-011440.jpg" alt="Logo Kemenkeu" class="h-9 sm:h-11 w-auto" />
             </div>
             <div>
-                <div class="flex items-center gap-2 flex-wrap">
-                    <h1 class="font-extrabold text-sm sm:text-base tracking-widest text-slate-100">E-DOCS PORTAL</h1>
-                    <span class="bg-emerald-500/20 text-emerald-400 text-[9px] sm:text-[10px] px-1.5 py-0.5 rounded border border-emerald-500/30 flex items-center gap-1">
-                        <svg class="w-2.5 h-2.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"></path></svg> Secure AES-256
+                <div class="flex items-center gap-2.5 flex-wrap">
+                    <h1 class="font-black text-sm sm:text-base tracking-widest text-white">E-DOCS PORTAL</h1>
+                    <span class="header-badge text-emerald-400 text-[9px] sm:text-[10px] px-2 py-1 rounded-md flex items-center gap-1.5 font-semibold">
+                        <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"></path></svg>
+                        AES-256 Encrypted
                     </span>
                 </div>
-                <p class="text-[9px] sm:text-[10px] text-slate-400 uppercase tracking-wider mt-0.5">Dirjen Pajak & Bea Cukai • Diawasi OJK</p>
+                <p class="text-[9px] sm:text-[10px] text-slate-400 uppercase tracking-wider mt-1 font-medium">Dirjen Bea Cukai • Diawasi OJK • ISO 27001</p>
             </div>
         </div>
-        <div class="flex items-center gap-4 header-right-panel mt-3 sm:mt-0">
-            <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-bold bg-amber-500/10 text-amber-400 border border-amber-500/20">
+        <div class="flex items-center gap-4 header-right-panel mt-3 sm:mt-0 relative z-10">
+            <div class="status-pill status-pending" id="global-status-pill">
                 <span class="relative flex h-2.5 w-2.5">
                   <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
                   <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-amber-500"></span>
                 </span>
-                Menunggu Legalisasi
-            </span>
-            <div class="text-right border-l border-slate-700 pl-4">
-                <p class="text-[9px] sm:text-[10px] text-slate-400 uppercase">Waktu Server</p>
-                <p class="font-mono text-xs sm:text-sm font-bold text-slate-200" id="server-clock">--:--:--</p>
+                <span>Menunggu Legalisasi</span>
+            </div>
+            <div class="text-right border-l border-white/10 pl-4 hidden sm:block">
+                <p class="text-[9px] text-slate-500 uppercase font-medium">Server Time</p>
+                <p class="font-mono text-xs font-bold text-slate-200 tracking-wide" id="server-clock">--:--:--</p>
             </div>
         </div>
     </header>
 
     <!-- MAIN PORTAL CONTENT -->
-    <main class="flex-grow w-full max-w-[1400px] mx-auto px-2 sm:px-4 py-6 sm:py-8 flex flex-col lg:flex-row gap-6 sm:gap-8">
+    <main class="flex-grow w-full max-w-[1400px] mx-auto px-3 sm:px-5 py-6 sm:py-8 flex flex-col lg:flex-row gap-6 sm:gap-8">
         
-        <!-- SIDEBAR KIRI (KONTROL & VERIFIKASI) -->
-        <div class="no-print w-full lg:w-[360px] flex flex-col gap-6 shrink-0 relative">
+        <!-- SIDEBAR PANEL -->
+        <aside class="no-print w-full lg:w-[380px] flex flex-col gap-5 shrink-0 relative">
             
-            <div class="sidebar-panel p-4 sm:p-5">
-                <!-- PANEL COUNTDOWN -->
+            <!-- PANEL UTAMA -->
+            <div class="sidebar-panel p-5 sm:p-6">
+                
+                <!-- PROGRESS TIMELINE -->
                 <div class="mb-6">
-                    <h3 class="font-extrabold text-slate-800 text-[11px] sm:text-xs tracking-wider uppercase mb-3 flex items-center gap-2">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="font-extrabold text-slate-800 text-[11px] tracking-wider uppercase flex items-center gap-2">
+                            <svg class="w-4 h-4 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path></svg>
+                            Status Proses
+                        </h3>
+                        <span class="text-[10px] font-bold text-indigo-600 bg-indigo-50 px-2 py-0.5 rounded-full">2/4</span>
+                    </div>
+
+                    <div id="process-timeline">
+                        <div class="timeline-step completed">
+                            <div class="timeline-dot">
+                                <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                            </div>
+                            <div>
+                                <p class="text-[11px] font-bold text-slate-800">Dokumen Diterbitkan</p>
+                                <p class="text-[9px] text-slate-500 mt-0.5">14 Des 2025 • 08:30 WIB</p>
+                            </div>
+                        </div>
+                        <div class="timeline-step completed">
+                            <div class="timeline-dot">
+                                <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                            </div>
+                            <div>
+                                <p class="text-[11px] font-bold text-slate-800">Notifikasi Terkirim</p>
+                                <p class="text-[9px] text-slate-500 mt-0.5">14 Des 2025 • 09:15 WIB</p>
+                            </div>
+                        </div>
+                        <div class="timeline-step active" id="step-payment">
+                            <div class="timeline-dot">3</div>
+                            <div>
+                                <p class="text-[11px] font-bold text-amber-700">Menunggu Pembayaran</p>
+                                <p class="text-[9px] text-slate-500 mt-0.5">Segera selesaikan jaminan</p>
+                            </div>
+                        </div>
+                        <div class="timeline-step" id="step-finalize">
+                            <div class="timeline-dot">4</div>
+                            <div>
+                                <p class="text-[11px] font-bold text-slate-400">Legalisasi Selesai</p>
+                                <p class="text-[9px] text-slate-400 mt-0.5">Barang akan diproses</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <hr class="border-slate-100 my-5">
+
+                <!-- COUNTDOWN TIMER -->
+                <div class="mb-6">
+                    <h3 class="font-extrabold text-slate-800 text-[11px] tracking-wider uppercase mb-3 flex items-center gap-2">
                         <svg class="w-4 h-4 text-rose-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                         Batas Waktu Penyelesaian
                     </h3>
-                    <div class="grid grid-cols-3 gap-2 text-center">
-                        <div class="bg-slate-50 py-2.5 sm:py-3 rounded-lg border border-slate-200 shadow-inner">
-                            <span class="block text-xl sm:text-2xl font-black text-rose-600 font-mono" id="hours">23</span>
-                            <span class="text-[8px] sm:text-[9px] font-bold text-slate-500 uppercase tracking-widest">Jam</span>
+                    <div class="countdown-grid">
+                        <div class="countdown-cell">
+                            <span class="countdown-value" id="hours">23</span>
+                            <p class="countdown-label">Jam</p>
                         </div>
-                        <div class="bg-slate-50 py-2.5 sm:py-3 rounded-lg border border-slate-200 shadow-inner">
-                            <span class="block text-xl sm:text-2xl font-black text-rose-600 font-mono" id="minutes">59</span>
-                            <span class="text-[8px] sm:text-[9px] font-bold text-slate-500 uppercase tracking-widest">Menit</span>
+                        <div class="countdown-cell">
+                            <span class="countdown-value" id="minutes">59</span>
+                            <p class="countdown-label">Menit</p>
                         </div>
-                        <div class="bg-slate-50 py-2.5 sm:py-3 rounded-lg border border-slate-200 shadow-inner">
-                            <span class="block text-xl sm:text-2xl font-black text-rose-600 font-mono" id="seconds">59</span>
-                            <span class="text-[8px] sm:text-[9px] font-bold text-slate-500 uppercase tracking-widest">Detik</span>
+                        <div class="countdown-cell">
+                            <span class="countdown-value" id="seconds">59</span>
+                            <p class="countdown-label">Detik</p>
                         </div>
                     </div>
-                    <p class="text-[10px] sm:text-[11px] text-justify text-slate-500 mt-3 bg-rose-50 p-2 rounded border border-rose-100 leading-relaxed">
-                        Sesuai instruksi pabean, jaminan wajib diselesaikan dalam kurun <strong class="text-rose-600">1x24 Jam</strong> untuk menghindari status penetapan Barang Milik Negara (Sita Permanen).
-                    </p>
+                    <div class="mt-3 bg-gradient-to-r from-rose-50 to-orange-50 p-3 rounded-xl border border-rose-100">
+                        <p class="text-[10px] text-slate-600 leading-relaxed flex items-start gap-2">
+                            <svg class="w-3.5 h-3.5 text-rose-500 mt-0.5 shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path></svg>
+                            <span>Jaminan wajib diselesaikan dalam <strong class="text-rose-700">1×24 Jam</strong> untuk menghindari sita permanen (UU Cukai No.39/2007).</span>
+                        </p>
+                    </div>
                 </div>
 
-                <hr class="border-slate-200 my-5">
+                <hr class="border-slate-100 my-5">
 
-                <!-- PANEL E-VERIFICATION -->
-                <div class="mb-6 relative" id="verify-container">
-                    <h3 class="font-extrabold text-slate-800 text-[11px] sm:text-xs tracking-wider uppercase mb-3 flex items-center gap-2">
+                <!-- E-VERIFICATION -->
+                <div class="mb-6" id="verify-container">
+                    <h3 class="font-extrabold text-slate-800 text-[11px] tracking-wider uppercase mb-3 flex items-center gap-2">
                         <svg class="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
-                        Verifikasi Pangkalan Data
+                        Verifikasi Data
                     </h3>
-                    <div class="space-y-3 relative z-20">
-                        <input type="text" id="verify-resi" value="001776527333" class="w-full bg-slate-50 border border-slate-300 rounded-md p-2.5 text-sm font-mono font-bold text-slate-800 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all shadow-sm" placeholder="Masukkan No. Resi" />
-                        <button onclick="simulateVerification()" id="btn-verify" class="w-full bg-slate-800 hover:bg-slate-900 text-white font-bold py-2.5 px-4 rounded-md text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-2 shadow-sm">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
-                            Cek Validitas Resi
+                    <div class="space-y-3">
+                        <div class="verify-input-group">
+                            <svg class="w-4 h-4 input-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                            <input type="text" id="verify-resi" value="001776527333" placeholder="Masukkan No. Resi" />
+                        </div>
+                        <button onclick="simulateVerification()" id="btn-verify" class="w-full bg-slate-800 hover:bg-slate-900 text-white font-bold py-3 px-4 rounded-xl text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-2 shadow-md active:scale-[0.98]">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                            Verifikasi Resi
                         </button>
                     </div>
                 </div>
 
+                <!-- DESKTOP ACTIONS -->
                 <div class="desktop-actions">
-                    <hr class="border-slate-200 my-5">
-                    <!-- PANEL PAYMENT GATEWAY (DESKTOP) -->
-                    <div class="mb-6">
-                        <h3 class="font-extrabold text-slate-800 text-xs tracking-wider uppercase mb-3 flex items-center gap-2">
-                            <svg class="w-4 h-4 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path></svg>
-                            Payment Gateway
-                        </h3>
-                        <button onclick="openPaymentModal()" class="pay-btn-class w-full bg-gradient-to-r from-emerald-600 to-emerald-500 hover:from-emerald-700 hover:to-emerald-600 text-white font-bold py-3 px-4 rounded-md text-sm transition-all flex items-center justify-center gap-2 shadow-md transform hover:-translate-y-0.5">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    <hr class="border-slate-100 my-5">
+                    
+                    <!-- PAYMENT BUTTON -->
+                    <div class="mb-5">
+                        <button onclick="openPaymentModal()" class="pay-btn-class btn-primary-action w-full">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
                             <span>Proses Pelunasan Jaminan</span>
                         </button>
                     </div>
 
-                    <!-- DOWNLOAD & PRINT (DESKTOP) -->
-                    <div class="flex gap-2">
-                        <button onclick="generatePDF()" class="pdf-btn-class flex-1 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold py-2.5 px-3 rounded-md text-xs transition-all flex flex-col items-center justify-center gap-1 border border-slate-300">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                    <!-- SECONDARY ACTIONS -->
+                    <div class="grid grid-cols-2 gap-3">
+                        <button onclick="generatePDF()" class="pdf-btn-class btn-secondary-action">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
                             Unduh PDF
                         </button>
-                        <button onclick="window.print()" class="flex-1 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold py-2.5 px-3 rounded-md text-xs transition-all flex flex-col items-center justify-center gap-1 border border-slate-300">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path></svg>
-                            Cetak Fisik
+                        <button onclick="window.print()" class="btn-secondary-action">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path></svg>
+                            Cetak
                         </button>
                     </div>
                 </div>
-                
-                <!-- Status Box (Shared) -->
-                <div id="payment-status" class="hidden mt-4 p-3 rounded-md bg-emerald-50 border border-emerald-200 text-[11px] sm:text-xs text-emerald-800 font-medium leading-relaxed"></div>
-            </div>
-        </div>
 
-        <!-- PORTAL AREA DOKUMEN (KANAN/BAWAH) -->
+                <!-- STATUS BOX -->
+                <div id="payment-status" class="hidden mt-5 p-4 rounded-xl bg-gradient-to-br from-emerald-50 to-green-50 border border-emerald-200 text-[11px] text-emerald-800 font-medium leading-relaxed shadow-sm"></div>
+            </div>
+
+            <!-- SECURITY & INTEGRITY PANEL -->
+            <div class="sidebar-panel p-4 sm:p-5">
+                <h3 class="font-extrabold text-slate-800 text-[11px] tracking-wider uppercase mb-3 flex items-center gap-2">
+                    <svg class="w-4 h-4 text-violet-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+                    Integritas Dokumen
+                </h3>
+                <div class="space-y-2.5">
+                    <div class="flex items-center justify-between text-[10px]">
+                        <span class="text-slate-500 font-medium">SHA-256 Hash</span>
+                        <span class="text-emerald-600 font-bold flex items-center gap-1">
+                            <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                            Verified
+                        </span>
+                    </div>
+                    <div class="hash-display">a7f3c9e8d2b1...4f6a (truncated)</div>
+                    <div class="flex items-center justify-between text-[10px] pt-1">
+                        <span class="text-slate-500 font-medium">Digital Signature</span>
+                        <span class="text-emerald-600 font-bold flex items-center gap-1">
+                            <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                            Valid
+                        </span>
+                    </div>
+                    <div class="flex items-center justify-between text-[10px]">
+                        <span class="text-slate-500 font-medium">SSL/TLS</span>
+                        <span class="text-emerald-600 font-bold flex items-center gap-1">
+                            <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"></path></svg>
+                            TLS 1.3
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- DOCUMENT AREA -->
         <div class="flex-grow document-wrapper relative" id="doc-wrapper">
             
-            <!-- FRAME UTAMA DOKUMEN (Fluid on Mobile, A4 on Print) -->
             <div class="document-container" id="pdfDocument">
                 
                 <!-- STAMPEL LUNAS -->
                 <div class="paid-stamp" id="paidStamp">LUNAS / PAID</div>
 
-                <!-- Watermark Kertas Baru (Realistis) -->
+                <!-- Watermark -->
                 <div class="watermark">
                     <img src="https://i.ibb.co.com/0RNkP7cG/pm-1766605896438-cmp.jpg" alt="Watermark Bea Cukai" />
                 </div>
 
                 <div class="content-layer">
                     
-                    <!-- KOP SURAT INVOICE -->
+                    <!-- KOP SURAT -->
                     <div class="grid-header">
                         <div>
-                            <!-- Logo Wajib Legalisasi Baru -->
                             <div class="mb-3">
                                 <img src="https://i.ibb.co.com/wF5hwJnq/IMG-20251215-214800.jpg" alt="Wajib Legalisasi" class="h-10 sm:h-12 w-auto object-contain mix-blend-multiply" />
                             </div>
@@ -466,7 +883,6 @@
                                         </tr>
                                     </table>
                                     
-                                    <!-- Logo OJK & ISO Berdampingan -->
                                     <div class="flex items-center pl-3 border-l border-slate-200 gap-2 logos-container">
                                         <img src="https://i.ibb.co.com/HpDB8NXW/1766129088487.jpg" alt="Diawasi OJK" class="h-10 sm:h-12 w-auto object-contain mix-blend-multiply" />
                                         <img src="https://i.ibb.co/4wcBBxK0/IMG-20251215-205820-651.jpg" alt="ISO Certified" class="h-10 sm:h-12 w-auto object-contain mix-blend-multiply" />
@@ -477,7 +893,7 @@
                     </div>
 
                     <!-- IDENTITAS TAGIHAN -->
-                    <div class="mb-4 bg-slate-50 p-3 border border-slate-300 rounded-sm">
+                    <div class="mb-4 bg-slate-50 p-3.5 border border-slate-300 rounded-sm">
                         <p class="font-bold text-[8pt] text-slate-500 uppercase tracking-widest mb-1.5">Penanggung Jawab / Penerima Barang:</p>
                         <p class="font-bold text-[11pt] text-slate-900">Andi M</p>
                         <p class="text-[8.5pt] leading-relaxed text-slate-800 mt-1 sm:max-w-[80%]">
@@ -486,7 +902,7 @@
                         <p class="text-[8.5pt] font-mono mt-1 font-semibold">Telp/WA: (+62) 812-6328-5947</p>
                     </div>
 
-                    <!-- TABEL TAGIHAN DENGAN HORIZONTAL SCROLL -->
+                    <!-- TABEL TAGIHAN -->
                     <div class="table-wrapper">
                         <table class="table-invoice">
                             <thead>
@@ -520,10 +936,9 @@
                         <span class="absolute left-1/2 transform -translate-x-1/2 -top-2.5 bg-white px-2 text-[7pt] text-slate-400 font-bold tracking-widest uppercase">Dokumen Resmi Pabean</span>
                     </div>
 
-                    <!-- KOLOM BERITA ACARA & KETENTUAN REFUND -->
+                    <!-- KOLOM BERITA ACARA -->
                     <div class="two-column-layout">
                         
-                        <!-- KOLOM KIRI (BERITA ACARA) -->
                         <div class="column-left">
                             <h3 class="font-bold text-[9.5pt] uppercase tracking-wide border-b border-slate-800 pb-1.5 mb-2.5 text-slate-900">
                                 SURAT PEMBERITAHUAN TINDAKAN PABEAN
@@ -557,7 +972,6 @@
                             </div>
                         </div>
 
-                        <!-- KOLOM KANAN (SYARAT REFUND & TTD) -->
                         <div class="column-right flex flex-col h-full">
                             <div>
                                 <h3 class="font-bold text-[9.5pt] uppercase tracking-wide border-b border-slate-800 pb-1.5 mb-2.5 text-slate-900">
@@ -610,67 +1024,105 @@
                             </div>
                         </div>
 
-                    </div> <!-- End of two-column-layout -->
+                    </div>
 
-                </div> <!-- End of content-layer -->
-            </div> <!-- End of document-container -->
+                </div>
+            </div>
 
         </div>
     </main>
 
-    <!-- MOBILE STICKY BOTTOM ACTION BAR (Hanya tampil di Layar Kecil) -->
+    <!-- MOBILE STICKY BOTTOM ACTION BAR -->
     <div class="mobile-action-bar no-print">
-        <button onclick="generatePDF()" class="pdf-btn-class w-1/3 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold py-3 px-2 rounded-md text-xs border border-slate-300 flex flex-col items-center justify-center gap-1">
+        <button onclick="generatePDF()" class="pdf-btn-class w-1/3 btn-secondary-action py-3.5 text-[11px]">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
-            Unduh PDF
+            PDF
         </button>
-        <button onclick="openPaymentModal()" class="pay-btn-class w-2/3 bg-gradient-to-r from-emerald-600 to-emerald-500 text-white font-bold py-3 px-4 rounded-md text-sm shadow-lg flex items-center justify-center gap-2">
+        <button onclick="openPaymentModal()" class="pay-btn-class w-2/3 bg-gradient-to-r from-emerald-600 to-emerald-500 text-white font-bold py-3.5 px-4 rounded-xl text-sm shadow-lg flex items-center justify-center gap-2 active:scale-[0.97] transition-transform">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
             Pelunasan Jaminan
         </button>
     </div>
 
-    <!-- FOOTER PORTAL WEB -->
-    <footer class="no-print bg-slate-900 text-slate-400 py-8 px-4 text-center text-xs mt-auto border-t border-slate-800">
-        <p>© 2026 Direktorat Jenderal Bea dan Cukai • Kementerian Keuangan Republik Indonesia</p>
-        <p class="text-[10px] text-slate-500 mt-2">Sistem Dokumen Kepabeanan Terpadu Nasional (CEISA 4.0) • Enkripsi AES-256</p>
+    <!-- FLOATING SECURITY INDICATOR (Mobile) -->
+    <div class="security-float no-print">
+        <svg class="w-3.5 h-3.5 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+        Secure Connection
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="no-print bg-gradient-to-b from-slate-900 to-slate-950 text-slate-400 py-10 px-4 text-center text-xs mt-auto border-t border-slate-800">
+        <div class="max-w-4xl mx-auto">
+            <div class="flex items-center justify-center gap-2 mb-3">
+                <div class="w-8 h-8 bg-white rounded-lg p-1">
+                    <img src="https://i.ibb.co.com/p6kxr6WT/IMG-20260121-011440.jpg" alt="Logo" class="w-full h-full object-contain" />
+                </div>
+                <span class="font-bold text-white text-sm tracking-wider">E-DOCS PORTAL</span>
+            </div>
+            <p class="text-slate-400 font-medium">© 2026 Direktorat Jenderal Bea dan Cukai • Kementerian Keuangan RI</p>
+            <div class="flex items-center justify-center gap-4 mt-3 text-[10px] text-slate-500">
+                <span class="flex items-center gap-1">
+                    <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+                    AES-256 Encrypted
+                </span>
+                <span class="flex items-center gap-1">
+                    <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+                    ISO 27001
+                </span>
+                <span class="flex items-center gap-1">
+                    <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    CEISA 4.0
+                </span>
+            </div>
+        </div>
     </footer>
 
     <!-- ==========================================
-         MODAL PEMBAYARAN QRIS / BARCODE
+         MODAL PEMBAYARAN QRIS
          ========================================== -->
-    <div id="payment-modal" class="fixed inset-0 bg-slate-900/80 backdrop-blur-sm z-[2000] hidden flex justify-center items-center p-4 modal-overlay opacity-0 no-print">
-        <div class="bg-white rounded-xl shadow-2xl max-w-sm w-full p-6 text-center modal-content scale-95" id="payment-modal-content">
-            <h3 class="font-extrabold text-lg text-slate-800 mb-1">Pindai QR Untuk Pelunasan</h3>
-            <p class="text-xs text-slate-500 mb-4 font-medium">Batas Waktu Kode QR: <span id="qr-countdown" class="font-mono text-rose-600 font-bold bg-rose-50 px-2 py-0.5 rounded">05:00</span></p>
+    <div id="payment-modal" class="fixed inset-0 bg-slate-900/85 backdrop-blur-md z-[2000] hidden flex justify-center items-center p-4 modal-overlay opacity-0 no-print">
+        <div class="bg-white rounded-2xl shadow-2xl max-w-sm w-full p-6 text-center modal-content scale-95 overflow-hidden" id="payment-modal-content">
             
-            <div class="border-2 border-slate-200 rounded-xl p-2 mb-4 bg-slate-50 relative overflow-hidden">
-                <img src="https://i.ibb.co.com/hwncmfY/IMG-20251219-202725.jpg" alt="QRIS Barcode" class="w-full h-auto object-contain mix-blend-multiply rounded-lg" />
-                <!-- Animasi scan barcode -->
-                <div class="absolute top-0 left-0 w-full h-1 bg-emerald-400 opacity-70 shadow-[0_0_15px_#34d399] animate-[scanning_2.5s_ease-in-out_infinite]"></div>
-            </div>
-            
-            <div class="bg-emerald-50 text-emerald-800 p-3.5 rounded-lg text-xs mb-5 text-left border border-emerald-200 shadow-inner">
-                <div class="flex justify-between items-center border-b border-emerald-200 pb-2 mb-2">
-                    <span class="font-medium">Total Kewajiban</span>
-                    <span class="font-black font-mono text-sm">Rp 2.000.000</span>
+            <!-- Modal Header -->
+            <div class="relative mb-5">
+                <div class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-12 bg-emerald-100 rounded-full flex items-center justify-center">
+                    <svg class="w-6 h-6 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z"></path></svg>
                 </div>
-                <p class="leading-relaxed">Sistem akan secara otomatis mendeteksi pembayaran Anda. <strong>Rp 1.400.000 (70%)</strong> akan di-refund setelah legalisasi selesai.</p>
+                <div class="pt-6">
+                    <h3 class="font-extrabold text-lg text-slate-800">Pindai QR Untuk Pelunasan</h3>
+                    <p class="text-xs text-slate-500 mt-1 font-medium">Batas Waktu: <span id="qr-countdown" class="font-mono text-rose-600 font-bold bg-rose-50 px-2 py-0.5 rounded-md text-[11px]">05:00</span></p>
+                </div>
             </div>
             
-            <button onclick="confirmPayment()" class="w-full bg-slate-800 hover:bg-slate-900 text-white font-bold py-3.5 rounded-lg transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 flex items-center justify-center gap-2">
+            <!-- QR Code -->
+            <div class="border-2 border-slate-200 rounded-2xl p-3 mb-4 bg-gradient-to-br from-slate-50 to-white relative overflow-hidden shadow-inner">
+                <img src="https://i.ibb.co.com/hwncmfY/IMG-20251219-202725.jpg" alt="QRIS Barcode" class="w-full h-auto object-contain mix-blend-multiply rounded-xl" />
+                <div class="absolute top-0 left-0 w-full h-1 bg-emerald-400 opacity-70 shadow-[0_0_15px_#34d399]" style="animation: scanning 2.5s ease-in-out infinite;"></div>
+            </div>
+            
+            <!-- Payment Info -->
+            <div class="bg-gradient-to-br from-emerald-50 to-green-50 text-emerald-800 p-4 rounded-xl text-xs mb-5 text-left border border-emerald-200">
+                <div class="flex justify-between items-center border-b border-emerald-200 pb-2.5 mb-2.5">
+                    <span class="font-semibold text-slate-600">Total Kewajiban</span>
+                    <span class="font-black font-mono text-base text-slate-900">Rp 2.000.000</span>
+                </div>
+                <p class="leading-relaxed text-[11px] text-slate-600">Sistem otomatis mendeteksi pembayaran. <strong class="text-emerald-700">Rp 1.400.000 (70%)</strong> akan di-refund setelah legalisasi selesai.</p>
+            </div>
+            
+            <!-- Action Buttons -->
+            <button onclick="confirmPayment()" class="w-full bg-gradient-to-r from-slate-800 to-slate-900 hover:from-slate-900 hover:to-black text-white font-bold py-4 rounded-xl transition-all shadow-lg hover:shadow-xl active:scale-[0.97] flex items-center justify-center gap-2.5 text-sm">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
                 Saya Sudah Membayar
             </button>
-            <button onclick="closePaymentModal()" class="w-full text-slate-500 text-xs mt-4 hover:text-slate-800 underline font-medium">
+            <button onclick="closePaymentModal()" class="w-full text-slate-400 text-xs mt-3 hover:text-slate-700 font-semibold py-2 transition-colors">
                 Batalkan & Kembali
             </button>
         </div>
     </div>
 
-    <!-- INTERACTIVE JAVASCRIPT -->
+    <!-- JAVASCRIPT -->
     <script>
-        // Custom Toast Function Mobile Optimized
+        // Toast Notification
         function showToast(message, isError = false) {
             const toast = document.getElementById('toast');
             const msg = document.getElementById('toast-msg');
@@ -700,7 +1152,7 @@
             document.getElementById('server-clock').innerText = `${dateStr} ${timeStr}`;
         }, 1000);
 
-        // Countdown Timer (Simulasi 24 Jam)
+        // Countdown Timer
         let deadline = localStorage.getItem('bc_deadline_v4');
         if (!deadline) {
             deadline = new Date().getTime() + 23 * 60 * 60 * 1000 + 45 * 60 * 1000;
@@ -720,19 +1172,28 @@
             document.getElementById('seconds').innerText = String(s).padStart(2, '0');
         }, 1000);
 
-        // Validasi Resi Sederhana
+        // Verification
         function simulateVerification() {
             const resi = document.getElementById('verify-resi').value.trim();
-            if (resi === '001776527333') {
-                showToast('AWD MATCH: Data diverifikasi oleh sistem.');
-            } else {
-                showToast('Verifikasi gagal. Data tidak cocok.', true);
-            }
+            const btn = document.getElementById('btn-verify');
+            
+            btn.disabled = true;
+            btn.innerHTML = '<svg class="animate-spin w-4 h-4" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg> Memverifikasi...';
+            
+            setTimeout(() => {
+                if (resi === '001776527333') {
+                    showToast('✓ Data terverifikasi oleh sistem CEISA.');
+                    btn.innerHTML = '<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg> Terverifikasi';
+                    btn.classList.replace('bg-slate-800', 'bg-emerald-600');
+                } else {
+                    showToast('Verifikasi gagal. Data tidak ditemukan.', true);
+                    btn.innerHTML = '<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg> Verifikasi Resi';
+                    btn.disabled = false;
+                }
+            }, 1500);
         }
 
-        // ==========================================
-        // SISTEM MODAL & PEMBAYARAN BARCODE
-        // ==========================================
+        // Payment Modal
         let qrInterval;
 
         function openPaymentModal() {
@@ -740,14 +1201,12 @@
             const content = document.getElementById('payment-modal-content');
             
             modal.classList.remove('hidden');
-            // Sedikit delay agar transisi CSS berjalan
             setTimeout(() => {
                 modal.classList.remove('opacity-0');
                 content.classList.remove('scale-95');
             }, 10);
 
-            // Set countdown 5 menit untuk QR
-            let qrTime = 300; // 5 menit dalam detik
+            let qrTime = 300;
             const qrDisplay = document.getElementById('qr-countdown');
             
             clearInterval(qrInterval);
@@ -759,6 +1218,7 @@
                 if (qrTime < 0) {
                     clearInterval(qrInterval);
                     qrDisplay.innerText = "KEDALUWARSA";
+                    qrDisplay.classList.add('animate-pulse');
                 }
             }, 1000);
         }
@@ -770,46 +1230,63 @@
             modal.classList.add('opacity-0');
             content.classList.add('scale-95');
             
-            setTimeout(() => {
-                modal.classList.add('hidden');
-            }, 300);
+            setTimeout(() => { modal.classList.add('hidden'); }, 300);
             clearInterval(qrInterval);
         }
 
         function confirmPayment() {
             closePaymentModal();
             
-            // Ubah tombol menjadi status Loading
             const payBtns = document.querySelectorAll('.pay-btn-class');
             payBtns.forEach(btn => {
                 btn.disabled = true;
-                btn.innerHTML = '<svg class="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg> Verifikasi Bank...';
+                btn.innerHTML = '<svg class="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg> Memverifikasi Pembayaran...';
+                btn.style.opacity = '0.8';
             });
 
-            // Simulasi proses bank (1.5 detik)
             setTimeout(() => {
                 payBtns.forEach(btn => {
                     btn.innerHTML = '<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg> LUNAS / TERVERIFIKASI';
-                    btn.classList.replace('from-emerald-600', 'from-slate-600');
-                    btn.classList.replace('to-emerald-500', 'to-slate-500');
-                    btn.classList.add('cursor-not-allowed', 'opacity-90');
+                    btn.style.background = 'linear-gradient(135deg, #059669, #047857)';
+                    btn.style.cursor = 'default';
+                    btn.style.opacity = '1';
                 });
                 
-                // Memicu animasi stampel "SLAM" di dokumen
-                const paidStamps = document.querySelectorAll('.paid-stamp');
-                paidStamps.forEach(stamp => stamp.classList.add('active'));
+                // Activate stamp
+                document.querySelectorAll('.paid-stamp').forEach(stamp => stamp.classList.add('active'));
                 
+                // Update timeline
+                document.getElementById('step-payment').classList.remove('active');
+                document.getElementById('step-payment').classList.add('completed');
+                document.getElementById('step-payment').querySelector('.timeline-dot').innerHTML = '<svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>';
+                
+                setTimeout(() => {
+                    document.getElementById('step-finalize').classList.add('completed');
+                    document.getElementById('step-finalize').querySelector('.timeline-dot').innerHTML = '<svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>';
+                }, 800);
+                
+                // Update global status pill
+                const statusPill = document.getElementById('global-status-pill');
+                statusPill.classList.remove('status-pending');
+                statusPill.classList.add('status-completed');
+                statusPill.innerHTML = '<span class="relative flex h-2.5 w-2.5"><span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span></span><span>Legalisasi Selesai</span>';
+                
+                // Status box
                 const statusBox = document.getElementById('payment-status');
                 statusBox.classList.remove('hidden');
                 statusBox.innerHTML = `
-                    <p class="font-bold border-b border-emerald-200 pb-1 mb-1">✓ Pembayaran Terkonfirmasi Sistem!</p>
-                    <p class="text-justify text-[10.5px]">Dana Rp 2.000.000 terverifikasi. Sesuai aturan, <strong>Rp 1.400.000 (70%)</strong> dikunci dan akan di-refund otomatis ke rekening asal max 3 hari kerja setelah dokumen legalitas disahkan.</p>
+                    <div class="flex items-center gap-2 border-b border-emerald-200 pb-2 mb-2">
+                        <svg class="w-4 h-4 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        <p class="font-bold text-emerald-800">Pembayaran Terkonfirmasi!</p>
+                    </div>
+                    <p class="text-justify text-[10.5px] text-slate-600">Dana Rp 2.000.000 terverifikasi. <strong class="text-emerald-700">Rp 1.400.000 (70%)</strong> akan di-refund otomatis ke rekening asal max 3 hari kerja setelah dokumen disahkan.</p>
                 `;
-                showToast('Transaksi Berhasil. Dokumen Resmi Dicap Lunas.');
-            }, 1500);
+                
+                showToast('✓ Transaksi Berhasil. Dokumen dicap LUNAS.');
+            }, 2000);
         }
 
-        // PDF Generator Cerdas (Murni A4 Desktop Layout meskipun dijalankan dari HP)
+        // PDF Generator
         function generatePDF() {
             const pdfBtns = document.querySelectorAll('.pdf-btn-class');
             const element = document.getElementById('pdfDocument');
@@ -817,7 +1294,7 @@
             pdfBtns.forEach(btn => {
                 btn.dataset.original = btn.innerHTML;
                 btn.disabled = true;
-                btn.innerHTML = '⏳ Merender PDF...';
+                btn.innerHTML = '<svg class="animate-spin w-4 h-4" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg> Merender...';
             });
 
             const opt = {
@@ -833,7 +1310,7 @@
                     btn.disabled = false;
                     btn.innerHTML = btn.dataset.original;
                 });
-                showToast('Dokumen A4 Resmi berhasil diunduh.');
+                showToast('✓ Dokumen PDF A4 berhasil diunduh.');
             }).catch(err => {
                 pdfBtns.forEach(btn => {
                     btn.disabled = false;
@@ -842,6 +1319,12 @@
                 showToast('Gagal memproses PDF.', true);
             });
         }
+
+        // Close modal on backdrop click
+        document.getElementById('payment-modal').addEventListener('click', function(e) {
+            if (e.target === this) closePaymentModal();
+        });
     </script>
 </body>
 </html>
+
