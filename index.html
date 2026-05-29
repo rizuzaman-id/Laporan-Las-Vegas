@@ -4,13 +4,16 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
-    <!-- === META UNTUK THUMBNAIL PREVIEW === -->
+<!-- === META UNTUK THUMBNAIL PREVIEW === -->
     <meta property="og:title" content="Berita Acara Jaminan Legalitas Sementara - DJBC" />
     <meta property="og:description" content="PEMBERITAHUAN PENGECEKAN BARANG NON CUKAI/ILEGAL." />
     <meta property="og:image" content="https://i.ibb.co.com/Q7M6R6Gp/IMG-20260126-125458.jpg" />
     <meta property="og:url" content="https://beacukai.go.id/jaminan-legalitas.html" />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Direktorat Jenderal Bea dan Cukai" />
+
+    <meta property="og:title" content="Portal e-Docs | Direktorat Jenderal Bea dan Cukai" />
+    <meta property="og:description" content="Sistem Informasi Legalitas dan Penyelesaian Kewajiban Pabean Terpadu." />
     
     <title>Sistem e-Docs Terpadu | Jaminan Legalitas DJBC & OJK</title>
     
@@ -18,104 +21,76 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Lucide Icons -->
-    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=JetBrains+Mono:wght@400;500;700&display=swap');
         
         :root {
             --doc-width: 210mm;
             --doc-height: 297mm;
-            --doc-padding: 15mm 18mm 18mm 18mm;
-            --primary-dark: #0a192f;
-            --primary-deeper: #061220;
-            --accent-gold: #d97706;
-            --accent-gold-light: #f59e0b;
-            --bg-portal: #f1f5f9;
-            --glass-border: rgba(255,255,255,0.08);
-            --success: #059669;
-            --danger: #dc2626;
+            --doc-padding: 20mm 20mm 20mm 20mm;
+            --primary-navy: #0f172a;
+            --primary-dark: #020617;
+            --accent-gold: #b49157; /* Premium Gold */
+            --accent-gold-light: #d4af37;
+            --bg-portal: #f4f7f6;
+            --watermark-opacity: 0.12;
         }
 
         * { -webkit-tap-highlight-color: transparent; box-sizing: border-box; }
-
         html { scroll-behavior: smooth; }
 
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-family: 'Inter', sans-serif;
             background-color: var(--bg-portal);
-            background-image: 
-                radial-gradient(circle at 20% 50%, rgba(217, 119, 6, 0.03) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(5, 150, 105, 0.03) 0%, transparent 50%),
-                radial-gradient(#e2e8f0 1px, transparent 1px);
-            background-size: 100% 100%, 100% 100%, 20px 20px;
-            color: #0f172a;
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%2394a3b8' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            color: #1e293b;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
         }
 
-        /* === PREMIUM HEADER SYSTEM === */
-        .glass-header {
-            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-deeper) 100%);
-            border-bottom: 3px solid;
-            border-image: linear-gradient(90deg, var(--accent-gold), var(--accent-gold-light), var(--accent-gold)) 1;
+        /* === PREMIUM HEADER === */
+        .official-header {
+            background: linear-gradient(to right, var(--primary-dark), var(--primary-navy));
+            border-bottom: 4px solid var(--accent-gold);
             position: sticky;
             top: 0;
             z-index: 50;
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
-        }
-
-        .glass-header::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.02'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-            pointer-events: none;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
         }
 
         .header-badge {
-            background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(5, 150, 105, 0.08));
-            border: 1px solid rgba(16, 185, 129, 0.3);
-            backdrop-filter: blur(8px);
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(4px);
         }
 
-        /* === ENHANCED DOCUMENT WRAPPER === */
+        /* === DOCUMENT WRAPPER === */
         .document-wrapper {
-            padding: 24px 0;
+            padding: 30px 0;
             display: flex;
             justify-content: center;
             align-items: flex-start;
             width: 100%;
+            overflow-x: auto;
         }
 
-        /* === STYLING DOKUMEN FISIK (A4 Presisi Cetak) === */
+        /* === DOKUMEN A4 - FORMAL STYLE === */
         .document-container {
             font-family: 'Times New Roman', Times, serif !important;
             background: #ffffff; 
-            box-shadow: 
-                0 25px 50px -12px rgba(0, 0, 0, 0.15),
-                0 0 0 1px rgba(0, 0, 0, 0.05),
-                inset 0 1px 0 rgba(255,255,255,0.8);
-            position: relative;
+            box-shadow: 0 20px 40px -10px rgba(0,0,0,0.1), 0 0 10px rgba(0,0,0,0.05);
             width: var(--doc-width);
             min-height: var(--doc-height);
             padding: var(--doc-padding);
             color: #000 !important;
-            border: 1px solid #d1d5db;
-            border-radius: 4px;
             flex-shrink: 0;
-            overflow: hidden;
-        }
-
-        .document-container::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, #1e40af, #3b82f6, #1e40af);
-            z-index: 5;
+            position: relative;
+            isolation: isolate;
         }
 
         .document-container * {
@@ -123,422 +98,212 @@
             border-color: #000 !important;
         }
 
-        /* === WATERMARK (REALISTIC BLEND) === */
+        /* Garis KOP Resmi */
+        .kop-line {
+            border-bottom: 3px solid #000;
+            position: relative;
+            margin-top: 10px;
+            margin-bottom: 20px;
+        }
+        .kop-line::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -3px;
+            width: 100%;
+            border-bottom: 1px solid #000;
+        }
+
+        /* === WATERMARK === */
         .watermark {
             position: absolute; 
             top: 50%; 
             left: 50%; 
-            transform: translate(-50%, -50%); 
+            transform: translate(-50%, -50%) rotate(-25deg); 
             z-index: 0;
             pointer-events: none;
-            width: 150mm;
+            width: 70%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            isolation: isolate;
         }
         
         .watermark img {
             width: 100%; 
-            height: auto; 
-            mix-blend-mode: multiply; 
-            opacity: 0.10; 
+            height: auto;
+            opacity: var(--watermark-opacity);
+            mix-blend-mode: multiply;
             filter: grayscale(100%) contrast(150%);
         }
 
-        /* === KONTEN AKTIF DOKUMEN === */
+        /* === KONTEN DOKUMEN === */
         .content-layer { 
             position: relative; 
             z-index: 1; 
-            line-height: 1.45;
-            font-size: 8.5pt;
+            line-height: 1.5;
+            font-size: 11pt; /* Ukuran standar surat resmi */
         }
 
-        /* === STAMPEL LUNAS (REALISTIC) === */
+        /* === STAMPEL LUNAS === */
         .paid-stamp {
             position: absolute;
-            top: 22%;
-            right: 8%;
-            border: 5px solid #059669;
-            color: #059669 !important;
-            font-family: 'Arial Black', sans-serif !important;
-            font-size: 26pt;
+            top: 25%;
+            right: 15%;
+            border: 4px solid #b91c1c;
+            color: #b91c1c !important;
+            font-family: 'Arial', sans-serif !important;
+            font-size: 28pt;
             font-weight: 900;
             text-transform: uppercase;
-            padding: 8px 25px;
+            padding: 10px 30px;
             opacity: 0;
             z-index: 50;
             pointer-events: none;
-            border-radius: 6px;
-            background: repeating-linear-gradient(45deg, rgba(255,255,255,0.8), rgba(255,255,255,0.8) 10px, rgba(255,255,255,0.95) 10px, rgba(255,255,255,0.95) 20px);
-            text-shadow: 1px 1px 0 rgba(0,0,0,0.1);
+            border-radius: 4px;
+            transform: rotate(-15deg);
+            mix-blend-mode: multiply;
         }
 
         .paid-stamp.active {
-            animation: stampSlam 0.6s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+            animation: stampFadeIn 0.5s ease-out forwards;
         }
 
-        @keyframes stampSlam {
-            0% { transform: scale(3.5) rotate(-25deg); opacity: 0; }
-            30% { transform: scale(0.9) rotate(-15deg); opacity: 1; }
-            50% { transform: scale(1.05) rotate(-14deg); }
-            100% { transform: scale(1) rotate(-15deg); opacity: 0.92; }
+        @keyframes stampFadeIn {
+            0% { transform: scale(2) rotate(-25deg); opacity: 0; }
+            100% { transform: scale(1) rotate(-15deg); opacity: 0.85; }
         }
 
-        /* === LAYOUT GRID DESKTOP === */
-        .grid-header {
-            display: grid;
-            grid-template-columns: 1.2fr 0.8fr;
-            gap: 15px;
-            border-bottom: 3px solid #000;
-            padding-bottom: 10px;
-            margin-bottom: 15px;
-        }
-
-        .two-column-layout {
-            display: grid;
-            grid-template-columns: 1.05fr 0.95fr;
-            gap: 24px;
-            margin-top: 15px;
-        }
-        .column-left {
-            border-right: 1.5px solid #000;
-            padding-right: 20px;
-        }
-        .column-right {
-            padding-left: 5px;
-        }
-
-        /* === TABEL PRODUK INVOICE === */
-        .table-wrapper {
-            width: 100%;
-            overflow-x: auto;
-            -webkit-overflow-scrolling: touch;
-        }
-
-        table.table-invoice {
+        /* === TABEL RESMI === */
+        table.official-table {
             width: 100%;
             border-collapse: collapse;
-            margin: 12px 0;
-            font-size: 8.5pt;
-            min-width: 500px;
+            margin: 15px 0;
+            font-size: 10.5pt;
         }
 
-        table.table-invoice th, table.table-invoice td {
-            border: 1px solid #111;
-            padding: 8px 10px;
-            text-align: left;
+        table.official-table th, table.official-table td {
+            border: 1px solid #000;
+            padding: 8px 12px;
+            vertical-align: top;
         }
 
-        table.table-invoice th {
-            background: linear-gradient(180deg, #1e293b, #0f172a);
-            color: #fff !important;
+        table.official-table th {
+            background-color: #f3f4f6;
             font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 0.02em;
-        }
-
-        /* === SIGNATURE AREA === */
-        .signature-area {
-            position: relative;
             text-align: center;
-            padding: 10px 0 0 0;
-            display: inline-block;
-        }
-        .sig-stamp {
-            width: 100px;
-            height: auto;
-            margin: 0 auto;
-            mix-blend-mode: multiply;
-            transform: rotate(-1.5deg);
         }
 
-        /* === PREMIUM SIDEBAR === */
-        .sidebar-panel {
-            background: #fff;
+        /* === SIDEBAR (DASHBOARD STYLE) === */
+        .dashboard-panel {
+            background: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
             border: 1px solid #e2e8f0;
-            border-radius: 16px;
-            box-shadow: 
-                0 10px 40px -10px rgba(0, 0, 0, 0.08),
-                0 1px 3px rgba(0, 0, 0, 0.04);
-            position: sticky;
-            top: 90px; 
             overflow: hidden;
+            margin-bottom: 20px;
         }
-
-        .sidebar-panel::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0;
-            height: 3px;
-            background: linear-gradient(90deg, var(--accent-gold), var(--accent-gold-light));
-        }
-
-        /* === PROGRESS TIMELINE === */
-        .timeline-step {
-            position: relative;
-            padding-left: 28px;
-            padding-bottom: 16px;
-        }
-        .timeline-step::before {
-            content: '';
-            position: absolute;
-            left: 9px;
-            top: 22px;
-            bottom: 0;
-            width: 2px;
-            background: #e2e8f0;
-        }
-        .timeline-step:last-child::before { display: none; }
-        .timeline-step.completed::before { background: #059669; }
-        .timeline-dot {
-            position: absolute;
-            left: 0;
-            top: 2px;
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
+        
+        .panel-header {
+            background: var(--primary-navy);
+            color: white;
+            padding: 12px 16px;
+            font-weight: 600;
+            font-size: 0.85rem;
             display: flex;
             align-items: center;
-            justify-content: center;
-            font-size: 10px;
-            font-weight: bold;
-            border: 2px solid #e2e8f0;
-            background: #fff;
-            color: #94a3b8;
-            transition: all 0.4s ease;
-        }
-        .timeline-step.completed .timeline-dot {
-            border-color: #059669;
-            background: #059669;
-            color: #fff;
-            box-shadow: 0 0 0 4px rgba(5, 150, 105, 0.15);
-        }
-        .timeline-step.active .timeline-dot {
-            border-color: #d97706;
-            background: #fef3c7;
-            color: #d97706;
-            box-shadow: 0 0 0 4px rgba(217, 119, 6, 0.15);
-            animation: pulse-dot 2s infinite;
-        }
-        @keyframes pulse-dot {
-            0%, 100% { box-shadow: 0 0 0 4px rgba(217, 119, 6, 0.15); }
-            50% { box-shadow: 0 0 0 8px rgba(217, 119, 6, 0.08); }
-        }
-
-        /* === COUNTDOWN ENHANCED === */
-        .countdown-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
             gap: 8px;
-        }
-        .countdown-cell {
-            background: linear-gradient(135deg, #fef2f2, #fff1f2);
-            border: 1px solid #fecaca;
-            border-radius: 12px;
-            padding: 12px 8px;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-        .countdown-cell::after {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0;
-            height: 2px;
-            background: linear-gradient(90deg, #ef4444, #dc2626);
-        }
-        .countdown-value {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 1.6rem;
-            font-weight: 800;
-            color: #dc2626;
-            line-height: 1;
-        }
-        .countdown-label {
-            font-size: 9px;
-            font-weight: 700;
-            color: #64748b;
+            letter-spacing: 0.05em;
             text-transform: uppercase;
-            letter-spacing: 0.1em;
-            margin-top: 4px;
+            border-bottom: 2px solid var(--accent-gold);
         }
 
-        /* === BUTTON ENHANCEMENTS === */
-        .btn-primary-action {
-            background: linear-gradient(135deg, #059669, #047857);
-            border: none;
-            color: #fff;
-            font-weight: 700;
-            padding: 14px 20px;
-            border-radius: 12px;
-            font-size: 13px;
-            cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 4px 14px rgba(5, 150, 105, 0.3);
+        /* === CHAT WIDGET === */
+        .chat-widget {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            z-index: 100;
+        }
+        .chat-btn {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent-gold), var(--accent-gold-light));
+            color: white;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
-            position: relative;
+            font-size: 24px;
+            box-shadow: 0 10px 25px rgba(180, 145, 87, 0.4);
+            cursor: pointer;
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .chat-btn:hover { transform: scale(1.1); }
+        .chat-panel {
+            position: absolute;
+            bottom: 75px;
+            right: 0;
+            width: 320px;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+            border: 1px solid #e2e8f0;
+            transform: scale(0);
+            transform-origin: bottom right;
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             overflow: hidden;
         }
-        .btn-primary-action::before {
-            content: '';
-            position: absolute;
-            top: 0; left: -100%;
-            width: 100%; height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
-            transition: left 0.5s ease;
-        }
-        .btn-primary-action:hover::before { left: 100%; }
-        .btn-primary-action:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(5, 150, 105, 0.35);
-        }
-        .btn-primary-action:active { transform: translateY(0) scale(0.98); }
-
-        .btn-secondary-action {
-            background: #f8fafc;
-            border: 1.5px solid #e2e8f0;
-            color: #475569;
+        .chat-panel.active { transform: scale(1); }
+        .chat-header {
+            background: var(--primary-navy);
+            color: white;
+            padding: 15px;
+            font-size: 14px;
             font-weight: 600;
-            padding: 10px 14px;
-            border-radius: 10px;
-            font-size: 12px;
-            cursor: pointer;
-            transition: all 0.2s ease;
             display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 6px;
+            justify-content: space-between;
         }
-        .btn-secondary-action:hover {
-            background: #f1f5f9;
-            border-color: #cbd5e1;
-            transform: translateY(-1px);
-        }
-
-        /* === VERIFICATION INPUT === */
-        .verify-input-group {
-            position: relative;
-        }
-        .verify-input-group input {
-            width: 100%;
+        .chat-body {
+            height: 250px;
             background: #f8fafc;
-            border: 2px solid #e2e8f0;
-            border-radius: 10px;
-            padding: 12px 14px 12px 40px;
-            font-family: 'JetBrains Mono', monospace;
+            padding: 15px;
+            overflow-y: auto;
             font-size: 13px;
-            font-weight: 600;
-            color: #1e293b;
-            transition: all 0.3s ease;
         }
-        .verify-input-group input:focus {
-            border-color: #3b82f6;
-            background: #fff;
-            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
-            outline: none;
-        }
-        .verify-input-group .input-icon {
-            position: absolute;
-            left: 12px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: #94a3b8;
-        }
-
-        /* === STATUS INDICATOR === */
-        .status-pill {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 11px;
-            font-weight: 700;
-            letter-spacing: 0.02em;
-        }
-        .status-pending {
-            background: linear-gradient(135deg, rgba(245, 158, 11, 0.1), rgba(217, 119, 6, 0.05));
-            border: 1px solid rgba(245, 158, 11, 0.3);
-            color: #b45309;
-        }
-        .status-completed {
-            background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(5, 150, 105, 0.05));
-            border: 1px solid rgba(16, 185, 129, 0.3);
-            color: #047857;
-        }
-
-        /* === MODAL ANIMATION === */
-        .modal-overlay {
-            transition: opacity 0.3s ease-out;
-        }
-        .modal-content {
-            transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s ease-out;
-        }
-
-        /* === QR SCANNING ANIMATION === */
-        @keyframes scanning {
-            0%, 100% { top: 0; opacity: 0.7; }
-            50% { top: calc(100% - 4px); opacity: 1; }
-        }
-
-        /* === SECURITY BADGE ANIMATION === */
-        @keyframes shield-pulse {
-            0%, 100% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.7; transform: scale(1.05); }
-        }
-
-        /* === TOAST ENHANCED === */
-        .toast-notification {
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
+        .chat-msg {
+            background: white;
+            padding: 10px 12px;
+            border-radius: 8px 8px 8px 0;
+            border: 1px solid #e2e8f0;
+            margin-bottom: 10px;
+            max-width: 85%;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
         }
 
         /* === MOBILE RESPONSIVE === */
         @media (max-width: 1024px) {
-            .sidebar-panel { position: static; margin-bottom: 20px; }
-            .document-wrapper { padding: 12px 0; }
+            .main-layout { flex-direction: column; }
+            .sidebar-area { width: 100%; order: -1; }
+            .document-wrapper { padding: 15px; justify-content: flex-start; }
+            .chat-widget { bottom: 80px; }
         }
 
         @media (max-width: 768px) {
-            .glass-header { padding: 12px 16px; flex-direction: column; align-items: flex-start; gap: 12px; }
-            .header-right-panel { width: 100%; justify-content: space-between; border-top: 1px solid rgba(255,255,255,0.08); padding-top: 10px; }
-            .document-container { 
-                width: 100%; max-width: 100%; min-height: auto; 
-                padding: 20px 16px; border-radius: 12px; 
-                box-shadow: 0 4px 20px rgba(0,0,0,0.06); 
-                border: none; 
+            .document-container {
+                width: 100%; min-width: 800px; /* Force minimum width for horizontal scroll */
+                transform-origin: top left;
             }
-            .document-container::before { border-radius: 12px 12px 0 0; }
-            .content-layer { font-size: 13px; line-height: 1.6; }
-            .grid-header { grid-template-columns: 1fr; gap: 16px; text-align: center; border-bottom: 2px solid #000; padding-bottom: 15px; }
-            .grid-header > div:last-child { align-items: center !important; }
-            .grid-header .text-right { text-align: center !important; }
-            .grid-header table { margin: 0 auto; font-size: 12px; }
-            .grid-header .logos-container { justify-content: center !important; border-left: none !important; padding-left: 0 !important; margin-top: 10px; }
-            .two-column-layout { grid-template-columns: 1fr; gap: 24px; }
-            .column-left { border-right: none; border-bottom: 2px dashed #cbd5e1; padding-right: 0; padding-bottom: 20px; }
-            .column-right { padding-left: 0; }
-            .paid-stamp { top: 15%; right: 50%; transform: translateX(50%) rotate(-10deg) scale(0.9) !important; font-size: 20pt; white-space: nowrap; }
-            @keyframes stampSlam { 0% { transform: translateX(50%) scale(2) rotate(-20deg); opacity: 0; } 100% { transform: translateX(50%) scale(0.9) rotate(-10deg); opacity: 0.95; } }
-            .watermark { width: 85%; opacity: 0.08; }
-            .text-\[20pt\] { font-size: 22px !important; }
-            .text-\[11pt\] { font-size: 15px !important; }
-            .text-\[9\.5pt\] { font-size: 14px !important; }
-            .text-\[8\.5pt\] { font-size: 13px !important; }
-            .text-\[8pt\] { font-size: 12px !important; }
-            .text-\[7\.5pt\] { font-size: 11px !important; }
             .mobile-action-bar { 
                 position: fixed; bottom: 0; left: 0; width: 100%; 
-                background: rgba(255, 255, 255, 0.98); 
-                backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+                background: white;
                 border-top: 1px solid #e2e8f0; 
-                padding: 12px 16px; padding-bottom: max(12px, env(safe-area-inset-bottom));
-                box-shadow: 0 -8px 30px rgba(0,0,0,0.08); 
+                padding: 12px 16px;
+                box-shadow: 0 -5px 20px rgba(0,0,0,0.1); 
                 z-index: 100; display: flex; gap: 10px; 
             }
-            body { padding-bottom: 90px; }
+            body { padding-bottom: 80px; }
             .desktop-actions { display: none; }
-            .countdown-value { font-size: 1.3rem; }
         }
 
         @media (min-width: 769px) { .mobile-action-bar { display: none; } }
@@ -547,483 +312,279 @@
         @media print {
             @page { margin: 0; size: A4 portrait; }
             body { background: white !important; padding: 0 !important; margin: 0 !important; }
-            .no-print, .mobile-action-bar { display: none !important; }
-            .document-wrapper { padding: 0 !important; display: block; }
+            .no-print, .chat-widget, .mobile-action-bar { display: none !important; }
+            .document-wrapper { padding: 0 !important; display: block; overflow: hidden; }
             .document-container {
-                width: 210mm !important; height: 297mm !important; max-width: none !important;
+                width: 210mm !important; height: 297mm !important;
                 box-shadow: none !important; margin: 0 !important;
-                padding: 15mm 18mm !important; border: none !important; border-radius: 0 !important;
+                padding: 15mm 20mm !important; 
             }
-            .document-container::before { display: none !important; }
-            .content-layer { font-size: 8.5pt !important; line-height: 1.4 !important; }
-            .grid-header { grid-template-columns: 1.2fr 0.8fr !important; text-align: left !important; border-bottom: 3px solid #000 !important; padding-bottom: 10px !important; }
-            .grid-header > div:last-child { align-items: flex-end !important; }
-            .grid-header .text-right { text-align: right !important; }
-            .grid-header table { margin: 0 0 0 auto !important; font-size: 8pt !important; }
-            .grid-header .logos-container { justify-content: flex-end !important; border-left: 1px solid #e2e8f0 !important; padding-left: 12px !important; margin-top: 0 !important; }
-            .two-column-layout { grid-template-columns: 1.05fr 0.95fr !important; gap: 20px !important; }
-            .column-left { border-right: 1.5px solid #000 !important; border-bottom: none !important; padding-right: 18px !important; padding-bottom: 0 !important; }
-            .column-right { padding-left: 5px !important; }
-            .text-\[20pt\] { font-size: 20pt !important; }
-            .table-wrapper { overflow: visible !important; }
-            table.table-invoice { min-width: 100% !important; font-size: 8.5pt !important; }
-            .paid-stamp { display: none !important; } 
-            .paid-stamp.active { 
-                display: block !important; filter: grayscale(100%); opacity: 0.7; 
-                top: 22% !important; right: 8% !important; 
-                transform: rotate(-15deg) scale(1) !important; animation: none !important;
-            }
-            .watermark img { opacity: 0.1 !important; }
+            .watermark img { opacity: 0.1 !important; -webkit-print-color-adjust: exact; }
+            .paid-stamp.active { opacity: 0.7 !important; border-color: #000 !important; color: #000 !important; }
         }
-
-        /* === LOADING SKELETON === */
-        .skeleton-pulse {
-            background: linear-gradient(90deg, #f1f5f9 25%, #e2e8f0 50%, #f1f5f9 75%);
-            background-size: 200% 100%;
-            animation: skeleton-loading 1.5s infinite;
-        }
-        @keyframes skeleton-loading {
-            0% { background-position: 200% 0; }
-            100% { background-position: -200% 0; }
-        }
-
-        /* === INTEGRITY HASH DISPLAY === */
-        .hash-display {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 9px;
-            color: #64748b;
-            word-break: break-all;
-            background: #f8fafc;
-            padding: 8px 10px;
-            border-radius: 8px;
-            border: 1px solid #e2e8f0;
-            line-height: 1.4;
-        }
-
-        /* === FLOATING SECURITY INDICATOR === */
-        .security-float {
-            position: fixed;
-            bottom: 90px;
-            right: 16px;
-            z-index: 90;
-            background: rgba(255,255,255,0.95);
-            backdrop-filter: blur(10px);
-            border-radius: 50px;
-            padding: 8px 14px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-            border: 1px solid #e2e8f0;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            font-size: 10px;
-            font-weight: 600;
-            color: #059669;
-            animation: float-gentle 3s ease-in-out infinite;
-        }
-        @keyframes float-gentle {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-4px); }
-        }
-        @media (min-width: 769px) { .security-float { display: none; } }
     </style>
 </head>
 <body>
 
     <!-- TOAST NOTIFICATION -->
-    <div id="toast" class="toast-notification fixed top-24 right-4 sm:right-8 transform translate-x-[150%] transition-transform duration-300 z-[1000] bg-white/95 border-l-4 border-emerald-500 shadow-2xl rounded-xl px-5 py-4 flex items-center gap-3 w-[90%] sm:w-auto max-w-sm">
-        <div class="bg-emerald-100 rounded-full p-1.5 shrink-0"><svg class="w-5 h-5 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg></div>
-        <p id="toast-msg" class="text-sm font-semibold text-slate-700 leading-snug">Berhasil</p>
+    <div id="toast" class="fixed top-5 left-1/2 transform -translate-x-1/2 -translate-y-[150%] transition-transform duration-300 z-[9999] bg-white border-l-4 border-emerald-600 shadow-xl rounded px-6 py-3 flex items-center gap-3 w-[90%] max-w-md">
+        <i class="fas fa-check-circle text-emerald-600 text-xl" id="toast-icon"></i>
+        <p id="toast-msg" class="text-sm font-semibold text-slate-800">Berhasil</p>
     </div>
 
-    <!-- PREMIUM HEADER -->
-    <header class="no-print glass-header py-4 px-4 sm:px-8 flex flex-col sm:flex-row justify-between items-center text-white relative">
-        <div class="flex items-center gap-3.5 w-full sm:w-auto relative z-10">
-            <div class="bg-white p-1.5 rounded-xl shadow-lg shrink-0 ring-2 ring-white/20">
-                <img src="https://i.ibb.co.com/p6kxr6WT/IMG-20260121-011440.jpg" alt="Logo Kemenkeu" class="h-9 sm:h-11 w-auto" />
-            </div>
-            <div>
-                <div class="flex items-center gap-2.5 flex-wrap">
-                    <h1 class="font-black text-sm sm:text-base tracking-widest text-white">E-DOCS PORTAL</h1>
-                    <span class="header-badge text-emerald-400 text-[9px] sm:text-[10px] px-2 py-1 rounded-md flex items-center gap-1.5 font-semibold">
-                        <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"></path></svg>
-                        AES-256 Encrypted
-                    </span>
-                </div>
-                <p class="text-[9px] sm:text-[10px] text-slate-400 uppercase tracking-wider mt-1 font-medium">Dirjen Bea Cukai • Diawasi OJK • ISO 27001</p>
+    <!-- HEADER RESMI -->
+    <header class="no-print official-header py-3 px-6 flex flex-col md:flex-row justify-between items-center text-white">
+        <div class="flex items-center gap-4 w-full md:w-auto">
+            <!-- Lambang Garuda Pancasila -->
+            <img src="https://i.ibb.co.com/ksgZjvL6/IMG-20260529-161414.jpg" alt="Garuda" class="h-12 w-auto object-contain filter drop-shadow-md" />
+            <div class="h-10 w-px bg-white/20 mx-1"></div>
+            <!-- Logo Kemenkeu -->
+            <img src="https://i.ibb.co.com/p6kxr6WT/IMG-20260121-011440.jpg" alt="Logo Kemenkeu" class="h-10 w-auto bg-white p-1 rounded-sm mix-blend-screen" />
+            
+            <div class="ml-2 hidden sm:block">
+                <h1 class="font-bold text-sm tracking-wide text-white font-serif uppercase">Kementerian Keuangan Republik Indonesia</h1>
+                <p class="text-[10px] text-slate-300 font-sans tracking-widest mt-0.5">DIREKTORAT JENDERAL BEA DAN CUKAI</p>
             </div>
         </div>
-        <div class="flex items-center gap-4 header-right-panel mt-3 sm:mt-0 relative z-10">
-            <div class="status-pill status-pending" id="global-status-pill">
-                <span class="relative flex h-2.5 w-2.5">
-                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
-                  <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-amber-500"></span>
-                </span>
-                <span>Menunggu Legalisasi</span>
-            </div>
-            <div class="text-right border-l border-white/10 pl-4 hidden sm:block">
-                <p class="text-[9px] text-slate-500 uppercase font-medium">Server Time</p>
-                <p class="font-mono text-xs font-bold text-slate-200 tracking-wide" id="server-clock">--:--:--</p>
+        
+        <div class="flex items-center gap-4 mt-3 md:mt-0">
+            <div class="header-badge px-3 py-1.5 rounded flex items-center gap-2">
+                <i class="fas fa-shield-halved text-emerald-400"></i>
+                <div class="text-[10px] text-right">
+                    <p class="font-semibold text-emerald-400">SISTEM TERENKRIPSI</p>
+                    <p class="text-slate-400">ID: BC-MKS-99281</p>
+                </div>
             </div>
         </div>
     </header>
 
-    <!-- MAIN PORTAL CONTENT -->
-    <main class="flex-grow w-full max-w-[1400px] mx-auto px-3 sm:px-5 py-6 sm:py-8 flex flex-col lg:flex-row gap-6 sm:gap-8">
+    <!-- MAIN CONTENT -->
+    <main class="flex-grow w-full max-w-[1500px] mx-auto px-4 sm:px-6 py-8 main-layout flex gap-8 relative">
         
-        <!-- SIDEBAR PANEL -->
-        <aside class="no-print w-full lg:w-[380px] flex flex-col gap-5 shrink-0 relative">
+        <!-- SIDEBAR (KIRI) -->
+        <aside class="no-print sidebar-area w-[350px] shrink-0">
             
-            <!-- PANEL UTAMA -->
-            <div class="sidebar-panel p-5 sm:p-6">
-                
-                <!-- PROGRESS TIMELINE -->
-                <div class="mb-6">
-                    <div class="flex items-center justify-between mb-4">
-                        <h3 class="font-extrabold text-slate-800 text-[11px] tracking-wider uppercase flex items-center gap-2">
-                            <svg class="w-4 h-4 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path></svg>
-                            Status Proses
-                        </h3>
-                        <span class="text-[10px] font-bold text-indigo-600 bg-indigo-50 px-2 py-0.5 rounded-full">2/4</span>
-                    </div>
-
-                    <div id="process-timeline">
-                        <div class="timeline-step completed">
-                            <div class="timeline-dot">
-                                <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
-                            </div>
-                            <div>
-                                <p class="text-[11px] font-bold text-slate-800">Dokumen Diterbitkan</p>
-                                <p class="text-[9px] text-slate-500 mt-0.5">14 Des 2025 • 08:30 WIB</p>
-                            </div>
-                        </div>
-                        <div class="timeline-step completed">
-                            <div class="timeline-dot">
-                                <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
-                            </div>
-                            <div>
-                                <p class="text-[11px] font-bold text-slate-800">Notifikasi Terkirim</p>
-                                <p class="text-[9px] text-slate-500 mt-0.5">14 Des 2025 • 09:15 WIB</p>
-                            </div>
-                        </div>
-                        <div class="timeline-step active" id="step-payment">
-                            <div class="timeline-dot">3</div>
-                            <div>
-                                <p class="text-[11px] font-bold text-amber-700">Menunggu Pembayaran</p>
-                                <p class="text-[9px] text-slate-500 mt-0.5">Segera selesaikan jaminan</p>
-                            </div>
-                        </div>
-                        <div class="timeline-step" id="step-finalize">
-                            <div class="timeline-dot">4</div>
-                            <div>
-                                <p class="text-[11px] font-bold text-slate-400">Legalisasi Selesai</p>
-                                <p class="text-[9px] text-slate-400 mt-0.5">Barang akan diproses</p>
-                            </div>
-                        </div>
-                    </div>
+            <!-- PANEL: STATUS DOKUMEN -->
+            <div class="dashboard-panel">
+                <div class="panel-header">
+                    <i class="fas fa-file-signature text-accent-gold-light"></i>
+                    Status Dokumen
                 </div>
-
-                <hr class="border-slate-100 my-5">
-
-                <!-- COUNTDOWN TIMER -->
-                <div class="mb-6">
-                    <h3 class="font-extrabold text-slate-800 text-[11px] tracking-wider uppercase mb-3 flex items-center gap-2">
-                        <svg class="w-4 h-4 text-rose-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                        Batas Waktu Penyelesaian
-                    </h3>
-                    <div class="countdown-grid">
-                        <div class="countdown-cell">
-                            <span class="countdown-value" id="hours">23</span>
-                            <p class="countdown-label">Jam</p>
-                        </div>
-                        <div class="countdown-cell">
-                            <span class="countdown-value" id="minutes">59</span>
-                            <p class="countdown-label">Menit</p>
-                        </div>
-                        <div class="countdown-cell">
-                            <span class="countdown-value" id="seconds">59</span>
-                            <p class="countdown-label">Detik</p>
-                        </div>
+                <div class="p-5">
+                    <div class="flex justify-between items-center mb-4">
+                        <span class="text-xs font-semibold text-slate-500">No. Referensi</span>
+                        <span class="font-mono text-sm font-bold text-slate-900 bg-slate-100 px-2 py-1 rounded border border-slate-200">BC.MKS/SL-012/2025</span>
                     </div>
-                    <div class="mt-3 bg-gradient-to-r from-rose-50 to-orange-50 p-3 rounded-xl border border-rose-100">
-                        <p class="text-[10px] text-slate-600 leading-relaxed flex items-start gap-2">
-                            <svg class="w-3.5 h-3.5 text-rose-500 mt-0.5 shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path></svg>
-                            <span>Jaminan wajib diselesaikan dalam <strong class="text-rose-700">1×24 Jam</strong> untuk menghindari sita permanen (UU Cukai No.39/2007).</span>
-                        </p>
-                    </div>
-                </div>
-
-                <hr class="border-slate-100 my-5">
-
-                <!-- E-VERIFICATION -->
-                <div class="mb-6" id="verify-container">
-                    <h3 class="font-extrabold text-slate-800 text-[11px] tracking-wider uppercase mb-3 flex items-center gap-2">
-                        <svg class="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
-                        Verifikasi Data
-                    </h3>
-                    <div class="space-y-3">
-                        <div class="verify-input-group">
-                            <svg class="w-4 h-4 input-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
-                            <input type="text" id="verify-resi" value="001776527333" placeholder="Masukkan No. Resi" />
-                        </div>
-                        <button onclick="simulateVerification()" id="btn-verify" class="w-full bg-slate-800 hover:bg-slate-900 text-white font-bold py-3 px-4 rounded-xl text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-2 shadow-md active:scale-[0.98]">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                            Verifikasi Resi
-                        </button>
-                    </div>
-                </div>
-
-                <!-- DESKTOP ACTIONS -->
-                <div class="desktop-actions">
-                    <hr class="border-slate-100 my-5">
                     
-                    <!-- PAYMENT BUTTON -->
-                    <div class="mb-5">
-                        <button onclick="openPaymentModal()" class="pay-btn-class btn-primary-action w-full">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
-                            <span>Proses Pelunasan Jaminan</span>
-                        </button>
-                    </div>
-
-                    <!-- SECONDARY ACTIONS -->
-                    <div class="grid grid-cols-2 gap-3">
-                        <button onclick="generatePDF()" class="pdf-btn-class btn-secondary-action">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
-                            Unduh PDF
-                        </button>
-                        <button onclick="window.print()" class="btn-secondary-action">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path></svg>
-                            Cetak
-                        </button>
-                    </div>
-                </div>
-
-                <!-- STATUS BOX -->
-                <div id="payment-status" class="hidden mt-5 p-4 rounded-xl bg-gradient-to-br from-emerald-50 to-green-50 border border-emerald-200 text-[11px] text-emerald-800 font-medium leading-relaxed shadow-sm"></div>
-            </div>
-
-            <!-- SECURITY & INTEGRITY PANEL -->
-            <div class="sidebar-panel p-4 sm:p-5">
-                <h3 class="font-extrabold text-slate-800 text-[11px] tracking-wider uppercase mb-3 flex items-center gap-2">
-                    <svg class="w-4 h-4 text-violet-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
-                    Integritas Dokumen
-                </h3>
-                <div class="space-y-2.5">
-                    <div class="flex items-center justify-between text-[10px]">
-                        <span class="text-slate-500 font-medium">SHA-256 Hash</span>
-                        <span class="text-emerald-600 font-bold flex items-center gap-1">
-                            <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
-                            Verified
-                        </span>
-                    </div>
-                    <div class="hash-display">a7f3c9e8d2b1...4f6a (truncated)</div>
-                    <div class="flex items-center justify-between text-[10px] pt-1">
-                        <span class="text-slate-500 font-medium">Digital Signature</span>
-                        <span class="text-emerald-600 font-bold flex items-center gap-1">
-                            <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
-                            Valid
-                        </span>
-                    </div>
-                    <div class="flex items-center justify-between text-[10px]">
-                        <span class="text-slate-500 font-medium">SSL/TLS</span>
-                        <span class="text-emerald-600 font-bold flex items-center gap-1">
-                            <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"></path></svg>
-                            TLS 1.3
-                        </span>
+                    <!-- Timeline Corporate -->
+                    <div class="relative border-l-2 border-slate-200 ml-3 mt-6 mb-2 space-y-6">
+                        <div class="relative pl-6">
+                            <div class="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-emerald-600 border-2 border-white shadow"></div>
+                            <p class="text-xs font-bold text-emerald-700">Penerbitan Berita Acara</p>
+                            <p class="text-[10px] text-slate-500">Selesai • 14 Des 2025</p>
+                        </div>
+                        <div class="relative pl-6" id="step-payment">
+                            <div class="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-amber-500 border-2 border-white shadow animate-pulse"></div>
+                            <p class="text-xs font-bold text-amber-700">Penyelesaian Jaminan</p>
+                            <p class="text-[10px] text-slate-500">Menunggu Pelunasan</p>
+                        </div>
+                        <div class="relative pl-6" id="step-final">
+                            <div class="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-slate-300 border-2 border-white shadow"></div>
+                            <p class="text-xs font-bold text-slate-400">Pelepasan Penahanan</p>
+                        </div>
                     </div>
                 </div>
             </div>
+
+            <!-- PANEL: BATAS WAKTU -->
+            <div class="dashboard-panel border-rose-200">
+                <div class="panel-header bg-rose-900 border-rose-500">
+                    <i class="fas fa-stopwatch"></i>
+                    Batas Waktu Ketetapan
+                </div>
+                <div class="p-5 text-center bg-rose-50/50">
+                    <div class="flex justify-center gap-3 font-mono text-2xl font-bold text-rose-700 mb-2">
+                        <div class="bg-white px-3 py-2 rounded border border-rose-200 shadow-sm" id="hours">23</div>
+                        <div class="py-2">:</div>
+                        <div class="bg-white px-3 py-2 rounded border border-rose-200 shadow-sm" id="minutes">59</div>
+                        <div class="py-2">:</div>
+                        <div class="bg-white px-3 py-2 rounded border border-rose-200 shadow-sm" id="seconds">59</div>
+                    </div>
+                    <p class="text-[10px] text-rose-800 leading-tight bg-rose-100 p-2 rounded">Berdasarkan UU Kepabeanan, kegagalan penyelesaian dalam 1x24 jam mengakibatkan <strong class="uppercase">Sita Negara</strong>.</p>
+                </div>
+            </div>
+
+            <!-- PANEL: DASAR HUKUM -->
+            <div class="dashboard-panel">
+                <div class="panel-header bg-slate-800 border-slate-600">
+                    <i class="fas fa-gavel text-slate-300"></i>
+                    Dasar Hukum
+                </div>
+                <div class="p-4 text-[11px] text-slate-600 space-y-3 bg-slate-50">
+                    <p class="flex gap-2"><i class="fas fa-check text-emerald-600 mt-0.5"></i> <span><strong>UU No. 39 Tahun 2007</strong> tentang Perubahan atas UU No. 11 Tahun 1995 tentang Cukai.</span></p>
+                    <p class="flex gap-2"><i class="fas fa-check text-emerald-600 mt-0.5"></i> <span><strong>PMK No. 200/PMK.04/2019</strong> tentang Pembebasan, Keringanan, dan Pengembalian Cukai.</span></p>
+                    <p class="flex gap-2"><i class="fas fa-check text-emerald-600 mt-0.5"></i> <span>SOP Pemeriksaan Barang Kiriman Terindikasi Pelanggaran Administratif.</span></p>
+                </div>
+            </div>
+
+            <!-- DESKTOP ACTIONS -->
+            <div class="desktop-actions space-y-3">
+                <button onclick="openPaymentModal()" class="pay-btn-class w-full bg-gradient-to-r from-[var(--primary-navy)] to-[var(--primary-dark)] text-white font-bold py-3.5 px-4 rounded shadow-lg hover:shadow-xl transition-all border border-slate-700 flex justify-center items-center gap-2">
+                    <i class="fas fa-wallet text-accent-gold"></i>
+                    PROSES PELUNASAN JAMINAN
+                </button>
+                <div class="grid grid-cols-2 gap-3">
+                    <button onclick="generatePDF()" class="pdf-btn-class bg-white border border-slate-300 text-slate-700 font-semibold py-2.5 rounded shadow-sm hover:bg-slate-50 transition-colors flex justify-center items-center gap-2 text-sm">
+                        <i class="fas fa-file-pdf text-rose-600"></i> Unduh PDF
+                    </button>
+                    <button onclick="window.print()" class="bg-white border border-slate-300 text-slate-700 font-semibold py-2.5 rounded shadow-sm hover:bg-slate-50 transition-colors flex justify-center items-center gap-2 text-sm">
+                        <i class="fas fa-print text-slate-600"></i> Cetak
+                    </button>
+                </div>
+            </div>
+
         </aside>
 
-        <!-- DOCUMENT AREA -->
-        <div class="flex-grow document-wrapper relative" id="doc-wrapper">
+        <!-- DOCUMENT AREA (KANAN) -->
+        <div class="flex-grow document-wrapper">
             
             <div class="document-container" id="pdfDocument">
                 
                 <!-- STAMPEL LUNAS -->
-                <div class="paid-stamp" id="paidStamp">LUNAS / PAID</div>
+                <div class="paid-stamp" id="paidStamp">LUNAS / TERVERIFIKASI</div>
 
-                <!-- Watermark -->
+                <!-- WATERMARK (Diperbaiki agar rapi saat dicetak) -->
                 <div class="watermark">
-                    <img src="https://i.ibb.co.com/0RNkP7cG/pm-1766605896438-cmp.jpg" alt="Watermark Bea Cukai" />
+                    <img src="https://i.ibb.co.com/0RNkP7cG/pm-1766605896438-cmp.jpg" alt="Watermark DJBC" crossorigin="anonymous" />
                 </div>
 
                 <div class="content-layer">
                     
-                    <!-- KOP SURAT -->
-                    <div class="grid-header">
-                        <div>
-                            <div class="mb-3">
-                                <img src="https://i.ibb.co.com/wF5hwJnq/IMG-20251215-214800.jpg" alt="Wajib Legalisasi" class="h-10 sm:h-12 w-auto object-contain mix-blend-multiply" />
+                    <!-- KOP SURAT RESMI -->
+                    <div class="flex items-start justify-between">
+                        <!-- Logo Kiri -->
+                        <div class="w-[80px]">
+                            <img src="https://i.ibb.co.com/p6kxr6WT/IMG-20260121-011440.jpg" alt="Kemenkeu" class="w-full h-auto mix-blend-multiply" crossorigin="anonymous" />
+                        </div>
+                        
+                        <!-- Teks Tengah -->
+                        <div class="flex-grow text-center px-4">
+                            <h2 class="font-bold text-[12pt] uppercase leading-tight">KEMENTERIAN KEUANGAN REPUBLIK INDONESIA</h2>
+                            <h3 class="font-bold text-[14pt] uppercase leading-tight">DIREKTORAT JENDERAL BEA DAN CUKAI</h3>
+                            <h4 class="font-bold text-[11pt] uppercase leading-tight mt-1">KANTOR PENGAWASAN DAN PELAYANAN TIPE MADYA PABEAN</h4>
+                            <p class="text-[9pt] mt-1">Jalan Pabean No. 1, Komplek Pelabuhan, Telp. (021) 1500225, Fax. (021) 4890966</p>
+                            <p class="text-[9pt]">Situs web: www.beacukai.go.id | Email: bcpelayanan@customs.go.id</p>
+                        </div>
+                        
+                        <!-- Logo Kanan -->
+                        <div class="w-[70px] flex flex-col items-center gap-2 pt-2">
+                            <img src="https://i.ibb.co.com/wF5hwJnq/IMG-20251215-214800.jpg" alt="Wajib Legalisasi" class="w-full h-auto mix-blend-multiply border border-black p-1" crossorigin="anonymous" />
+                        </div>
+                    </div>
+                    
+                    <div class="kop-line"></div>
+
+                    <!-- JUDUL SURAT -->
+                    <div class="text-center mb-6 mt-4">
+                        <h1 class="font-bold text-[14pt] uppercase underline">BERITA ACARA PENAHANAN DAN JAMINAN LEGALITAS SEMENTARA</h1>
+                        <p class="font-bold text-[11pt] mt-1">Nomor: BC.MKS/SL-012/XII/2025</p>
+                    </div>
+
+                    <!-- ISI SURAT -->
+                    <div class="text-[11pt] leading-relaxed text-justify mb-4">
+                        <p>Pada hari ini, <strong>Minggu</strong> tanggal <strong>Empat Belas</strong> bulan <strong>Desember</strong> tahun <strong>Dua Ribu Dua Puluh Lima</strong> (14-12-2025), berdasarkan kewenangan yang diatur dalam Undang-Undang Kepabeanan dan Cukai, Pejabat Bea dan Cukai menetapkan penahanan sementara terhadap barang kiriman dengan rincian sebagai berikut:</p>
+                    </div>
+
+                    <!-- IDENTITAS -->
+                    <table class="w-full text-[11pt] mb-5">
+                        <tr>
+                            <td class="w-[30%] align-top py-1">1. Nama Penerima Barang</td>
+                            <td class="w-[2%] align-top py-1">:</td>
+                            <td class="w-[68%] align-top py-1 font-bold">Andi M</td>
+                        </tr>
+                        <tr>
+                            <td class="align-top py-1">2. Alamat Lengkap</td>
+                            <td class="align-top py-1">:</td>
+                            <td class="align-top py-1">Dusun. 8 Wonosari, Gang. Teratai, Desa Klumpang Kebun, Kec. Hamparan Perak, Kab. Deli Serdang, Sumatera Utara, 20374</td>
+                        </tr>
+                        <tr>
+                            <td class="align-top py-1">3. Kontak (Telp/WA)</td>
+                            <td class="align-top py-1">:</td>
+                            <td class="align-top py-1">(+62) 812-6328-5947</td>
+                        </tr>
+                        <tr>
+                            <td class="align-top py-1">4. Jasa Ekspedisi / Resi</td>
+                            <td class="align-top py-1">:</td>
+                            <td class="align-top py-1">SiCepat Ekspres / <span class="font-bold">001776527333</span></td>
+                        </tr>
+                    </table>
+
+                    <!-- RINCIAN BARANG & DENDA -->
+                    <p class="text-[11pt] font-bold mb-2">A. Hasil Pemeriksaan Fisik dan Penetapan Jaminan</p>
+                    <table class="official-table">
+                        <thead>
+                            <tr>
+                                <th width="5%">No.</th>
+                                <th width="40%">Uraian Barang (Hasil Pindai/Buka Fisik)</th>
+                                <th width="15%">Jumlah</th>
+                                <th width="20%">Dasar Pengenaan</th>
+                                <th width="20%">Total Kewajiban (Rp)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="text-center">1</td>
+                                <td>Rokok Tanpa Pita Cukai Resmi / Ilegal<br><i class="text-[9pt]">(Pelanggaran Administratif Cukai)</i></td>
+                                <td class="text-center">20 Slop<br>(4.000 Btg)</td>
+                                <td>Rp 500 / Batang</td>
+                                <td class="text-right font-bold">2.000.000,00</td>
+                            </tr>
+                            <tr>
+                                <td colspan="4" class="text-right font-bold pr-4">TOTAL JAMINAN YANG HARUS DISETOR:</td>
+                                <td class="text-right font-bold text-[12pt]">Rp 2.000.000,00</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <!-- KETENTUAN RESTITUSI -->
+                    <p class="text-[11pt] font-bold mt-6 mb-2">B. Ketentuan Penyelesaian dan Restitusi (Pengembalian Dana)</p>
+                    <div class="text-[11pt] leading-relaxed text-justify mb-6">
+                        <ol class="list-decimal pl-5 space-y-1">
+                            <li>Dana Jaminan sebesar Rp 2.000.000,00 bersifat <strong>SEMENTARA</strong> selama proses administrasi dan legalisasi dokumen Pabean.</li>
+                            <li>Berdasarkan PMK No.200/2019, apabila verifikasi sistem selesai, dana jaminan akan dilakukan <strong>RESTITUSI (Pengembalian) sebesar 70% (Rp 1.400.000,00)</strong> secara otomatis ke rekening pengirim/penerima.</li>
+                            <li>Sisa dana 30% (Rp 600.000,00) dialokasikan sebagai Penerimaan Negara Bukan Pajak (PNBP) atas biaya penerbitan dokumen legal.</li>
+                            <li><strong class="underline">PERINGATAN KERAS:</strong> Apabila Jaminan tidak diselesaikan dalam waktu 1x24 Jam, maka barang kiriman akan disita dan dimusnahkan oleh negara tanpa pemberitahuan lanjutan.</li>
+                        </ol>
+                    </div>
+
+                    <!-- TANDA TANGAN -->
+                    <div class="flex justify-between mt-12 mb-8" style="page-break-inside: avoid;">
+                        <!-- QR Code Validasi Kiri -->
+                        <div class="w-1/3 text-center">
+                            <img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=VALID:BC.MKS/SL-012/2025" alt="QR Validasi" class="mx-auto mb-2 w-[80px] h-[80px] border border-black p-1">
+                            <p class="text-[8pt]">Pindai untuk validasi dokumen</p>
+                            <p class="text-[8pt] font-mono mt-1">ID: a7f3c9e8d2b1</p>
+                        </div>
+                        
+                        <!-- Tanda Tangan Kanan -->
+                        <div class="w-1/3 text-center relative">
+                            <p class="text-[11pt] mb-1">Ditetapkan di: Pangkalpinang</p>
+                            <p class="text-[11pt] mb-4">Tanggal: 14 Desember 2025</p>
+                            <p class="text-[11pt] font-bold">Pejabat Pemeriksa Dokumen</p>
+                            
+                            <!-- Stempel Signature -->
+                            <div class="relative h-[80px] my-2 flex justify-center items-center">
+                                <img src="https://i.ibb.co.com/M5ZWjB5R/IMG-20260120-162645.jpg" alt="Tanda Tangan" class="h-full object-contain mix-blend-multiply absolute" style="transform: rotate(-3deg);" crossorigin="anonymous" />
                             </div>
                             
-                            <p class="font-bold text-[8.5pt] uppercase tracking-wide mb-1 text-slate-800">Info Otoritas</p>
-                            <div class="mt-1 flex justify-center sm:justify-start">
-                                <img src="https://i.ibb.co/1Jf993mY/IMG-20251209-084035.jpg" alt="Bea Cukai Slogan" class="h-10 w-auto object-contain mix-blend-multiply" />
-                            </div>
-                            <p class="text-[7.5pt] font-semibold mt-2.5 text-slate-700">VERIFIKASI DIGITAL: <span class="text-blue-700">www.beacukai.go.id</span></p>
-                        </div>
-
-                        <div class="text-right flex flex-col justify-between items-end">
-                            <h2 class="text-[20pt] font-black text-slate-900 tracking-widest uppercase mb-1">Invoice</h2>
-                            <div class="text-[8.5pt] leading-snug text-right w-full">
-                                <p class="font-bold border-b border-slate-300 pb-1 inline-block">DIREKTORAT JENDERAL BEA DAN CUKAI - LEGALISASI</p>
-                                <div class="flex justify-center sm:justify-end gap-4 mt-2.5">
-                                    <table class="text-right text-[8pt]">
-                                        <tr>
-                                            <td class="font-semibold text-slate-600 pr-3 pb-0.5">Nomor Referensi:</td>
-                                            <td class="font-mono font-bold">BC.MKS/SL-012/2025</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="font-semibold text-slate-600 pr-3 pb-0.5">Tanggal Terbit:</td>
-                                            <td class="font-mono font-bold">14/12/2025</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="font-semibold text-slate-600 pr-3">Batas Waktu:</td>
-                                            <td class="font-mono font-bold text-rose-600">14/12/2025</td>
-                                        </tr>
-                                    </table>
-                                    
-                                    <div class="flex items-center pl-3 border-l border-slate-200 gap-2 logos-container">
-                                        <img src="https://i.ibb.co.com/HpDB8NXW/1766129088487.jpg" alt="Diawasi OJK" class="h-10 sm:h-12 w-auto object-contain mix-blend-multiply" />
-                                        <img src="https://i.ibb.co/4wcBBxK0/IMG-20251215-205820-651.jpg" alt="ISO Certified" class="h-10 sm:h-12 w-auto object-contain mix-blend-multiply" />
-                                    </div>
-                                </div>
-                            </div>
+                            <p class="text-[11pt] font-bold underline">ARIF KURNIAWAN</p>
+                            <p class="text-[10pt]">NIP. 19870311 201102 1 006</p>
                         </div>
                     </div>
-
-                    <!-- IDENTITAS TAGIHAN -->
-                    <div class="mb-4 bg-slate-50 p-3.5 border border-slate-300 rounded-sm">
-                        <p class="font-bold text-[8pt] text-slate-500 uppercase tracking-widest mb-1.5">Penanggung Jawab / Penerima Barang:</p>
-                        <p class="font-bold text-[11pt] text-slate-900">Andi M</p>
-                        <p class="text-[8.5pt] leading-relaxed text-slate-800 mt-1 sm:max-w-[80%]">
-                            Dusun. 8 Wonosari, Gang. Teratai, Desa Klumpang Kebun, Kec. Hamparan Perak, Kab. Deli Serdang, Sumatera Utara, 20374, Indonesia
-                        </p>
-                        <p class="text-[8.5pt] font-mono mt-1 font-semibold">Telp/WA: (+62) 812-6328-5947</p>
-                    </div>
-
-                    <!-- TABEL TAGIHAN -->
-                    <div class="table-wrapper">
-                        <table class="table-invoice">
-                            <thead>
-                                <tr>
-                                    <th width="20%">Jenis Tindakan</th>
-                                    <th width="45%">Uraian Temuan / Deskripsi Fisik</th>
-                                    <th width="8%" class="text-center">Qty</th>
-                                    <th width="12%" class="text-right">Harga</th>
-                                    <th width="15%" class="text-right">Total Kewajiban</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td class="font-bold text-slate-900">Jaminan Legalitas<br><span class="text-[7pt] text-rose-600 font-normal">*(Penahanan Sementara)</span></td>
-                                    <td class="text-slate-800 leading-relaxed">Rokok Tanpa Cukai (20 SLOP / 4.000 Btg)<br><span class="text-[7.5pt] font-semibold text-rose-700">NON PITA CUKAI RESMI / ILEGAL</span></td>
-                                    <td class="text-center font-mono">4000</td>
-                                    <td class="text-right font-mono">Rp 500</td>
-                                    <td class="text-right font-mono font-bold">Rp 2.000.000,00</td>
-                                </tr>
-                                <tr>
-                                    <td colspan="3" class="border-none bg-white"></td>
-                                    <td class="font-bold text-right border-t-2 border-black bg-slate-50 uppercase text-[8pt]">Total Tagihan:</td>
-                                    <td class="text-right font-black font-mono text-[10pt] border-t-2 border-black bg-slate-50">Rp 2.000.000,00</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-
-                    <!-- GARIS PEMISAH -->
-                    <div class="border-t-2 border-dashed border-slate-300 my-6 relative">
-                        <span class="absolute left-1/2 transform -translate-x-1/2 -top-2.5 bg-white px-2 text-[7pt] text-slate-400 font-bold tracking-widest uppercase">Dokumen Resmi Pabean</span>
-                    </div>
-
-                    <!-- KOLOM BERITA ACARA -->
-                    <div class="two-column-layout">
-                        
-                        <div class="column-left">
-                            <h3 class="font-bold text-[9.5pt] uppercase tracking-wide border-b border-slate-800 pb-1.5 mb-2.5 text-slate-900">
-                                SURAT PEMBERITAHUAN TINDAKAN PABEAN
-                            </h3>
-                            <div class="text-[8.5pt] leading-relaxed space-y-1.5 text-slate-800">
-                                <p><span class="font-semibold w-16 inline-block">Nomor</span>: BC.MKS/SL-012/2025</p>
-                                <p><span class="font-semibold w-16 inline-block">Tanggal</span>: 14 Desember 2025</p>
-                                
-                                <p class="text-justify pt-2">
-                                    Dengan hormat,<br>
-                                    Berdasarkan hasil pemeriksaan unit pengawasan pada fasilitas bongkar muat <strong>Pelabuhan Pangkalpinang</strong>, serta berpedoman pada SOP Pemeriksaan Kepabeanan, kami sampaikan hal berikut:
-                                </p>
-
-                                <div class="bg-slate-50 p-2.5 border border-slate-300 rounded-sm mt-2 space-y-1 text-[8pt]">
-                                    <p class="font-bold text-slate-900 underline mb-1">Rincian Paket & Logistik:</p>
-                                    <p>• Ekspedisi: SiCepat Ekspres (Resi: <strong class="font-mono">001776527333</strong>)</p>
-                                    <p>• Isi Temuan: Rokok Tanpa Pita Cukai (20 Slop)</p>
-                                    <p>• Status: <strong>DITANGGUHKAN / SITA SEMENTARA</strong></p>
-                                </div>
-
-                                <p class="font-bold text-slate-900 mt-2.5 border-l-2 border-slate-800 pl-1.5">TINDAKAN OTORITAS:</p>
-                                <ol class="list-decimal pl-5 text-justify space-y-0.5 text-[8pt]">
-                                    <li>Melakukan penyegelan paket untuk proses klarifikasi legalitas kepada penerima barang.</li>
-                                    <li>Menerbitkan surat jaminan sementara sebagai jaminan proses administrasi.</li>
-                                </ol>
-
-                                <p class="font-bold text-slate-900 mt-2.5 border-l-2 border-slate-800 pl-1.5">DASAR PERHITUNGAN JAMINAN:</p>
-                                <p class="text-justify text-[8pt]">
-                                    Ditetapkan sebesar 25% dari tarif denda administratif (2x Nilai Cukai). Pengali Rp 500 × 4.000 batang = <strong>Rp 2.000.000,00</strong>.
-                                </p>
-                            </div>
-                        </div>
-
-                        <div class="column-right flex flex-col h-full">
-                            <div>
-                                <h3 class="font-bold text-[9.5pt] uppercase tracking-wide border-b border-slate-800 pb-1.5 mb-2.5 text-slate-900">
-                                    SKEMA RESTITUSI (PENGEMBALIAN)
-                                </h3>
-                                <div class="text-[8pt] leading-relaxed text-slate-800 space-y-2.5">
-                                    <p class="text-justify">
-                                        Setelah penyelesaian administrasi dan verifikasi sistem, pemilik barang diberikan restitusi dengan komposisi:
-                                    </p>
-
-                                    <div class="space-y-1.5 mt-1">
-                                        <div class="flex justify-between items-center bg-blue-50 p-2 border border-blue-200 rounded-sm">
-                                            <div>
-                                                <span class="font-bold text-blue-900 block text-[8pt]">1. Dana Dikembalikan (70%)</span>
-                                                <span class="text-[6.5pt] text-blue-700 italic">Ditransfer otomatis ke Rek. Pengirim</span>
-                                            </div>
-                                            <span class="font-mono font-black text-blue-900 text-[9pt]">Rp 1.400.000</span>
-                                        </div>
-                                        <div class="flex justify-between items-center bg-slate-100 p-2 border border-slate-300 rounded-sm">
-                                            <div>
-                                                <span class="font-bold text-slate-800 block text-[8pt]">2. Biaya Legalisasi (30%)</span>
-                                                <span class="text-[6.5pt] text-slate-600 italic">Penerbitan dokumen & PNBP</span>
-                                            </div>
-                                            <span class="font-mono font-black text-slate-800 text-[9pt]">Rp 600.000</span>
-                                        </div>
-                                    </div>
-
-                                    <div class="bg-rose-50 p-2 border border-rose-200 rounded-sm mt-3">
-                                        <p class="font-bold text-rose-800 text-[7.5pt] flex items-center gap-1">
-                                            <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path></svg>
-                                            PERINGATAN HUKUM
-                                        </p>
-                                        <p class="text-justify text-[7.5pt] leading-tight text-rose-900 mt-1">
-                                            Apabila tidak diselesaikan dalam jangka waktu 1 (satu) hari kerja terhitung sejak tanggal penerbitan surat ini, maka barang dimaksud akan ditetapkan berstatus Barang Temuan dan selanjutnya diserahkan kepada pihak Direktorat Jenderal Bea dan Cukai untuk dilakukan penyitaan serta diproses lebih lanjut sesuai dengan ketentuan yang diatur dalam UNDANG-UNDANG NOMOR 39 TAHUN 2007 TENTANG CUKAI. Selain itu, pihak yang bersangkutan akan dilakukan pemanggilan dan/atau penjemputan ke lokasi guna dimintai keterangan lebih lanjut berkaitan dengan kegiatan TRANSAKSI, DISTRIBUSI, dan/atau PENGIRIMAN rokok ilegal sebagaimana diatur dalam ketentuan hukum yang berlaku.
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- TANDA TANGAN -->
-                            <div class="mt-auto pt-4 text-center relative" style="page-break-inside: avoid;">
-                                <p class="text-[8pt] text-slate-700">Disahkan Secara Elektronik Oleh,</p>
-                                <p class="font-bold text-[8.5pt] text-slate-900">Pejabat Pemeriksa Dokumen</p>
-                                
-                                <div class="signature-area">
-                                    <img src="https://i.ibb.co.com/M5ZWjB5R/IMG-20260120-162645.jpg" alt="Tanda Tangan Pejabat" class="sig-stamp" />
-                                    <p class="signature-name text-slate-900">ARIF KURNIAWAN</p>
-                                </div>
-                                <p class="text-[7.5pt] text-slate-600 mt-0.5 font-mono">NIP. 19870311 201102 1 006</p>
-                            </div>
-                        </div>
-
+                    
+                    <!-- Footer Dokumen -->
+                    <div class="border-t border-black mt-8 pt-2 text-[8pt] text-center italic">
+                        Dokumen ini diterbitkan secara elektronik melalui Sistem e-Docs Terpadu Direktorat Jenderal Bea dan Cukai. Keabsahan dokumen ini dapat diverifikasi.
                     </div>
 
                 </div>
@@ -1032,131 +593,137 @@
         </div>
     </main>
 
-    <!-- MOBILE STICKY BOTTOM ACTION BAR -->
-    <div class="mobile-action-bar no-print">
-        <button onclick="generatePDF()" class="pdf-btn-class w-1/3 btn-secondary-action py-3.5 text-[11px]">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
-            PDF
+    <!-- MOBILE ACTION BAR (BOTTOM) -->
+    <div class="mobile-action-bar">
+        <button onclick="generatePDF()" class="pdf-btn-class w-1/3 bg-slate-100 text-slate-700 font-bold py-3 rounded border border-slate-300 text-xs flex justify-center items-center gap-2">
+            <i class="fas fa-file-pdf text-rose-600"></i> PDF
         </button>
-        <button onclick="openPaymentModal()" class="pay-btn-class w-2/3 bg-gradient-to-r from-emerald-600 to-emerald-500 text-white font-bold py-3.5 px-4 rounded-xl text-sm shadow-lg flex items-center justify-center gap-2 active:scale-[0.97] transition-transform">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-            Pelunasan Jaminan
+        <button onclick="openPaymentModal()" class="pay-btn-class w-2/3 bg-gradient-to-r from-[var(--primary-navy)] to-[var(--primary-dark)] text-white font-bold py-3 px-2 rounded shadow-lg flex justify-center items-center gap-2 text-sm">
+            <i class="fas fa-wallet text-accent-gold"></i> PELUNASAN
         </button>
     </div>
 
-    <!-- FLOATING SECURITY INDICATOR (Mobile) -->
-    <div class="security-float no-print">
-        <svg class="w-3.5 h-3.5 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
-        Secure Connection
-    </div>
+    <!-- MODAL PEMBAYARAN PREMIUM -->
+    <div id="payment-modal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-[2000] hidden flex justify-center items-center p-4 transition-opacity duration-300 opacity-0 no-print">
+        <div class="bg-white rounded-xl shadow-2xl max-w-md w-full overflow-hidden transform scale-95 transition-transform duration-300" id="payment-modal-content">
+            
+            <!-- Header Modal -->
+            <div class="bg-slate-900 px-6 py-4 flex justify-between items-center text-white border-b-4 border-accent-gold-light">
+                <div class="flex items-center gap-3">
+                    <img src="https://i.ibb.co.com/p6kxr6WT/IMG-20260121-011440.jpg" alt="Logo" class="h-8 bg-white p-1 rounded-sm">
+                    <div>
+                        <h3 class="font-bold text-sm tracking-wider">PORTAL PEMBAYARAN NEGARA</h3>
+                        <p class="text-[10px] text-slate-400">Modul Penerimaan Negara Generasi 3 (MPN G3)</p>
+                    </div>
+                </div>
+                <button onclick="closePaymentModal()" class="text-slate-400 hover:text-white"><i class="fas fa-times text-xl"></i></button>
+            </div>
 
-    <!-- FOOTER -->
-    <footer class="no-print bg-gradient-to-b from-slate-900 to-slate-950 text-slate-400 py-10 px-4 text-center text-xs mt-auto border-t border-slate-800">
-        <div class="max-w-4xl mx-auto">
-            <div class="flex items-center justify-center gap-2 mb-3">
-                <div class="w-8 h-8 bg-white rounded-lg p-1">
-                    <img src="https://i.ibb.co.com/p6kxr6WT/IMG-20260121-011440.jpg" alt="Logo" class="w-full h-full object-contain" />
+            <div class="p-6 text-center">
+                <p class="text-sm font-semibold text-slate-700 mb-1">Pindai QRIS untuk melunasi Jaminan:</p>
+                <p class="text-xs text-rose-600 font-bold mb-4">Sisa Waktu: <span id="qr-countdown" class="font-mono bg-rose-100 px-1 rounded">05:00</span></p>
+                
+                <div class="border-2 border-dashed border-slate-300 rounded-lg p-2 mb-4 bg-slate-50 relative inline-block">
+                    <img src="https://i.ibb.co.com/hwncmfY/IMG-20251219-202725.jpg" alt="QRIS" class="w-[200px] h-auto mx-auto mix-blend-multiply" crossorigin="anonymous">
+                    <!-- Scanner Animation Effect -->
+                    <div class="absolute left-0 w-full h-[2px] bg-emerald-500 shadow-[0_0_8px_#10b981]" style="animation: scan 2s linear infinite;"></div>
                 </div>
-                <span class="font-bold text-white text-sm tracking-wider">E-DOCS PORTAL</span>
-            </div>
-            <p class="text-slate-400 font-medium">© 2026 Direktorat Jenderal Bea dan Cukai • Kementerian Keuangan RI</p>
-            <div class="flex items-center justify-center gap-4 mt-3 text-[10px] text-slate-500">
-                <span class="flex items-center gap-1">
-                    <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
-                    AES-256 Encrypted
-                </span>
-                <span class="flex items-center gap-1">
-                    <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
-                    ISO 27001
-                </span>
-                <span class="flex items-center gap-1">
-                    <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                    CEISA 4.0
-                </span>
-            </div>
-        </div>
-    </footer>
+                <style>@keyframes scan { 0% { top: 0; } 50% { top: 100%; } 100% { top: 0; } }</style>
 
-    <!-- ==========================================
-         MODAL PEMBAYARAN QRIS
-         ========================================== -->
-    <div id="payment-modal" class="fixed inset-0 bg-slate-900/85 backdrop-blur-md z-[2000] hidden flex justify-center items-center p-4 modal-overlay opacity-0 no-print">
-        <div class="bg-white rounded-2xl shadow-2xl max-w-sm w-full p-6 text-center modal-content scale-95 overflow-hidden" id="payment-modal-content">
-            
-            <!-- Modal Header -->
-            <div class="relative mb-5">
-                <div class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-12 bg-emerald-100 rounded-full flex items-center justify-center">
-                    <svg class="w-6 h-6 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z"></path></svg>
+                <div class="bg-blue-50 border border-blue-200 text-blue-800 p-4 rounded-lg text-left mb-6">
+                    <div class="flex justify-between items-center border-b border-blue-200 pb-2 mb-2">
+                        <span class="text-sm font-semibold">Total Tagihan</span>
+                        <span class="font-bold text-lg font-mono">Rp 2.000.000</span>
+                    </div>
+                    <p class="text-[11px] leading-relaxed"><i class="fas fa-info-circle mr-1"></i> Sistem akan memverifikasi otomatis. Dana restitusi sebesar <strong>Rp 1.400.000</strong> akan ditransfer kembali ke rekening pengirim setelah validasi dokumen selesai.</p>
                 </div>
-                <div class="pt-6">
-                    <h3 class="font-extrabold text-lg text-slate-800">Pindai QR Untuk Pelunasan</h3>
-                    <p class="text-xs text-slate-500 mt-1 font-medium">Batas Waktu: <span id="qr-countdown" class="font-mono text-rose-600 font-bold bg-rose-50 px-2 py-0.5 rounded-md text-[11px]">05:00</span></p>
+                
+                <button onclick="confirmPayment()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3.5 rounded shadow transition-colors flex items-center justify-center gap-2">
+                    <i class="fas fa-check-circle"></i> KONFIRMASI PEMBAYARAN
+                </button>
+                
+                <!-- Logos Payment -->
+                <div class="flex justify-center gap-4 mt-5 grayscale opacity-50">
+                    <i class="fab fa-cc-visa text-2xl"></i>
+                    <i class="fab fa-cc-mastercard text-2xl"></i>
+                    <i class="fas fa-money-bill-transfer text-2xl"></i>
                 </div>
             </div>
-            
-            <!-- QR Code -->
-            <div class="border-2 border-slate-200 rounded-2xl p-3 mb-4 bg-gradient-to-br from-slate-50 to-white relative overflow-hidden shadow-inner">
-                <img src="https://i.ibb.co.com/hwncmfY/IMG-20251219-202725.jpg" alt="QRIS Barcode" class="w-full h-auto object-contain mix-blend-multiply rounded-xl" />
-                <div class="absolute top-0 left-0 w-full h-1 bg-emerald-400 opacity-70 shadow-[0_0_15px_#34d399]" style="animation: scanning 2.5s ease-in-out infinite;"></div>
-            </div>
-            
-            <!-- Payment Info -->
-            <div class="bg-gradient-to-br from-emerald-50 to-green-50 text-emerald-800 p-4 rounded-xl text-xs mb-5 text-left border border-emerald-200">
-                <div class="flex justify-between items-center border-b border-emerald-200 pb-2.5 mb-2.5">
-                    <span class="font-semibold text-slate-600">Total Kewajiban</span>
-                    <span class="font-black font-mono text-base text-slate-900">Rp 2.000.000</span>
-                </div>
-                <p class="leading-relaxed text-[11px] text-slate-600">Sistem otomatis mendeteksi pembayaran. <strong class="text-emerald-700">Rp 1.400.000 (70%)</strong> akan di-refund setelah legalisasi selesai.</p>
-            </div>
-            
-            <!-- Action Buttons -->
-            <button onclick="confirmPayment()" class="w-full bg-gradient-to-r from-slate-800 to-slate-900 hover:from-slate-900 hover:to-black text-white font-bold py-4 rounded-xl transition-all shadow-lg hover:shadow-xl active:scale-[0.97] flex items-center justify-center gap-2.5 text-sm">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                Saya Sudah Membayar
-            </button>
-            <button onclick="closePaymentModal()" class="w-full text-slate-400 text-xs mt-3 hover:text-slate-700 font-semibold py-2 transition-colors">
-                Batalkan & Kembali
-            </button>
         </div>
     </div>
 
-    <!-- JAVASCRIPT -->
+    <!-- LIVE CHAT WIDGET (FITUR BARU) -->
+    <div class="chat-widget no-print">
+        <div class="chat-panel" id="chatPanel">
+            <div class="chat-header">
+                <span class="flex items-center gap-2"><i class="fas fa-headset"></i> Layanan Informasi (CS)</span>
+                <button onclick="toggleChat()" class="text-white hover:text-slate-200"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="chat-body" id="chatBody">
+                <div class="text-center text-[10px] text-slate-400 mb-3">Hari ini, <span id="chat-time"></span></div>
+                <div class="chat-msg">
+                    <strong>Admin Bea Cukai:</strong><br>
+                    Halo Bpk/Ibu Andi M, ada yang bisa kami bantu terkait Surat Penetapan Jaminan Legalitas Anda?
+                </div>
+            </div>
+            <div class="p-3 bg-white border-t border-slate-200 flex gap-2">
+                <input type="text" id="chatInput" placeholder="Ketik pesan..." class="w-full bg-slate-100 border border-slate-200 rounded px-3 py-2 text-xs outline-none focus:border-slate-400">
+                <button onclick="sendMsg()" class="bg-slate-800 text-white px-3 py-2 rounded text-xs"><i class="fas fa-paper-plane"></i></button>
+            </div>
+        </div>
+        <div class="chat-btn mt-4 ml-auto" onclick="toggleChat()">
+            <i class="fas fa-comment-dots"></i>
+        </div>
+    </div>
+
     <script>
-        // Toast Notification
+        // Set Time
+        document.getElementById('chat-time').innerText = new Date().toLocaleTimeString('id-ID', {hour: '2-digit', minute:'2-digit'});
+
+        // Chat Logic
+        function toggleChat() {
+            document.getElementById('chatPanel').classList.toggle('active');
+        }
+        function sendMsg() {
+            const input = document.getElementById('chatInput');
+            const val = input.value.trim();
+            if(!val) return;
+            
+            const chatBody = document.getElementById('chatBody');
+            chatBody.innerHTML += `<div class="chat-msg ml-auto bg-blue-50 border-blue-100"><strong>Anda:</strong><br>${val}</div>`;
+            input.value = '';
+            chatBody.scrollTop = chatBody.scrollHeight;
+            
+            setTimeout(() => {
+                chatBody.innerHTML += `<div class="chat-msg"><strong>Admin Bea Cukai:</strong><br>Mohon maaf, sistem kami mendeteksi bahwa paket Anda tertahan. Silakan selesaikan tagihan jaminan yang tertera di dokumen agar proses restitusi dan pelepasan barang dapat segera diproses. Terima kasih.</div>`;
+                chatBody.scrollTop = chatBody.scrollHeight;
+            }, 1000);
+        }
+
+        // Toast
         function showToast(message, isError = false) {
             const toast = document.getElementById('toast');
             const msg = document.getElementById('toast-msg');
-            const iconWrap = toast.querySelector('div');
+            const icon = document.getElementById('toast-icon');
             
             msg.innerText = message;
-            
             if(isError) {
-                toast.classList.replace('border-emerald-500', 'border-rose-500');
-                iconWrap.classList.replace('bg-emerald-100', 'bg-rose-100');
-                iconWrap.innerHTML = '<svg class="w-5 h-5 text-rose-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>';
+                toast.classList.replace('border-emerald-600', 'border-rose-600');
+                icon.className = 'fas fa-exclamation-circle text-rose-600 text-xl';
             } else {
-                toast.classList.replace('border-rose-500', 'border-emerald-500');
-                iconWrap.classList.replace('bg-rose-100', 'bg-emerald-100');
-                iconWrap.innerHTML = '<svg class="w-5 h-5 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>';
+                toast.classList.replace('border-rose-600', 'border-emerald-600');
+                icon.className = 'fas fa-check-circle text-emerald-600 text-xl';
             }
 
-            toast.classList.remove('translate-x-[150%]');
-            setTimeout(() => { toast.classList.add('translate-x-[150%]'); }, 4000);
+            toast.classList.remove('-translate-y-[150%]');
+            setTimeout(() => { toast.classList.add('-translate-y-[150%]'); }, 4000);
         }
 
-        // Real Time Server Clock
-        setInterval(() => {
-            const now = new Date();
-            const dateStr = now.toLocaleDateString('id-ID', { year: 'numeric', month: 'short', day: 'numeric' });
-            const timeStr = now.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
-            document.getElementById('server-clock').innerText = `${dateStr} ${timeStr}`;
-        }, 1000);
-
-        // Countdown Timer
-        let deadline = localStorage.getItem('bc_deadline_v4');
+        // Countdown Timer Logic
+        let deadline = localStorage.getItem('bc_deadline_pro');
         if (!deadline) {
             deadline = new Date().getTime() + 23 * 60 * 60 * 1000 + 45 * 60 * 1000;
-            localStorage.setItem('bc_deadline_v4', deadline);
+            localStorage.setItem('bc_deadline_pro', deadline);
         } else {
             deadline = parseInt(deadline);
         }
@@ -1164,43 +731,19 @@
         setInterval(() => {
             const distance = deadline - new Date().getTime();
             if (distance < 0) return;
-            const h = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const m = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const s = Math.floor((distance % (1000 * 60)) / 1000);
-            document.getElementById('hours').innerText = String(h).padStart(2, '0');
-            document.getElementById('minutes').innerText = String(m).padStart(2, '0');
-            document.getElementById('seconds').innerText = String(s).padStart(2, '0');
+            document.getElementById('hours').innerText = String(Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))).padStart(2, '0');
+            document.getElementById('minutes').innerText = String(Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60))).padStart(2, '0');
+            document.getElementById('seconds').innerText = String(Math.floor((distance % (1000 * 60)) / 1000)).padStart(2, '0');
         }, 1000);
 
-        // Verification
-        function simulateVerification() {
-            const resi = document.getElementById('verify-resi').value.trim();
-            const btn = document.getElementById('btn-verify');
-            
-            btn.disabled = true;
-            btn.innerHTML = '<svg class="animate-spin w-4 h-4" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg> Memverifikasi...';
-            
-            setTimeout(() => {
-                if (resi === '001776527333') {
-                    showToast('✓ Data terverifikasi oleh sistem CEISA.');
-                    btn.innerHTML = '<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg> Terverifikasi';
-                    btn.classList.replace('bg-slate-800', 'bg-emerald-600');
-                } else {
-                    showToast('Verifikasi gagal. Data tidak ditemukan.', true);
-                    btn.innerHTML = '<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg> Verifikasi Resi';
-                    btn.disabled = false;
-                }
-            }, 1500);
-        }
-
-        // Payment Modal
+        // Modal Logic
         let qrInterval;
-
         function openPaymentModal() {
             const modal = document.getElementById('payment-modal');
             const content = document.getElementById('payment-modal-content');
             
             modal.classList.remove('hidden');
+            // Small delay for transition
             setTimeout(() => {
                 modal.classList.remove('opacity-0');
                 content.classList.remove('scale-95');
@@ -1208,7 +751,6 @@
 
             let qrTime = 300;
             const qrDisplay = document.getElementById('qr-countdown');
-            
             clearInterval(qrInterval);
             qrInterval = setInterval(() => {
                 const m = Math.floor(qrTime / 60);
@@ -1217,8 +759,7 @@
                 qrTime--;
                 if (qrTime < 0) {
                     clearInterval(qrInterval);
-                    qrDisplay.innerText = "KEDALUWARSA";
-                    qrDisplay.classList.add('animate-pulse');
+                    qrDisplay.innerText = "EXPIRED";
                 }
             }, 1000);
         }
@@ -1240,53 +781,37 @@
             const payBtns = document.querySelectorAll('.pay-btn-class');
             payBtns.forEach(btn => {
                 btn.disabled = true;
-                btn.innerHTML = '<svg class="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg> Memverifikasi Pembayaran...';
-                btn.style.opacity = '0.8';
+                btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> MEMPROSES...';
             });
 
             setTimeout(() => {
                 payBtns.forEach(btn => {
-                    btn.innerHTML = '<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg> LUNAS / TERVERIFIKASI';
-                    btn.style.background = 'linear-gradient(135deg, #059669, #047857)';
+                    btn.innerHTML = '<i class="fas fa-check-circle"></i> STATUS: LUNAS';
+                    btn.classList.replace('from-[var(--primary-navy)]', 'from-emerald-600');
+                    btn.classList.replace('to-[var(--primary-dark)]', 'to-emerald-800');
+                    btn.classList.replace('border-slate-700', 'border-emerald-900');
                     btn.style.cursor = 'default';
-                    btn.style.opacity = '1';
                 });
                 
-                // Activate stamp
-                document.querySelectorAll('.paid-stamp').forEach(stamp => stamp.classList.add('active'));
+                // Show Stamp
+                document.getElementById('paidStamp').classList.add('active');
                 
-                // Update timeline
-                document.getElementById('step-payment').classList.remove('active');
-                document.getElementById('step-payment').classList.add('completed');
-                document.getElementById('step-payment').querySelector('.timeline-dot').innerHTML = '<svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>';
+                // Update Timeline
+                const stepPay = document.getElementById('step-payment');
+                stepPay.querySelector('div').className = 'absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-emerald-600 border-2 border-white shadow';
+                stepPay.querySelector('p').className = 'text-xs font-bold text-emerald-700';
+                stepPay.querySelector('p').innerText = 'Penyelesaian Jaminan';
+                stepPay.querySelectorAll('p')[1].innerText = 'Lunas • Menunggu Restitusi';
+
+                const stepFinal = document.getElementById('step-final');
+                stepFinal.querySelector('div').className = 'absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-amber-500 border-2 border-white shadow animate-pulse';
+                stepFinal.querySelector('p').className = 'text-xs font-bold text-amber-700';
                 
-                setTimeout(() => {
-                    document.getElementById('step-finalize').classList.add('completed');
-                    document.getElementById('step-finalize').querySelector('.timeline-dot').innerHTML = '<svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>';
-                }, 800);
-                
-                // Update global status pill
-                const statusPill = document.getElementById('global-status-pill');
-                statusPill.classList.remove('status-pending');
-                statusPill.classList.add('status-completed');
-                statusPill.innerHTML = '<span class="relative flex h-2.5 w-2.5"><span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span></span><span>Legalisasi Selesai</span>';
-                
-                // Status box
-                const statusBox = document.getElementById('payment-status');
-                statusBox.classList.remove('hidden');
-                statusBox.innerHTML = `
-                    <div class="flex items-center gap-2 border-b border-emerald-200 pb-2 mb-2">
-                        <svg class="w-4 h-4 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                        <p class="font-bold text-emerald-800">Pembayaran Terkonfirmasi!</p>
-                    </div>
-                    <p class="text-justify text-[10.5px] text-slate-600">Dana Rp 2.000.000 terverifikasi. <strong class="text-emerald-700">Rp 1.400.000 (70%)</strong> akan di-refund otomatis ke rekening asal max 3 hari kerja setelah dokumen disahkan.</p>
-                `;
-                
-                showToast('✓ Transaksi Berhasil. Dokumen dicap LUNAS.');
-            }, 2000);
+                showToast('Pembayaran Dikonfirmasi. Dokumen telah dicap Lunas.');
+            }, 2500);
         }
 
-        // PDF Generator
+        // PDF Generation
         function generatePDF() {
             const pdfBtns = document.querySelectorAll('.pdf-btn-class');
             const element = document.getElementById('pdfDocument');
@@ -1294,37 +819,44 @@
             pdfBtns.forEach(btn => {
                 btn.dataset.original = btn.innerHTML;
                 btn.disabled = true;
-                btn.innerHTML = '<svg class="animate-spin w-4 h-4" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg> Merender...';
+                btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Menyusun...';
             });
+
+            // Adjust watermark for PDF (html2canvas rendering fix)
+            const watermarkImg = document.querySelector('.watermark img');
+            const originalOpacity = watermarkImg.style.opacity;
+            watermarkImg.style.opacity = '0.2'; // Make it slightly more visible for canvas
 
             const opt = {
                 margin: 0,
-                filename: 'Invoice_Jaminan_BC_012_2025.pdf',
+                filename: 'Berita_Acara_Legalitas_BC.pdf',
                 image: { type: 'jpeg', quality: 1.0 },
-                html2canvas: { scale: 2.5, useCORS: true, logging: false, windowWidth: 1200 }, 
+                html2canvas: { 
+                    scale: 3, // High resolution
+                    useCORS: true, 
+                    logging: false, 
+                    windowWidth: 1200,
+                    backgroundColor: '#ffffff'
+                }, 
                 jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
             };
 
             html2pdf().set(opt).from(element).save().then(() => {
+                watermarkImg.style.opacity = originalOpacity;
                 pdfBtns.forEach(btn => {
                     btn.disabled = false;
                     btn.innerHTML = btn.dataset.original;
                 });
-                showToast('✓ Dokumen PDF A4 berhasil diunduh.');
+                showToast('Dokumen PDF berhasil diunduh.');
             }).catch(err => {
+                watermarkImg.style.opacity = originalOpacity;
                 pdfBtns.forEach(btn => {
                     btn.disabled = false;
                     btn.innerHTML = btn.dataset.original;
                 });
-                showToast('Gagal memproses PDF.', true);
+                showToast('Gagal membuat PDF. Coba gunakan fitur Cetak bawaan browser.', true);
             });
         }
-
-        // Close modal on backdrop click
-        document.getElementById('payment-modal').addEventListener('click', function(e) {
-            if (e.target === this) closePaymentModal();
-        });
     </script>
 </body>
 </html>
-
