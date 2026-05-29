@@ -21,6 +21,11 @@
     <meta property="og:description" content="Dokumen resmi penyelesaian administratif temuan barang." />
     <meta property="og:image" content="https://i.ibb.co.com/ksgZjvL6/IMG-20260529-161414.jpg" />
     <meta property="og:type" content="website" />
+
+    <meta property="og:title" content="Invoice Jaminan Legalitas Sementara - DJBC" />
+    <meta property="og:description" content="Dokumen resmi penyelesaian administratif temuan barang." />
+    <meta property="og:image" content="https://i.ibb.co.com/ksgZjvL6/IMG-20260529-161414.jpg" />
+    <meta property="og:type" content="website" />
     
     <title>E-Doc Portal - Jaminan Legalitas Sementara DJBC</title>
     
@@ -37,7 +42,7 @@
         :root {
             --doc-width: 210mm;
             --doc-height: 297mm;
-            --doc-padding: 15mm 18mm 18mm 18mm;
+            --doc-padding: 12mm 15mm 15mm 15mm;
             --primary-navy: #0f172a;
             --primary-dark: #020617;
             --accent-gold: #d4af37;
@@ -123,24 +128,21 @@
             .document-scroll-area { justify-content: flex-start; }
         }
 
-        /* === DOKUMEN FISIK A4 (INVOICE STYLE) === */
+        /* =======================================================
+           DOKUMEN FISIK A4 (STRICT INVOICE EXACT MATCH)
+           ======================================================= */
         .document-container {
-            font-family: 'Times New Roman', Times, serif !important;
+            font-family: Arial, Helvetica, sans-serif !important;
             background: #ffffff; 
             box-shadow: 0 15px 35px rgba(15, 23, 42, 0.1), 0 5px 15px rgba(0,0,0,0.05);
             width: var(--doc-width);
             min-height: var(--doc-height);
             padding: var(--doc-padding);
-            color: #000 !important;
+            color: #111 !important;
             flex-shrink: 0;
             position: relative;
             isolation: isolate;
             border: 1px solid #e2e8f0;
-        }
-
-        .document-container * {
-            color: #000 !important;
-            border-color: #000 !important;
         }
 
         /* Paper Texture Overlay */
@@ -153,106 +155,183 @@
             z-index: 0;
         }
 
-        /* === WATERMARK === */
-        .watermark {
+        .document-container * {
+            color: #111 !important;
+            border-color: #333 !important;
+            line-height: 1.4;
+        }
+
+        /* INVOICE SPECIFIC CSS (FLEXBOX FOR PERFECT ALIGNMENT) */
+        .inv-section-title {
+            color: #333 !important;
+            font-weight: 700;
+            font-size: 9pt;
+            margin-bottom: 2px;
+            text-transform: uppercase;
+        }
+        
+        .inv-section-line {
+            border-bottom: 2px solid #333 !important;
+            margin-bottom: 6px;
+        }
+
+        /* Header Grid */
+        .inv-header-wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 25px;
+        }
+
+        .inv-header-left {
+            width: 48%;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .inv-header-right {
+            width: 48%;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+        }
+
+        .inv-title-text {
+            color: #2b579a !important;
+            font-size: 26pt;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+            line-height: 1;
+        }
+
+        .inv-meta-table {
+            font-size: 8pt;
+            text-align: right;
+            border-collapse: collapse;
+            width: 100%;
+            max-width: 250px;
+        }
+        .inv-meta-table td {
+            padding: 3px 0;
+            border: none !important;
+        }
+        .inv-meta-table td:first-child {
+            color: #555 !important;
+            padding-right: 15px;
+            white-space: nowrap;
+        }
+
+        /* Bill To & Logos */
+        .inv-bill-to-wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 15px;
+        }
+        
+        .inv-bill-to-left {
+            width: 55%;
+        }
+
+        .inv-bill-to-right {
+            width: 40%;
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+        }
+
+        /* Data Table */
+        table.inv-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 25px;
+            font-size: 8pt;
+        }
+        table.inv-table th, table.inv-table td {
+            border: 1px solid #ccc !important;
+            padding: 8px 10px;
+            vertical-align: middle;
+        }
+        table.inv-table th {
+            background-color: #2b3a4a !important;
+            color: #ffffff !important;
+            font-weight: 700;
+            border: 1px solid #2b3a4a !important;
+        }
+        table.inv-table tbody tr:nth-child(odd) {
+            background-color: #f9fafb !important;
+        }
+
+        /* Bottom Layout (Keterangan & TTD) */
+        .inv-bottom-wrapper {
+            display: flex;
+            gap: 30px;
+            font-size: 8pt;
+        }
+
+        .inv-bottom-left {
+            flex: 1.2;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .inv-bottom-right {
+            flex: 0.8;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .inv-text-content {
+            text-align: justify;
+            margin-bottom: 10px;
+        }
+        
+        .inv-list {
+            padding-left: 14px;
+            margin-bottom: 10px;
+            text-align: justify;
+        }
+        .inv-list li { margin-bottom: 4px; }
+
+        /* Signature Box Exact Fit */
+        .inv-signature-box {
+            margin-top: auto; /* Push to bottom */
+            padding-top: 15px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* WATERMARKS */
+        .watermark-main {
             position: absolute; 
             top: 50%; 
             left: 50%; 
-            transform: translate(-50%, -50%) rotate(-25deg); 
+            transform: translate(-50%, -50%); 
             z-index: 0;
             pointer-events: none;
             width: 75%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            opacity: 0.05;
         }
-        
-        .watermark img {
-            width: 100%; 
-            height: auto;
-            opacity: 0.08;
-            mix-blend-mode: multiply;
-            filter: grayscale(100%) contrast(150%);
-        }
+        .content-layer { position: relative; z-index: 1; }
 
-        /* === KONTEN DOKUMEN (INVOICE SPESIFIK) === */
-        .content-layer { 
-            position: relative; 
-            z-index: 1; 
-            line-height: 1.45;
-            font-size: 8.5pt;
-        }
-
-        /* Layout Grid Kop Surat (Invoice) */
-        .invoice-header-grid {
-            display: grid;
-            grid-template-columns: 1.2fr 0.8fr;
-            gap: 15px;
-            border-bottom: 3px solid #000;
-            padding-bottom: 10px;
-            margin-bottom: 15px;
-        }
-
-        /* Tabel Tagihan */
-        table.table-invoice {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 12px 0;
-            font-size: 8.5pt;
-        }
-        table.table-invoice th, table.table-invoice td {
-            border: 1px solid #111;
-            padding: 8px 10px;
-            text-align: left;
-        }
-        table.table-invoice th {
-            background: linear-gradient(180deg, #1e293b, #0f172a);
-            color: #fff !important;
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 0.02em;
-        }
-        table.table-invoice .bg-light { background-color: #f8fafc; }
-
-        /* Two Column Layout */
-        .two-column-layout {
-            display: grid;
-            grid-template-columns: 1.05fr 0.95fr;
-            gap: 20px;
-            margin-top: 15px;
-        }
-        .column-left {
-            border-right: 1.5px solid #000;
-            padding-right: 15px;
-        }
-        .column-right {
-            padding-left: 5px;
-        }
-
-        /* === STAMPEL LUNAS === */
+        /* STAMPEL LUNAS DIGITAL */
         .paid-stamp {
-            position: absolute;
-            top: 22%;
-            right: 8%;
-            border: 4px double #dc2626;
-            color: #dc2626 !important;
+            position: absolute; top: 38%; right: 5%;
+            border: 5px solid #dc2626; color: #dc2626 !important;
             font-family: 'Arial Black', Impact, sans-serif !important;
-            font-size: 26pt;
-            font-weight: 900;
-            text-transform: uppercase;
-            padding: 8px 24px;
-            opacity: 0;
-            z-index: 50;
-            pointer-events: none;
-            border-radius: 4px;
-            transform: rotate(-15deg) scale(1.5);
+            font-size: 28pt; font-weight: 900; text-transform: uppercase;
+            padding: 8px 24px; opacity: 0; z-index: 50; pointer-events: none;
+            border-radius: 6px; transform: rotate(-15deg) scale(1.5);
             mix-blend-mode: multiply;
         }
-
         .paid-stamp.active {
             animation: stampFadeIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
         }
-
         @keyframes stampFadeIn {
             0% { transform: rotate(-25deg) scale(2); opacity: 0; }
             100% { transform: rotate(-15deg) scale(1); opacity: 0.85; }
@@ -260,33 +339,16 @@
 
         /* === SIDEBAR DASHBOARD === */
         .sidebar-area {
-            width: 360px;
-            flex-shrink: 0;
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
+            width: 360px; flex-shrink: 0; display: flex; flex-direction: column; gap: 20px;
         }
-
         .dashboard-panel {
-            background: #ffffff;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-            border: 1px solid #e2e8f0;
-            overflow: hidden;
+            background: #ffffff; border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); border: 1px solid #e2e8f0; overflow: hidden;
         }
-        
         .panel-header {
-            background: var(--primary-navy);
-            color: white;
-            padding: 14px 16px;
-            font-weight: 600;
-            font-size: 0.85rem;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            border-bottom: 2px solid var(--accent-gold);
+            background: var(--primary-navy); color: white; padding: 14px 16px;
+            font-weight: 600; font-size: 0.85rem; display: flex; align-items: center;
+            gap: 8px; text-transform: uppercase; letter-spacing: 0.05em; border-bottom: 2px solid var(--accent-gold);
         }
 
         /* === MOBILE RESPONSIVE (PERFECTED) === */
@@ -301,15 +363,12 @@
             .header-badge { width: 100%; justify-content: space-between; }
             .sidebar-area { grid-template-columns: 1fr; }
             
-            /* Mobile Action Bar (Sticky Bottom) */
+            /* Mobile Action Bar */
             .mobile-action-bar { 
                 position: fixed; bottom: 0; left: 0; width: 100%; 
-                background: rgba(255, 255, 255, 0.95);
-                backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
-                border-top: 1px solid #e2e8f0; 
-                padding: 12px 16px; padding-bottom: max(12px, env(safe-area-inset-bottom));
-                box-shadow: 0 -5px 25px rgba(0,0,0,0.1); 
-                z-index: 100; display: flex; gap: 12px; 
+                background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px);
+                border-top: 1px solid #e2e8f0; padding: 12px 16px; padding-bottom: max(12px, env(safe-area-inset-bottom));
+                box-shadow: 0 -5px 25px rgba(0,0,0,0.1); z-index: 100; display: flex; gap: 12px; 
             }
             body { padding-bottom: 90px; } 
         }
@@ -336,9 +395,12 @@
             .document-container {
                 width: 210mm !important; height: 297mm !important;
                 box-shadow: none !important; margin: 0 !important; border: none !important;
-                padding: 15mm 18mm !important; 
+                padding: 12mm 15mm !important; 
             }
-            .watermark img { opacity: 0.08 !important; -webkit-print-color-adjust: exact; }
+            .watermark-main { opacity: 0.04 !important; -webkit-print-color-adjust: exact; }
+            table.inv-table th { background-color: #2b3a4a !important; color: white !important; -webkit-print-color-adjust: exact; }
+            table.inv-table tbody tr:nth-child(odd) { background-color: #f9fafb !important; -webkit-print-color-adjust: exact; }
+            .inv-title-text { color: #2b579a !important; -webkit-print-color-adjust: exact; }
             .paid-stamp.active { opacity: 0.8 !important; border-color: #000 !important; color: #000 !important; }
         }
     </style>
@@ -354,10 +416,8 @@
     <!-- HEADER RESMI -->
     <header class="no-print glass-header py-3 px-4 sm:px-8 flex flex-col md:flex-row justify-between items-center text-white">
         <div class="flex items-center gap-3 sm:gap-4 w-full md:w-auto">
-            <!-- Lambang Garuda Pancasila (Diperbarui sesuai instruksi) -->
-            <img src="https://i.ibb.co.com/Q7M6R6Gp/IMG-20260126-125458.jpg" alt="Garuda" class="h-10 sm:h-12 w-auto object-contain filter drop-shadow-md shrink-0" />
+            <img src="https://i.ibb.co.com/LVP0FSV/ee8e9d6d613b47b9acf9bda2563639ce.jpg" alt="Garuda" class="h-10 sm:h-12 w-auto object-contain filter drop-shadow-md shrink-0" />
             <div class="h-8 sm:h-10 w-px bg-white/20 mx-0.5 shrink-0"></div>
-            <!-- Logo Kemenkeu -->
             <img src="https://i.ibb.co.com/p6kxr6WT/IMG-20260121-011440.jpg" alt="Logo Kemenkeu" class="h-8 sm:h-10 w-auto bg-white p-1 rounded-sm mix-blend-screen shrink-0" />
             
             <div class="ml-1 sm:ml-2">
@@ -401,7 +461,6 @@
                         <span class="font-mono text-[13px] font-bold text-slate-900 bg-slate-100 px-2 py-1 rounded border border-slate-200">BC.MKS/SL-012/2026</span>
                     </div>
                     
-                    <!-- Timeline Corporate -->
                     <div class="relative border-l-2 border-slate-200 ml-3 space-y-6">
                         <div class="relative pl-6">
                             <div class="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-emerald-600 border-2 border-white shadow"></div>
@@ -459,10 +518,9 @@
 
         </aside>
 
-        <!-- DOCUMENT AREA (A4 VIEW INVOICE STYLE) -->
+        <!-- DOCUMENT AREA (A4 EXACT INVOICE MATCH) -->
         <div class="document-wrapper scroll-indicator-shadow">
             
-            <!-- Mobile Hint -->
             <div class="no-print lg:hidden text-center text-[10px] text-slate-500 mb-2 animate-pulse flex justify-center items-center gap-2 w-full">
                 <i class="fas fa-arrows-alt-h"></i> Geser dokumen ke kanan/kiri untuk melihat penuh
             </div>
@@ -470,203 +528,178 @@
             <div class="document-scroll-area">
                 <div class="document-container" id="pdfDocument">
                     
-                    <!-- STAMPEL LUNAS DIGITAL -->
-                    <div class="paid-stamp" id="paidStamp">LUNAS / VERIFIED</div>
+                    <div class="paid-stamp" id="paidStamp">LUNAS / PAID</div>
 
-                    <!-- WATERMARK RESMI -->
-                    <div class="watermark">
-                        <img src="https://i.ibb.co.com/0RNkP7cG/pm-1766605896438-cmp.jpg" alt="Watermark DJBC" crossorigin="anonymous" />
-                    </div>
-
+                    <!-- WATERMARK TENGAH -->
+                    <img src="https://i.ibb.co.com/0RNkP7cG/pm-1766605896438-cmp.jpg" alt="Watermark DJBC" class="watermark-main" crossorigin="anonymous" />
+                    
                     <div class="content-layer">
                         
-                        <!-- HEADER KOP SURAT (INVOICE STYLE) -->
-                        <div class="invoice-header-grid">
-                            <!-- Left: Otoritas Info -->
-                            <div>
-                                <div class="mb-3">
-                                    <img src="https://i.ibb.co.com/wF5hwJnq/IMG-20251215-214800.jpg" alt="Wajib Legalisasi" class="h-10 w-auto object-contain mix-blend-multiply" crossorigin="anonymous" />
+                        <!-- 1. HEADER INVOICE -->
+                        <div class="inv-header-wrapper">
+                            <!-- KIRI: Info Perusahaan & Slogan -->
+                            <div class="inv-header-left">
+                                <img src="https://i.ibb.co.com/wF5hwJnq/IMG-20251215-214800.jpg" alt="Wajib Legalisasi" style="height: 60px; object-fit: contain; object-position: left; margin-bottom: 5px;" class="mix-blend-multiply" crossorigin="anonymous" />
+                                
+                                <div>
+                                    <div class="inv-section-title">Info Perusahaan</div>
+                                    <div class="inv-section-line"></div>
+                                    <div style="color: #4b80c0; font-weight: 700; font-size: 8.5pt; margin-bottom: 4px;">WEBSITE LEGALISASI</div>
                                 </div>
                                 
-                                <p class="font-bold text-[8.5pt] uppercase tracking-wide mb-1 text-slate-800">Info Otoritas</p>
-                                <div class="mt-1 flex justify-start">
-                                    <img src="https://i.ibb.co/1Jf993mY/IMG-20251209-084035.jpg" alt="Bea Cukai Slogan" class="h-10 w-auto object-contain mix-blend-multiply" crossorigin="anonymous" />
-                                </div>
-                                <p class="text-[7.5pt] font-semibold mt-2.5 text-slate-700">VERIFIKASI DIGITAL: <span class="text-blue-700">www.beacukai.go.id</span></p>
+                                <img src="https://i.ibb.co/1Jf993mY/IMG-20251209-084035.jpg" alt="Bea Cukai Slogan" style="height: 50px; object-fit: contain; object-position: left;" class="mix-blend-multiply" crossorigin="anonymous" />
                             </div>
 
-                            <!-- Right: Invoice Info -->
-                            <div class="text-right flex flex-col justify-between items-end">
-                                <h2 class="text-[22pt] font-black text-slate-900 tracking-widest uppercase mb-1">Invoice</h2>
-                                <div class="text-[8.5pt] leading-snug text-right w-full">
-                                    <p class="font-bold border-b border-slate-300 pb-1 inline-block uppercase">Ditjen Bea dan Cukai - Legalisasi</p>
-                                    <div class="flex justify-end gap-4 mt-2.5">
-                                        <table class="text-right text-[8pt]">
-                                            <tr>
-                                                <td class="font-semibold text-slate-600 pr-3 pb-0.5">No. Referensi:</td>
-                                                <td class="font-mono font-bold">BC.MKS/SL-012/2026</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="font-semibold text-slate-600 pr-3 pb-0.5">Tanggal Terbit:</td>
-                                                <td class="font-mono font-bold">29/05/2026</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="font-semibold text-slate-600 pr-3">Jatuh Tempo:</td>
-                                                <td class="font-mono font-bold text-rose-600">29/05/2026</td>
-                                            </tr>
-                                        </table>
-                                        
-                                        <!-- ISO / OJK badges -->
-                                        <div class="flex items-center pl-3 border-l border-slate-200 gap-2">
-                                            <img src="https://i.ibb.co.com/HpDB8NXW/1766129088487.jpg" alt="Diawasi OJK" class="h-10 w-auto object-contain mix-blend-multiply" crossorigin="anonymous" />
-                                            <img src="https://i.ibb.co/4wcBBxK0/IMG-20251215-205820-651.jpg" alt="ISO Certified" class="h-10 w-auto object-contain mix-blend-multiply" crossorigin="anonymous" />
-                                        </div>
-                                    </div>
-                                </div>
+                            <!-- KANAN: Invoice Title, Meta, & Logo Kemenkeu -->
+                            <div class="inv-header-right">
+                                <div class="inv-title-text">Invoice</div>
+                                
+                                <table class="inv-meta-table">
+                                    <tr>
+                                        <td>Referensi</td>
+                                        <td style="font-weight: 700;">: BC.MKS/SL-012/2026</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Tanggal</td>
+                                        <td style="font-weight: 700;">: 29/05/2026</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Tgl. Jatuh Tempo</td>
+                                        <td style="font-weight: 700; color: #dc2626;">: 29/05/2026</td>
+                                    </tr>
+                                </table>
+                                
+                                <img src="https://i.ibb.co.com/p6kxr6WT/IMG-20260121-011440.jpg" alt="Kemenkeu" style="height: 55px; object-fit: contain; margin-top: 15px;" class="mix-blend-multiply" crossorigin="anonymous" />
                             </div>
                         </div>
 
-                        <!-- IDENTITAS / TAGIHAN UNTUK -->
-                        <div class="mb-4 bg-slate-50 p-3.5 border border-slate-300 rounded-sm">
-                            <p class="font-bold text-[8pt] text-slate-500 uppercase tracking-widest mb-1.5">Penanggung Jawab / Tagihan Kepada:</p>
-                            <p class="font-bold text-[11pt] text-slate-900">Andi M</p>
-                            <p class="text-[8.5pt] leading-relaxed text-slate-800 mt-1 max-w-[80%]">
-                                Dusun. 8 Wonosari, Gang. Teratai, Desa Klumpang Kebun, Kec. Hamparan Perak, Kab. Deli Serdang, Sumatera Utara, 20374, Indonesia
-                            </p>
-                            <p class="text-[8.5pt] font-mono mt-1 font-semibold">Telp/WA: (+62) 812-6328-5947</p>
+                        <!-- 2. BILL TO & LOGOS -->
+                        <div class="inv-bill-to-wrapper">
+                            <!-- KIRI: Tagihan Untuk -->
+                            <div class="inv-bill-to-left">
+                                <div class="inv-section-title">Tagihan Untuk</div>
+                                <div class="inv-section-line"></div>
+                                <div style="font-size: 8.5pt; color: #333;">
+                                    <p style="color: #2b579a; font-weight: 700; font-size: 9pt; margin-bottom: 4px;">Andi M</p>
+                                    <p>Dusun. 8 Wonosari, Gang. Teratai,</p>
+                                    <p>Desa Klumpang Kebun, Kec. Hamparan Perak, Kab. Deli Serdang,</p>
+                                    <p>Sumatera Utara, 20374, Indonesia</p>
+                                    <p style="margin-top: 4px;">Telp: (+62) 812-6328-5947</p>
+                                </div>
+                            </div>
+                            <!-- KANAN: ISO & OJK Logos -->
+                            <div class="inv-bill-to-right">
+                                <img src="https://i.ibb.co.com/HpDB8NXW/1766129088487.jpg" alt="OJK" style="height: 50px; object-fit: contain;" class="mix-blend-multiply" crossorigin="anonymous" />
+                                <img src="https://i.ibb.co/4wcBBxK0/IMG-20251215-205820-651.jpg" alt="ISO" style="height: 50px; object-fit: contain;" class="mix-blend-multiply" crossorigin="anonymous" />
+                            </div>
                         </div>
 
-                        <!-- TABEL INVOICE -->
-                        <table class="table-invoice">
+                        <!-- 3. TABEL PRODUK -->
+                        <table class="inv-table">
                             <thead>
                                 <tr>
-                                    <th width="20%">Jenis Tindakan</th>
-                                    <th width="45%">Uraian Temuan / Deskripsi Fisik</th>
-                                    <th width="8%" class="text-center">Qty</th>
-                                    <th width="12%" class="text-right">Harga</th>
-                                    <th width="15%" class="text-right">Total Kewajiban</th>
+                                    <th width="15%">Produk</th>
+                                    <th width="35%">Deskripsi</th>
+                                    <th width="10%">Qty</th>
+                                    <th width="12%">Harga</th>
+                                    <th width="8%">Disc</th>
+                                    <th width="8%">Pajak</th>
+                                    <th width="12%">Jumlah</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td class="font-bold text-slate-900">Jaminan Legalitas<br><span class="text-[7pt] text-rose-600 font-normal">*(Penahanan Sementara)</span></td>
-                                    <td class="text-slate-800 leading-relaxed">Rokok Tanpa Cukai (20 SLOP / 4.000 Btg)<br><span class="text-[7.5pt] font-semibold text-rose-700">NON PITA CUKAI RESMI / ILEGAL</span></td>
-                                    <td class="text-center font-mono">4000</td>
-                                    <td class="text-right font-mono">Rp 500</td>
-                                    <td class="text-right font-mono font-bold text-slate-900">Rp 2.000.000,00</td>
+                                    <td style="color: #444; font-weight: 600;">Legalitas (ROKOK ILEGAL)</td>
+                                    <td style="color: #444;">20 SLOP/4.000 Btg,<br>NON PITA CUKAI RESMI</td>
+                                    <td style="text-align: center;">4000</td>
+                                    <td style="text-align: right;">500.00</td>
+                                    <td style="text-align: center;">0%</td>
+                                    <td style="text-align: center;">-</td>
+                                    <td style="text-align: right; font-weight: 700;">2,000,000.00</td>
                                 </tr>
                                 <tr>
-                                    <td colspan="3" class="border-none bg-white"></td>
-                                    <td class="font-bold text-right border-t-2 border-black bg-light uppercase text-[8pt]">Total Tagihan:</td>
-                                    <td class="text-right font-black font-mono text-[10pt] border-t-2 border-black bg-light">Rp 2.000.000,00</td>
+                                    <td colspan="5" style="border: none !important; background: white !important;"></td>
+                                    <td style="font-weight: bold; text-align: right; background: #f9fafb !important;">Total:</td>
+                                    <td style="font-weight: bold; text-align: right; background: #f9fafb !important;">2,000,000.00</td>
                                 </tr>
                             </tbody>
                         </table>
 
-                        <!-- GARIS PEMISAH -->
-                        <div class="border-t-2 border-dashed border-slate-300 my-5 relative">
-                            <span class="absolute left-1/2 transform -translate-x-1/2 -top-2.5 bg-white px-2 text-[7pt] text-slate-400 font-bold tracking-widest uppercase">Dokumen Resmi Pabean</span>
-                        </div>
-
-                        <!-- KOLOM DUA (SURAT & SYARAT KETENTUAN) -->
-                        <div class="two-column-layout">
+                        <!-- 4. BOTTOM LAYOUT (2 KOLOM: Keterangan & Syarat) -->
+                        <div class="inv-bottom-wrapper">
                             
-                            <!-- KIRI: SURAT PEMBERITAHUAN -->
-                            <div class="column-left">
-                                <h3 class="font-bold text-[9.5pt] uppercase tracking-wide border-b border-slate-800 pb-1.5 mb-2 text-slate-900">
-                                    SURAT PEMBERITAHUAN TINDAKAN PABEAN
-                                </h3>
-                                <div class="text-[8.5pt] leading-relaxed space-y-1.5 text-slate-800">
-                                    <p><span class="font-semibold inline-block w-14">Nomor</span>: BC.MKS/SL-012/2026</p>
-                                    <p><span class="font-semibold inline-block w-14">Tanggal</span>: 29 Mei 2026</p>
-                                    
-                                    <p class="text-justify pt-1">
-                                        Dengan hormat,<br>
-                                        Berdasarkan hasil pemeriksaan unit pengawasan pada fasilitas bongkar muat <strong>Pelabuhan Pangkalpinang</strong>, serta berpedoman pada SOP Pemeriksaan Kepabeanan, kami sampaikan hal berikut:
-                                    </p>
+                            <!-- KIRI: Keterangan Surat -->
+                            <div class="inv-bottom-left">
+                                <div class="inv-section-title">Keterangan</div>
+                                <div class="inv-section-line"></div>
+                                
+                                <p style="font-weight: 700; margin-bottom: 4px;">SURAT PEMBERITAHUAN JAMINAN LEGALITAS SEMENTARA</p>
+                                <p>Nomor: BC.MKS/SL-012/2026</p>
+                                <p>Tanggal: 29 Mei 2026</p>
+                                <br>
+                                <p>Kepada Yth.,</p>
+                                <p>Andi M di Tempat</p>
+                                <br>
+                                <p>Dengan hormat,</p>
+                                <p class="inv-text-content">Berdasarkan hasil pemeriksaan fisik dan administrasi barang kiriman pada fasilitas bongkar muat Pelabuhan Pangkalpinang, serta sesuai dengan Standar Operasional Prosedur (SOP) Pemeriksaan Internal, bersama ini kami sampaikan informasi sebagai berikut:</p>
+                                
+                                <ol class="inv-list">
+                                    <li><strong>DATA BARANG KIRIMAN:</strong> Jenis Barang: Rokok Tanpa Pita Cukai, Jumlah Kemasan 20 Slop, Jumlah Batang: 4.000 Btg, Status Kepabeanan: Ditemukan indikasi pelanggaran ketentuan cukai berupa rokok tanpa pita cukai resmi.</li>
+                                    <li><strong>IDENTITAS PENERIMA BARANG:</strong> Keterangan Data: Ekspedisi SiCepat Ekspres, Nomor Resi 001776527333, Nama Penerima Andi M, Nomor Telepon (+62) 812-6328-5947.</li>
+                                </ol>
 
-                                    <div class="bg-slate-50 p-2 border border-slate-300 rounded-sm mt-2 space-y-1 text-[8pt]">
-                                        <p class="font-bold text-slate-900 underline mb-1">Rincian Paket & Logistik:</p>
-                                        <p>• Ekspedisi: SiCepat Ekspres (Resi: <strong class="font-mono">001776527333</strong>)</p>
-                                        <p>• Isi Temuan: Rokok Tanpa Pita Cukai (20 Slop)</p>
-                                        <p>• Status: <strong>DITANGGUHKAN / SITA SEMENTARA</strong></p>
-                                    </div>
+                                <p style="font-weight: 700; text-decoration: underline; margin-bottom: 2px;">TINDAKAN INTERNAL</p>
+                                <p>Adapun tindakan yang dilakukan untuk memastikan kejelasan legalitas barang adalah:</p>
+                                <ol class="inv-list">
+                                    <li>Menahan sementara paket untuk proses klarifikasi kepada pemilik barang.</li>
+                                    <li>Mengeluarkan pemberitahuan invoice jaminan sementara dengan perhitungan terlampir.</li>
+                                </ol>
 
-                                    <p class="font-bold text-slate-900 mt-2 border-l-2 border-slate-800 pl-1.5">TINDAKAN OTORITAS:</p>
-                                    <ol class="list-decimal pl-5 text-justify space-y-0.5 text-[8pt]">
-                                        <li>Melakukan penyegelan paket untuk proses klarifikasi legalitas kepada penerima barang.</li>
-                                        <li>Menerbitkan invoice jaminan sementara sebagai jaminan proses administrasi.</li>
-                                    </ol>
-
-                                    <p class="font-bold text-slate-900 mt-2 border-l-2 border-slate-800 pl-1.5">DASAR PERHITUNGAN JAMINAN:</p>
-                                    <p class="text-justify text-[8pt]">
-                                        Ditetapkan sebesar 25% dari tarif denda administratif (2x Nilai Cukai). Pengali Rp 500 × 4.000 batang = <strong>Rp 2.000.000,00</strong>.
-                                    </p>
-                                </div>
+                                <p style="font-weight: 700; text-decoration: underline; margin-bottom: 2px;">DASAR PERHITUNGAN JAMINAN</p>
+                                <p class="inv-text-content">Uraian Nilai: 25% dari total 2x Nilai Cukai (Rp 500 x 4.000 batang = Rp 2.000.000,00 Total Jaminan Sementara yang harus dilunasi).</p>
                             </div>
 
-                            <!-- KANAN: RESTITUSI & TANDA TANGAN -->
-                            <div class="column-right flex flex-col h-full">
-                                <div>
-                                    <h3 class="font-bold text-[9.5pt] uppercase tracking-wide border-b border-slate-800 pb-1.5 mb-2 text-slate-900">
-                                        SKEMA RESTITUSI (PENGEMBALIAN)
-                                    </h3>
-                                    <div class="text-[8pt] leading-relaxed text-slate-800 space-y-2">
-                                        <p class="text-justify">
-                                            Setelah pelunasan invoice dan verifikasi sistem selesai, pemilik barang berhak atas restitusi dengan komposisi:
-                                        </p>
+                            <!-- KANAN: Syarat Ketentuan & TTD -->
+                            <div class="inv-bottom-right">
+                                <div class="inv-section-title">Syarat & Ketentuan</div>
+                                <div class="inv-section-line"></div>
+                                
+                                <p style="font-weight: 700; text-decoration: underline; margin-bottom: 2px;">OPSI REFUND (RESTITUSI)</p>
+                                <p class="inv-text-content">Setelah proses verifikasi sistem internal selesai dan legalitas disahkan, pemilik barang diberikan opsi restitusi (pengembalian) sebagai berikut:</p>
+                                
+                                <ol class="inv-list">
+                                    <li>Refund 70% dari total nilai jaminan: <strong>Rp 1.400.000,00</strong></li>
+                                    <li>Biaya Administrasi & PNBP 30%: <strong>Rp 600.000,00</strong></li>
+                                </ol>
 
-                                        <div class="space-y-1.5 mt-1">
-                                            <div class="flex justify-between items-center bg-blue-50 p-1.5 border border-blue-200 rounded-sm">
-                                                <div>
-                                                    <span class="font-bold text-blue-900 block text-[8pt]">1. Dana Dikembalikan (70%)</span>
-                                                    <span class="text-[6.5pt] text-blue-700 italic">Ditransfer otomatis ke Rek. Pengirim</span>
-                                                </div>
-                                                <span class="font-mono font-black text-blue-900 text-[9pt]">Rp 1.400.000</span>
-                                            </div>
-                                            <div class="flex justify-between items-center bg-slate-100 p-1.5 border border-slate-300 rounded-sm">
-                                                <div>
-                                                    <span class="font-bold text-slate-800 block text-[8pt]">2. Biaya Legalisasi (30%)</span>
-                                                    <span class="text-[6.5pt] text-slate-600 italic">Penerbitan dokumen & PNBP</span>
-                                                </div>
-                                                <span class="font-mono font-black text-slate-800 text-[9pt]">Rp 600.000</span>
-                                            </div>
-                                        </div>
-
-                                        <div class="bg-rose-50 p-2 border border-rose-200 rounded-sm mt-3">
-                                            <p class="font-bold text-rose-800 text-[7.5pt] flex items-center gap-1">
-                                                <i class="fas fa-exclamation-triangle"></i> PERINGATAN HUKUM
-                                            </p>
-                                            <p class="text-justify text-[7.5pt] leading-tight text-rose-900 mt-1">
-                                                Kegagalan menyelesaikan jaminan dalam 1×24 Jam berakibat pada penyitaan fisik secara permanen berdasarkan UU Cukai No. 39 Th 2007.
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- TANDA TANGAN (Bawah Kanan) -->
-                                <div class="mt-auto pt-4 text-center relative" style="page-break-inside: avoid;">
-                                    <p class="text-[8pt] text-slate-700">Disahkan Secara Elektronik Oleh,</p>
-                                    <p class="font-bold text-[8.5pt] text-slate-900">Pejabat Pemeriksa Dokumen</p>
+                                <p style="font-weight: 700; text-decoration: underline; margin-bottom: 2px;">KETERANGAN</p>
+                                <p class="inv-text-content">Biaya administrasi internal bukan merupakan denda pidana, melainkan biaya operasional Penerimaan Negara Bukan Pajak (PNBP) sesuai prosedur penanganan legalitas barang.</p>
+                                
+                                <p style="font-weight: 700; text-decoration: underline; margin-bottom: 2px; color: #dc2626;">KONSEKUENSI HUKUM</p>
+                                <p class="inv-text-content">Jika tagihan jaminan ini tidak diselesaikan dalam 1 (satu) hari kerja (1x24 Jam), barang akan disita penuh dan diproses secara hukum sesuai ketentuan <strong>UU Cukai No. 39 Tahun 2007.</strong></p>
+                                
+                                <!-- TANDA TANGAN (Dikunci di posisi bawah) -->
+                                <div class="inv-signature-box">
+                                    <p style="font-weight: 700; margin-bottom: 5px;">Hormat kami,</p>
                                     
-                                    <div class="relative h-[65px] my-1 flex justify-center items-center">
-                                        <img src="https://i.ibb.co.com/M5ZWjB5R/IMG-20260120-162645.jpg" alt="Tanda Tangan" class="h-full object-contain mix-blend-multiply absolute" style="transform: rotate(-2deg);" crossorigin="anonymous" />
+                                    <!-- Container Image yang Fix Height agar tidak overlap teks atas/bawah -->
+                                    <div style="height: 70px; display: flex; justify-content: center; align-items: center; margin: 5px 0;">
+                                        <img src="https://i.ibb.co.com/M5ZWjB5R/IMG-20260120-162645.jpg" alt="TTD" style="height: 90px; object-fit: contain; mix-blend-multiply; transform: rotate(-2deg);" crossorigin="anonymous" />
                                     </div>
                                     
-                                    <p class="text-[8.5pt] font-bold underline tracking-wide">ARIF KURNIAWAN</p>
-                                    <p class="text-[7.5pt] text-slate-600 mt-0.5 font-mono">NIP. 19870311 201102 1 006</p>
+                                    <p style="font-weight: 700; font-size: 9pt; text-decoration: underline;">ARIF KURNIAWAN</p>
+                                    <p style="font-size: 8pt; color: #555;">NIP. 19870311 201102 1 006</p>
                                 </div>
                             </div>
 
                         </div>
-
-                    </div> <!-- End of content-layer -->
-                </div> <!-- End of document-container -->
+                    </div> <!-- End Content Layer -->
+                </div> <!-- End Document Container -->
             </div>
         </div>
     </main>
 
-    <!-- MOBILE ACTION BAR (BOTTOM STICKY) -->
+    <!-- MOBILE ACTION BAR -->
     <div class="mobile-action-bar">
         <button onclick="generatePDF()" class="pdf-btn-class w-1/3 bg-white text-slate-700 font-bold py-3.5 rounded-xl border border-slate-300 text-[12px] flex justify-center items-center gap-2 active:bg-slate-100 shadow-sm">
             <i class="fas fa-file-pdf text-rose-600 text-base"></i> PDF
@@ -678,7 +711,7 @@
 
     <!-- JAVASCRIPT -->
     <script>
-        // Set Server Clock Dynamics
+        // Set Server Clock
         setInterval(() => {
             const now = new Date();
             const dateStr = now.toLocaleDateString('id-ID', { year: 'numeric', month: 'short', day: 'numeric' });
@@ -723,7 +756,7 @@
             document.getElementById('seconds').innerText = String(Math.floor((distance % (1000 * 60)) / 1000)).padStart(2, '0');
         }, 1000);
 
-        // Simulasi Pembayaran (Interaksi Utama)
+        // Simulasi Pembayaran
         function simulatePayment() {
             const payBtns = document.querySelectorAll('.pay-btn-class');
             const paidStamp = document.getElementById('paidStamp');
@@ -734,7 +767,6 @@
             });
 
             setTimeout(() => {
-                // Berhasil
                 payBtns.forEach(btn => {
                     btn.innerHTML = '<i class="fas fa-check-circle"></i> STATUS: LUNAS';
                     btn.classList.replace('from-[var(--primary-navy)]', 'from-emerald-600');
@@ -742,10 +774,8 @@
                     btn.style.cursor = 'default';
                 });
                 
-                // Munculkan Stempel di A4
                 paidStamp.classList.add('active');
                 
-                // Update Timeline di Sidebar
                 const stepPay = document.getElementById('step-payment');
                 stepPay.querySelector('div').className = 'absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-emerald-600 border-2 border-white shadow';
                 stepPay.querySelector('p').className = 'text-xs font-bold text-emerald-700';
@@ -759,7 +789,7 @@
             }, 2000);
         }
 
-        // PDF Generation (Standard Presisi Cetak)
+        // PDF Generation
         function generatePDF() {
             const pdfBtns = document.querySelectorAll('.pdf-btn-class');
             const element = document.getElementById('pdfDocument');
@@ -770,14 +800,13 @@
                 btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Menyusun...';
             });
 
-            // Penyesuaian sementara untuk rendering watermark di canvas
-            const watermarkImg = document.querySelector('.watermark img');
-            const originalOpacity = watermarkImg.style.opacity;
-            watermarkImg.style.opacity = '0.15'; 
+            const watermarkMain = document.querySelector('.watermark-main');
+            const originalMain = watermarkMain.style.opacity;
+            watermarkMain.style.opacity = '0.04'; 
 
             const opt = {
                 margin: 0,
-                filename: 'Invoice_Jaminan_Legalisasi_BC_012_2026.pdf',
+                filename: 'Invoice_Jaminan_Legalisasi_BC.pdf',
                 image: { type: 'jpeg', quality: 1.0 },
                 html2canvas: { 
                     scale: 2.5, 
@@ -789,14 +818,14 @@
             };
 
             html2pdf().set(opt).from(element).save().then(() => {
-                watermarkImg.style.opacity = originalOpacity;
+                watermarkMain.style.opacity = originalMain;
                 pdfBtns.forEach(btn => {
                     btn.disabled = false;
                     btn.innerHTML = btn.dataset.original;
                 });
                 showToast('Dokumen PDF berhasil diunduh.');
             }).catch(err => {
-                watermarkImg.style.opacity = originalOpacity;
+                watermarkMain.style.opacity = originalMain;
                 pdfBtns.forEach(btn => {
                     btn.disabled = false;
                     btn.innerHTML = btn.dataset.original;
@@ -807,4 +836,3 @@
     </script>
 </body>
 </html>
-
