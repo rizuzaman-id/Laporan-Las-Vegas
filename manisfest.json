@@ -1,0 +1,21 @@
+{
+    "name": "R2 Nusantara — Distributor Rokok Grosir",
+    "short_name": "R2 Nusantara",
+    "description": "Distributor rokok grosir Malang. Katalog R2 & Resmi. Harga slop kompetitif, gratis ongkir minimal 20 slop.",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#f8f9fc",
+    "theme_color": "#0a1628",
+    "icons": [
+        {
+            "src": "https://r2nusantara.com/icon-192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "https://r2nusantara.com/icon-512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ]
+}
