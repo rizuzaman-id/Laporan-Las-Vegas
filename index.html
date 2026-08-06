@@ -1,836 +1,832 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
+    <!-- ============================================
+    META & SEO LENGKAP
+    ============================================ -->
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
+    <title>R2 Nusantara — Distributor Rokok Grosir Malang Terpercaya</title>
+    <meta name="description" content="Distributor rokok grosir Malang. Katalog R2 (167 merek) & Resmi (66 merek). Harga slop kompetitif, gratis ongkir minimal 20 slop." />
+    <meta name="theme-color" content="#0a1628" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://r2nusantara.com/" />
 
-<!-- === META UNTUK THUMBNAIL PREVIEW === -->
-    <meta property="og:title" content="Berita Acara Jaminan Legalitas Sementara - DJBC" />
-    <meta property="og:description" content="PEMBERITAHUAN PENGECEKAN BARANG NON CUKAI/ILEGAL." />
-    <meta property="og:image" content="https://i.ibb.co.com/Q7M6R6Gp/IMG-20260126-125458.jpg" />
-    <meta property="og:url" content="https://beacukai.go.id/jaminan-legalitas.html" />
+    <!-- Open Graph -->
+    <meta property="og:title" content="R2 Nusantara — Distributor Rokok Grosir Malang" />
+    <meta property="og:description" content="Distributor rokok grosir Malang. Katalog R2 & Resmi. Harga slop kompetitif, gratis ongkir minimal 20 slop." />
+    <meta property="og:url" content="https://r2nusantara.com/" />
     <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="Direktorat Jenderal Bea dan Cukai" />
-    
+    <meta property="og:image" content="https://r2nusantara.com/og-image.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:locale" content="id_ID" />
+    <meta property="og:site_name" content="R2 Nusantara" />
+
+    <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Berita Acara Jaminan Legalitas Sementara - DJBC" />
-    <meta name="twitter:description" content="Dokumen resmi penyelesaian administratif temuan rokok ilegal. WAJIB diselesaikan dalam 1x24 jam." />
-    <meta name="twitter:image" content="https://i.ibb.co.com/Kpxptc6n/IMG-20260117-110547.jpg" />
+    <meta name="twitter:title" content="R2 Nusantara — Distributor Rokok Grosir Malang" />
+    <meta name="twitter:description" content="Distributor rokok grosir Malang. Katalog R2 & Resmi. Harga slop kompetitif, gratis ongkir." />
+    <meta name="twitter:image" content="https://r2nusantara.com/og-image.jpg" />
+    <meta name="twitter:site" content="@r2nusantara" />
 
-    <meta property="og:title" content="Invoice Jaminan Legalitas Sementara - DJBC" />
-    <meta property="og:description" content="Dokumen resmi penyelesaian administratif temuan barang." />
-    <meta property="og:image" content="https://i.ibb.co.com/ksgZjvL6/IMG-20260529-161414.jpg" />
-    <meta property="og:type" content="website" />
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚬</text></svg>" />
+    <link rel="apple-touch-icon" href="https://r2nusantara.com/icon-192.png" />
 
-    <meta property="og:title" content="Invoice Jaminan Legalitas Sementara - DJBC" />
-    <meta property="og:description" content="Dokumen resmi penyelesaian administratif temuan barang." />
-    <meta property="og:image" content="https://i.ibb.co.com/ksgZjvL6/IMG-20260529-161414.jpg" />
-    <meta property="og:type" content="website" />
-    
-    <title>E-Doc Portal - Jaminan Legalitas Sementara DJBC</title>
-    
-    <!-- PDF Generation Library -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap');
-        
-        :root {
-            --doc-width: 210mm;
-            --doc-height: 297mm;
-            --doc-padding: 12mm 15mm 15mm 15mm;
-            --primary-navy: #0f172a;
-            --primary-dark: #020617;
-            --accent-gold: #d4af37;
-            --bg-app: #f1f5f9;
-        }
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="/manifest.json" />
 
-        * { -webkit-tap-highlight-color: transparent; box-sizing: border-box; }
-        html, body { width: 100%; overflow-x: hidden; }
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,600;14..32,700;14..32,800;14..32,900&family=IBM+Plex+Mono:wght@400;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--bg-app);
-            background-image: radial-gradient(#cbd5e1 1px, transparent 1px);
-            background-size: 24px 24px;
-            color: #1e293b;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
+    <!-- ============================================
+    STRUCTURED DATA (JSON-LD @graph)
+    ============================================ -->
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@graph": [{
+                "@type": "Organization",
+                "@id": "https://r2nusantara.com/#organization",
+                "name": "R2 Nusantara",
+                "description": "Distributor rokok grosir terpercaya di Malang.",
+                "url": "https://r2nusantara.com/",
+                "logo": "https://r2nusantara.com/logo.png",
+                "contactPoint": {
+                    "@type": "ContactPoint",
+                    "telephone": "+62-812-3456-7890",
+                    "contactType": "Sales",
+                    "availableLanguage": ["Indonesian"]
+                },
+                "address": {
+                    "@type": "PostalAddress",
+                    "addressLocality": "Malang",
+                    "addressRegion": "Jawa Timur",
+                    "addressCountry": "ID"
+                },
+                "sameAs": [
+                    "https://wa.me/6281234567890"
+                ]
+            }, {
+                "@type": "WebSite",
+                "@id": "https://r2nusantara.com/#website",
+                "url": "https://r2nusantara.com/",
+                "name": "R2 Nusantara",
+                "description": "Distributor rokok grosir Malang. Katalog R2 & Resmi.",
+                "publisher": { "@id": "https://r2nusantara.com/#organization" }
+            }, {
+                "@type": "Product",
+                "@id": "https://r2nusantara.com/#product-r2",
+                "name": "Katalog R2 Nusantara",
+                "description": "167 merek rokok lokal pilihan dengan harga kompetitif.",
+                "brand": { "@type": "Brand", "name": "R2 Nusantara" },
+                "offers": {
+                    "@type": "AggregateOffer",
+                    "priceCurrency": "IDR",
+                    "lowPrice": "65000",
+                    "highPrice": "230000",
+                    "offerCount": "167"
+                }
+            }, {
+                "@type": "Product",
+                "@id": "https://r2nusantara.com/#product-resmi",
+                "name": "Katalog Rokok Resmi",
+                "description": "66 merek nasional & internasional terbagi dalam 5 segmen.",
+                "brand": { "@type": "Brand", "name": "R2 Nusantara" },
+                "offers": {
+                    "@type": "AggregateOffer",
+                    "priceCurrency": "IDR",
+                    "lowPrice": "95000",
+                    "highPrice": "320000",
+                    "offerCount": "66"
+                }
+            }, {
+                "@type": "FAQPage",
+                "@id": "https://r2nusantara.com/#faq",
+                "mainEntity": [{
+                    "@type": "Question",
+                    "name": "Bagaimana cara memesan?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Pilih produk dari katalog R2 atau Resmi, tambahkan ke keranjang, lalu lanjutkan ke checkout. Kami akan menghubungi Anda via WhatsApp untuk konfirmasi."
+                    }
+                }, {
+                    "@type": "Question",
+                    "name": "Apakah harga sudah termasuk pajak?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Ya, semua harga sudah termasuk PPN dan cukai sesuai ketentuan. Harga per slop."
+                    }
+                }, {
+                    "@type": "Question",
+                    "name": "Minimal pemesanan berapa?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Minimal 1 slop per produk. Untuk gratis ongkir minimal 20 slop (kombinasi produk)."
+                    }
+                }]
+            }]
         }
+    </script>
 
-        /* === PREMIUM HEADER === */
-        .glass-header {
-            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-navy) 100%);
-            border-bottom: 3px solid var(--accent-gold);
-            position: sticky;
-            top: 0;
-            z-index: 50;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-        }
-
-        .header-badge {
-            background: rgba(255, 255, 255, 0.08);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
-        }
-
-        /* === DOCUMENT LAYOUT & SCROLL AREA === */
-        .main-container {
-            flex-grow: 1;
-            width: 100%;
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 24px 16px;
-            display: flex;
-            gap: 24px;
-            align-items: flex-start;
-        }
-
-        .document-wrapper {
-            flex-grow: 1;
-            width: 100%;
-            overflow: hidden; 
-            border-radius: 12px;
-            position: relative;
-        }
-
-        /* Smooth horizontal scroll for A4 document on mobile */
-        .document-scroll-area {
-            width: 100%;
-            overflow-x: auto;
-            overflow-y: hidden;
-            -webkit-overflow-scrolling: touch;
-            padding: 10px;
-            display: flex;
-            justify-content: center;
-        }
-
-        /* Inner shadow to indicate scrollability on mobile */
-        .scroll-indicator-shadow::after {
-            content: '';
-            position: absolute;
-            top: 0; right: 0; bottom: 0;
-            width: 30px;
-            background: linear-gradient(to left, rgba(0,0,0,0.05), transparent);
-            pointer-events: none;
-            z-index: 10;
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-        @media (max-width: 1024px) {
-            .scroll-indicator-shadow::after { opacity: 1; }
-            .document-scroll-area { justify-content: flex-start; }
-        }
-
-        /* =======================================================
-           DOKUMEN FISIK A4 (STRICT INVOICE EXACT MATCH)
-           ======================================================= */
-        .document-container {
-            font-family: Arial, Helvetica, sans-serif !important;
-            background: #ffffff; 
-            box-shadow: 0 15px 35px rgba(15, 23, 42, 0.1), 0 5px 15px rgba(0,0,0,0.05);
-            width: var(--doc-width);
-            min-height: var(--doc-height);
-            padding: var(--doc-padding);
-            color: #111 !important;
-            flex-shrink: 0;
-            position: relative;
-            isolation: isolate;
-            border: 1px solid #e2e8f0;
-        }
-
-        /* Paper Texture Overlay */
-        .document-container::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background-image: radial-gradient(ellipse at center, rgba(0,0,0,0.01) 0%, transparent 100%);
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        .document-container * {
-            color: #111 !important;
-            border-color: #333 !important;
-            line-height: 1.4;
-        }
-
-        /* INVOICE SPECIFIC CSS (FLEXBOX FOR PERFECT ALIGNMENT) */
-        .inv-section-title {
-            color: #333 !important;
-            font-weight: 700;
-            font-size: 9pt;
-            margin-bottom: 2px;
-            text-transform: uppercase;
-        }
-        
-        .inv-section-line {
-            border-bottom: 2px solid #333 !important;
-            margin-bottom: 6px;
-        }
-
-        /* Header Grid */
-        .inv-header-wrapper {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 25px;
-        }
-
-        .inv-header-left {
-            width: 48%;
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-        }
-
-        .inv-header-right {
-            width: 48%;
-            display: flex;
-            flex-direction: column;
-            align-items: flex-end;
-        }
-
-        .inv-title-text {
-            color: #2b579a !important;
-            font-size: 26pt;
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 10px;
-            line-height: 1;
-        }
-
-        .inv-meta-table {
-            font-size: 8pt;
-            text-align: right;
-            border-collapse: collapse;
-            width: 100%;
-            max-width: 250px;
-        }
-        .inv-meta-table td {
-            padding: 3px 0;
-            border: none !important;
-        }
-        .inv-meta-table td:first-child {
-            color: #555 !important;
-            padding-right: 15px;
-            white-space: nowrap;
-        }
-
-        /* Bill To & Logos */
-        .inv-bill-to-wrapper {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
-            margin-bottom: 15px;
-        }
-        
-        .inv-bill-to-left {
-            width: 55%;
-        }
-
-        .inv-bill-to-right {
-            width: 40%;
-            display: flex;
-            justify-content: flex-end;
-            gap: 10px;
-        }
-
-        /* Data Table */
-        table.inv-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 25px;
-            font-size: 8pt;
-        }
-        table.inv-table th, table.inv-table td {
-            border: 1px solid #ccc !important;
-            padding: 8px 10px;
-            vertical-align: middle;
-        }
-        table.inv-table th {
-            background-color: #2b3a4a !important;
-            color: #ffffff !important;
-            font-weight: 700;
-            border: 1px solid #2b3a4a !important;
-        }
-        table.inv-table tbody tr:nth-child(odd) {
-            background-color: #f9fafb !important;
-        }
-
-        /* Bottom Layout (Keterangan & TTD) */
-        .inv-bottom-wrapper {
-            display: flex;
-            gap: 30px;
-            font-size: 8pt;
-        }
-
-        .inv-bottom-left {
-            flex: 1.2;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .inv-bottom-right {
-            flex: 0.8;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .inv-text-content {
-            text-align: justify;
-            margin-bottom: 10px;
-        }
-        
-        .inv-list {
-            padding-left: 14px;
-            margin-bottom: 10px;
-            text-align: justify;
-        }
-        .inv-list li { margin-bottom: 4px; }
-
-        /* Signature Box Exact Fit */
-        .inv-signature-box {
-            margin-top: auto; /* Push to bottom */
-            padding-top: 15px;
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        /* WATERMARKS */
-        .watermark-main {
-            position: absolute; 
-            top: 50%; 
-            left: 50%; 
-            transform: translate(-50%, -50%); 
-            z-index: 0;
-            pointer-events: none;
-            width: 75%;
-            opacity: 0.05;
-        }
-        .content-layer { position: relative; z-index: 1; }
-
-        /* STAMPEL LUNAS DIGITAL */
-        .paid-stamp {
-            position: absolute; top: 38%; right: 5%;
-            border: 5px solid #dc2626; color: #dc2626 !important;
-            font-family: 'Arial Black', Impact, sans-serif !important;
-            font-size: 28pt; font-weight: 900; text-transform: uppercase;
-            padding: 8px 24px; opacity: 0; z-index: 50; pointer-events: none;
-            border-radius: 6px; transform: rotate(-15deg) scale(1.5);
-            mix-blend-mode: multiply;
-        }
-        .paid-stamp.active {
-            animation: stampFadeIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-        }
-        @keyframes stampFadeIn {
-            0% { transform: rotate(-25deg) scale(2); opacity: 0; }
-            100% { transform: rotate(-15deg) scale(1); opacity: 0.85; }
-        }
-
-        /* === SIDEBAR DASHBOARD === */
-        .sidebar-area {
-            width: 360px; flex-shrink: 0; display: flex; flex-direction: column; gap: 20px;
-        }
-        .dashboard-panel {
-            background: #ffffff; border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); border: 1px solid #e2e8f0; overflow: hidden;
-        }
-        .panel-header {
-            background: var(--primary-navy); color: white; padding: 14px 16px;
-            font-weight: 600; font-size: 0.85rem; display: flex; align-items: center;
-            gap: 8px; text-transform: uppercase; letter-spacing: 0.05em; border-bottom: 2px solid var(--accent-gold);
-        }
-
-        /* === MOBILE RESPONSIVE (PERFECTED) === */
-        @media (max-width: 1024px) {
-            .main-container { flex-direction: column; padding: 16px 12px; gap: 16px; }
-            .sidebar-area { width: 100%; order: -1; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; }
-            .desktop-actions { display: none; }
-        }
-
-        @media (max-width: 768px) {
-            .glass-header { padding: 12px 16px; flex-direction: column; align-items: flex-start; gap: 12px; }
-            .header-badge { width: 100%; justify-content: space-between; }
-            .sidebar-area { grid-template-columns: 1fr; }
-            
-            /* Mobile Action Bar */
-            .mobile-action-bar { 
-                position: fixed; bottom: 0; left: 0; width: 100%; 
-                background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px);
-                border-top: 1px solid #e2e8f0; padding: 12px 16px; padding-bottom: max(12px, env(safe-area-inset-bottom));
-                box-shadow: 0 -5px 25px rgba(0,0,0,0.1); z-index: 100; display: flex; gap: 12px; 
-            }
-            body { padding-bottom: 90px; } 
-        }
-        @media (min-width: 1025px) { .mobile-action-bar { display: none; } }
-
-        /* === TOAST === */
-        .toast {
-            position: fixed; top: 24px; left: 50%; transform: translate(-50%, -150%);
-            background: white; color: #0f172a; padding: 14px 24px; border-radius: 12px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.15); border-left: 4px solid #10b981;
-            z-index: 3000; display: flex; align-items: center; gap: 12px; font-size: 14px;
-            font-weight: 600; transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-        }
-        .toast.show { transform: translate(-50%, 0); }
-        .toast.error { border-left-color: #ef4444; }
-
-        /* === PRINT OPTIMIZATION === */
-        @media print {
-            @page { margin: 0; size: A4 portrait; }
-            body { background: white !important; padding: 0 !important; margin: 0 !important; }
-            .no-print, .mobile-action-bar { display: none !important; }
-            .main-container { padding: 0 !important; display: block; overflow: visible; }
-            .document-wrapper, .document-scroll-area { overflow: visible !important; padding: 0 !important; display: block; }
-            .document-container {
-                width: 210mm !important; height: 297mm !important;
-                box-shadow: none !important; margin: 0 !important; border: none !important;
-                padding: 12mm 15mm !important; 
-            }
-            .watermark-main { opacity: 0.04 !important; -webkit-print-color-adjust: exact; }
-            table.inv-table th { background-color: #2b3a4a !important; color: white !important; -webkit-print-color-adjust: exact; }
-            table.inv-table tbody tr:nth-child(odd) { background-color: #f9fafb !important; -webkit-print-color-adjust: exact; }
-            .inv-title-text { color: #2b579a !important; -webkit-print-color-adjust: exact; }
-            .paid-stamp.active { opacity: 0.8 !important; border-color: #000 !important; color: #000 !important; }
-        }
-    </style>
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-    <!-- TOAST NOTIFICATION -->
-    <div class="toast" id="toast">
-        <div id="toast-icon" class="w-6 h-6 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center text-sm"><i class="fas fa-check"></i></div>
-        <span id="toast-msg">Operasi berhasil!</span>
+    <!-- LOADER -->
+    <div id="loader" class="fixed inset-0 z-[100] flex items-center justify-center bg-white dark:bg-[#0a0f1a] transition-opacity duration-700">
+        <div class="flex flex-col items-center gap-4">
+            <div class="w-12 h-12 rounded-full border-4 border-brand-900 dark:border-white/20 border-t-brand-500 loader-spinner"></div>
+            <p class="text-sm font-bold text-brand-900 dark:text-white tracking-widest">R2 NUSANTARA</p>
+        </div>
     </div>
 
-    <!-- HEADER RESMI -->
-    <header class="no-print glass-header py-3 px-4 sm:px-8 flex flex-col md:flex-row justify-between items-center text-white">
-        <div class="flex items-center gap-3 sm:gap-4 w-full md:w-auto">
-            <img src="https://i.ibb.co.com/LVP0FSV/ee8e9d6d613b47b9acf9bda2563639ce.jpg" alt="Garuda" class="h-10 sm:h-12 w-auto object-contain filter drop-shadow-md shrink-0" />
-            <div class="h-8 sm:h-10 w-px bg-white/20 mx-0.5 shrink-0"></div>
-            <img src="https://i.ibb.co.com/p6kxr6WT/IMG-20260121-011440.jpg" alt="Logo Kemenkeu" class="h-8 sm:h-10 w-auto bg-white p-1 rounded-sm mix-blend-screen shrink-0" />
-            
-            <div class="ml-1 sm:ml-2">
-                <h1 class="font-bold text-[12px] sm:text-[15px] tracking-wide text-white font-serif uppercase leading-tight">Kementerian Keuangan RI</h1>
-                <p class="text-[9px] sm:text-[10px] text-slate-300 font-sans tracking-widest mt-0.5">DITJEN BEA DAN CUKAI</p>
-            </div>
-        </div>
-        
-        <div class="flex items-center gap-4 mt-3 md:mt-0 w-full md:w-auto">
-            <div class="header-badge px-3 py-1.5 rounded flex items-center justify-between w-full md:w-auto gap-4">
-                <div class="flex items-center gap-2">
-                    <i class="fas fa-shield-halved text-emerald-400"></i>
-                    <div class="text-[10px]">
-                        <p class="font-semibold text-emerald-400">SISTEM TERENKRIPSI</p>
-                        <p class="text-slate-300 hidden sm:block">ID: BC-MKS-99281</p>
-                    </div>
-                </div>
-                <div class="text-right text-[10px]">
-                    <p class="text-slate-400">Server Time</p>
-                    <p class="font-mono font-bold text-amber-400" id="server-clock">--:--</p>
-                </div>
+    <!-- TOAST -->
+    <div id="toast-container"></div>
+
+    <!-- CIRCULAR SCROLL PROGRESS -->
+    <div id="scrollProgress" class="fixed bottom-24 right-4 z-40 w-12 h-12 rounded-full bg-white dark:bg-[#101827] border border-slate-200 dark:border-white/10 shadow-lg flex items-center justify-center opacity-0 transition-opacity duration-300 pointer-events-none">
+        <svg class="w-10 h-10 -rotate-90" viewBox="0 0 100 100">
+            <circle cx="50" cy="50" r="42" fill="none" stroke="#e2e6ed" stroke-width="3" />
+            <circle id="progressCircle" cx="50" cy="50" r="42" fill="none" stroke="#2563eb" stroke-width="3" stroke-linecap="round" style="stroke-dasharray: 263.89; stroke-dashoffset: 263.89; transition: stroke-dashoffset 0.15s ease;" />
+        </svg>
+        <span id="scrollPercent" class="absolute text-[9px] font-bold text-brand-900 dark:text-white">0%</span>
+    </div>
+
+    <!-- HEADER -->
+    <header class="sticky top-0 z-50 glass-pill border-b border-white/20 dark:border-white/5" id="headerInner">
+        <div class="container flex items-center justify-between h-16 md:h-20">
+            <a href="#" class="flex items-center gap-2.5 group no-underline">
+                <span class="text-2xl font-black tracking-tighter premium-text-gradient">R2</span>
+                <span class="text-[10px] font-bold text-slate-400 dark:text-slate-500 hidden sm:inline">NUSANTARA</span>
+                <span class="inline-flex items-center gap-1 text-[9px] font-bold text-emerald-500 bg-emerald-50 dark:bg-emerald-900/30 px-2 py-0.5 rounded-full border border-emerald-200 dark:border-emerald-800/30">
+                    <i class="fa-solid fa-circle-check text-[8px]"></i> Grosir
+                </span>
+            </a>
+            <div class="flex items-center gap-1 sm:gap-2">
+                <button onclick="window.toggleDarkMode()" class="w-9 h-9 rounded-xl bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 flex items-center justify-center text-slate-500 hover:text-brand-600 dark:hover:text-brand-400 transition-colors dark-mode-toggle-btn">
+                    <i id="darkModeIcon" class="fa-solid fa-moon text-[13px] sm:text-sm"></i>
+                </button>
+                <button onclick="window.toggleWishlistSidebar()" class="relative w-9 h-9 rounded-xl bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 flex items-center justify-center text-slate-500 hover:text-red-500 transition-colors">
+                    <i class="fa-regular fa-heart text-sm"></i>
+                    <span id="wishlistBadge" class="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-red-500 text-white text-[9px] font-bold flex items-center justify-center transition-transform duration-300 scale-0">0</span>
+                </button>
+                <button onclick="window.toggleCart()" class="relative w-9 h-9 rounded-xl bg-brand-900 dark:bg-brand-600 text-white flex items-center justify-center hover:bg-brand-700 dark:hover:bg-brand-700 transition-colors">
+                    <i class="fa-solid fa-cart-shopping text-sm"></i>
+                    <span id="cartBadge" class="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-emerald-400 text-brand-900 text-[9px] font-bold flex items-center justify-center transition-transform duration-300 scale-0">0</span>
+                </button>
             </div>
         </div>
     </header>
 
-    <!-- MAIN CONTENT -->
-    <main class="main-container">
-        
-        <!-- SIDEBAR (DASHBOARD KONTROL) -->
-        <aside class="no-print sidebar-area">
-            
-            <!-- PANEL: STATUS -->
-            <div class="dashboard-panel">
-                <div class="panel-header">
-                    <i class="fas fa-file-invoice-dollar text-accent-gold"></i>
-                    Status Tagihan
+    <!-- ============================================
+    HERO
+    ============================================ -->
+    <section class="relative overflow-hidden hero-overlay min-h-[70vh] md:min-h-[80vh] flex items-center">
+        <div class="absolute inset-0 grid-pattern opacity-20"></div>
+        <div class="container relative z-10 py-12 md:py-20">
+            <div class="max-w-3xl">
+                <div class="flex items-center gap-3 mb-4 flex-wrap">
+                    <span class="inline-flex items-center gap-2 text-[11px] font-bold text-emerald-300 bg-emerald-900/40 px-3 py-1 rounded-full border border-emerald-700/30 backdrop-blur-sm">
+                        <i class="fa-solid fa-bolt text-emerald-400"></i> Distributor Resmi
+                    </span>
+                    <span class="live-visitor-badge">
+                        <span class="dot"></span>
+                        <span id="visitorCount">0</span> online
+                    </span>
                 </div>
-                <div class="p-5">
-                    <div class="flex justify-between items-center mb-5">
-                        <span class="text-xs font-semibold text-slate-500">No. Invoice / Ref</span>
-                        <span class="font-mono text-[13px] font-bold text-slate-900 bg-slate-100 px-2 py-1 rounded border border-slate-200">BC.MKS/SL-012/2026</span>
-                    </div>
-                    
-                    <div class="relative border-l-2 border-slate-200 ml-3 space-y-6">
-                        <div class="relative pl-6">
-                            <div class="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-emerald-600 border-2 border-white shadow"></div>
-                            <p class="text-xs font-bold text-emerald-700">Penerbitan Invoice Jaminan</p>
-                            <p class="text-[10px] text-slate-500">Selesai • 29 Mei 2026</p>
-                        </div>
-                        <div class="relative pl-6" id="step-payment">
-                            <div class="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-amber-500 border-2 border-white shadow animate-pulse"></div>
-                            <p class="text-xs font-bold text-amber-700">Penyelesaian Jaminan</p>
-                            <p class="text-[10px] text-slate-500">Menunggu Pelunasan Tagihan</p>
-                        </div>
-                        <div class="relative pl-6" id="step-final">
-                            <div class="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-slate-300 border-2 border-white shadow"></div>
-                            <p class="text-xs font-bold text-slate-400">Pelepasan & Restitusi</p>
-                        </div>
-                    </div>
+                <h1 class="text-4xl md:text-6xl lg:text-7xl font-black text-white leading-[1.1] tracking-tighter mb-4">
+                    R2 <span class="premium-text-gradient">Nusantara</span>
+                </h1>
+                <p class="text-base md:text-lg text-slate-300 max-w-xl leading-relaxed mb-6">
+                    Distributor rokok grosir terpercaya di Malang. Katalog lengkap 167 merek R2 + 66 merek resmi.
+                    Harga slop kompetitif, margin maksimal.
+                </p>
+                <div class="flex flex-wrap items-center gap-3">
+                    <a href="#produk" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-bold text-sm transition-all shadow-lg shadow-brand-600/30 btn-glow">
+                        <i class="fa-solid fa-store"></i> Lihat Katalog
+                    </a>
+                    <a href="#testimoni" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-white/10 backdrop-blur-sm border border-white/20 text-white font-bold text-sm hover:bg-white/20 transition-all">
+                        <i class="fa-regular fa-comment"></i> Testimoni
+                    </a>
                 </div>
             </div>
-
-            <!-- PANEL: BATAS WAKTU -->
-            <div class="dashboard-panel border-rose-200">
-                <div class="panel-header bg-rose-900 border-rose-500">
-                    <i class="fas fa-stopwatch text-white"></i>
-                    Batas Waktu Ketetapan
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-12 max-w-3xl">
+                <div class="bg-white/5 backdrop-blur-sm rounded-2xl p-4 border border-white/10">
+                    <div class="text-2xl font-black text-white" id="totalBrandCount">0</div>
+                    <div class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Total Merek</div>
                 </div>
-                <div class="p-5 text-center bg-rose-50/50">
-                    <div class="flex justify-center gap-2 font-mono text-2xl font-bold text-rose-700 mb-3">
-                        <div class="bg-white px-3 py-2 rounded-lg border border-rose-200 shadow-sm flex flex-col items-center min-w-[60px]"><span id="hours">23</span><span class="text-[8px] font-sans text-slate-400 font-normal mt-1">JAM</span></div>
-                        <div class="py-2">:</div>
-                        <div class="bg-white px-3 py-2 rounded-lg border border-rose-200 shadow-sm flex flex-col items-center min-w-[60px]"><span id="minutes">59</span><span class="text-[8px] font-sans text-slate-400 font-normal mt-1">MENIT</span></div>
-                        <div class="py-2">:</div>
-                        <div class="bg-white px-3 py-2 rounded-lg border border-rose-200 shadow-sm flex flex-col items-center min-w-[60px]"><span id="seconds">59</span><span class="text-[8px] font-sans text-slate-400 font-normal mt-1">DETIK</span></div>
-                    </div>
-                    <p class="text-[10px] text-rose-800 leading-relaxed bg-rose-100 p-2.5 rounded border border-rose-200">
-                        Sesuai UU Kepabeanan, kegagalan pelunasan invoice ini dalam <strong class="text-rose-900">1x24 jam</strong> berakibat pada <strong class="uppercase text-rose-900">Sita Negara</strong> tanpa pemberitahuan.
-                    </p>
+                <div class="bg-white/5 backdrop-blur-sm rounded-2xl p-4 border border-white/10">
+                    <div class="text-2xl font-black text-white" id="countR2">0</div>
+                    <div class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Katalog R2</div>
                 </div>
-            </div>
-
-            <!-- DESKTOP ACTIONS -->
-            <div class="desktop-actions flex flex-col gap-3">
-                <button onclick="simulatePayment()" class="pay-btn-class w-full bg-gradient-to-r from-[var(--primary-navy)] to-[var(--primary-dark)] hover:from-slate-800 hover:to-black text-white font-bold py-3.5 px-4 rounded-xl shadow-lg transition-all border border-slate-700 flex justify-center items-center gap-2 active:scale-95">
-                    <i class="fas fa-wallet text-accent-gold"></i>
-                    PROSES PELUNASAN JAMINAN
-                </button>
-                <div class="grid grid-cols-2 gap-3">
-                    <button onclick="generatePDF()" class="pdf-btn-class bg-white border border-slate-300 text-slate-700 font-semibold py-3 rounded-xl shadow-sm hover:bg-slate-50 transition-colors flex justify-center items-center gap-2 text-sm">
-                        <i class="fas fa-file-pdf text-rose-600"></i> Unduh PDF
-                    </button>
-                    <button onclick="window.print()" class="bg-white border border-slate-300 text-slate-700 font-semibold py-3 rounded-xl shadow-sm hover:bg-slate-50 transition-colors flex justify-center items-center gap-2 text-sm">
-                        <i class="fas fa-print text-slate-600"></i> Cetak
-                    </button>
+                <div class="bg-white/5 backdrop-blur-sm rounded-2xl p-4 border border-white/10">
+                    <div class="text-2xl font-black text-white" id="countResmi">0</div>
+                    <div class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Katalog Resmi</div>
                 </div>
-            </div>
-
-        </aside>
-
-        <!-- DOCUMENT AREA (A4 EXACT INVOICE MATCH) -->
-        <div class="document-wrapper scroll-indicator-shadow">
-            
-            <div class="no-print lg:hidden text-center text-[10px] text-slate-500 mb-2 animate-pulse flex justify-center items-center gap-2 w-full">
-                <i class="fas fa-arrows-alt-h"></i> Geser dokumen ke kanan/kiri untuk melihat penuh
-            </div>
-
-            <div class="document-scroll-area">
-                <div class="document-container" id="pdfDocument">
-                    
-                    <div class="paid-stamp" id="paidStamp">LUNAS / PAID</div>
-
-                    <!-- WATERMARK TENGAH -->
-                    <img src="https://i.ibb.co.com/0RNkP7cG/pm-1766605896438-cmp.jpg" alt="Watermark DJBC" class="watermark-main" crossorigin="anonymous" />
-                    
-                    <div class="content-layer">
-                        
-                        <!-- 1. HEADER INVOICE -->
-                        <div class="inv-header-wrapper">
-                            <!-- KIRI: Info Perusahaan & Slogan -->
-                            <div class="inv-header-left">
-                                <img src="https://i.ibb.co.com/wF5hwJnq/IMG-20251215-214800.jpg" alt="Wajib Legalisasi" style="height: 60px; object-fit: contain; object-position: left; margin-bottom: 5px;" class="mix-blend-multiply" crossorigin="anonymous" />
-                                
-                                <div>
-                                    <div class="inv-section-title">Info Perusahaan</div>
-                                    <div class="inv-section-line"></div>
-                                    <div style="color: #4b80c0; font-weight: 700; font-size: 8.5pt; margin-bottom: 4px;">WEBSITE LEGALISASI</div>
-                                </div>
-                                
-                                <img src="https://i.ibb.co/1Jf993mY/IMG-20251209-084035.jpg" alt="Bea Cukai Slogan" style="height: 50px; object-fit: contain; object-position: left;" class="mix-blend-multiply" crossorigin="anonymous" />
-                            </div>
-
-                            <!-- KANAN: Invoice Title, Meta, & Logo Kemenkeu -->
-                            <div class="inv-header-right">
-                                <div class="inv-title-text">Invoice</div>
-                                
-                                <table class="inv-meta-table">
-                                    <tr>
-                                        <td>Referensi</td>
-                                        <td style="font-weight: 700;">: BC.MKS/SL-012/2026</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Tanggal</td>
-                                        <td style="font-weight: 700;">: 29/05/2026</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Tgl. Jatuh Tempo</td>
-                                        <td style="font-weight: 700; color: #dc2626;">: 29/05/2026</td>
-                                    </tr>
-                                </table>
-                                
-                                <img src="https://i.ibb.co.com/p6kxr6WT/IMG-20260121-011440.jpg" alt="Kemenkeu" style="height: 55px; object-fit: contain; margin-top: 15px;" class="mix-blend-multiply" crossorigin="anonymous" />
-                            </div>
-                        </div>
-
-                        <!-- 2. BILL TO & LOGOS -->
-                        <div class="inv-bill-to-wrapper">
-                            <!-- KIRI: Tagihan Untuk -->
-                            <div class="inv-bill-to-left">
-                                <div class="inv-section-title">Tagihan Untuk</div>
-                                <div class="inv-section-line"></div>
-                                <div style="font-size: 8.5pt; color: #333;">
-                                    <p style="color: #2b579a; font-weight: 700; font-size: 9pt; margin-bottom: 4px;">Andi M</p>
-                                    <p>Dusun. 8 Wonosari, Gang. Teratai,</p>
-                                    <p>Desa Klumpang Kebun, Kec. Hamparan Perak, Kab. Deli Serdang,</p>
-                                    <p>Sumatera Utara, 20374, Indonesia</p>
-                                    <p style="margin-top: 4px;">Telp: (+62) 812-6328-5947</p>
-                                </div>
-                            </div>
-                            <!-- KANAN: ISO & OJK Logos -->
-                            <div class="inv-bill-to-right">
-                                <img src="https://i.ibb.co.com/HpDB8NXW/1766129088487.jpg" alt="OJK" style="height: 50px; object-fit: contain;" class="mix-blend-multiply" crossorigin="anonymous" />
-                                <img src="https://i.ibb.co/4wcBBxK0/IMG-20251215-205820-651.jpg" alt="ISO" style="height: 50px; object-fit: contain;" class="mix-blend-multiply" crossorigin="anonymous" />
-                            </div>
-                        </div>
-
-                        <!-- 3. TABEL PRODUK -->
-                        <table class="inv-table">
-                            <thead>
-                                <tr>
-                                    <th width="15%">Produk</th>
-                                    <th width="35%">Deskripsi</th>
-                                    <th width="10%">Qty</th>
-                                    <th width="12%">Harga</th>
-                                    <th width="8%">Disc</th>
-                                    <th width="8%">Pajak</th>
-                                    <th width="12%">Jumlah</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td style="color: #444; font-weight: 600;">Legalitas (ROKOK ILEGAL)</td>
-                                    <td style="color: #444;">20 SLOP/4.000 Btg,<br>NON PITA CUKAI RESMI</td>
-                                    <td style="text-align: center;">4000</td>
-                                    <td style="text-align: right;">500.00</td>
-                                    <td style="text-align: center;">0%</td>
-                                    <td style="text-align: center;">-</td>
-                                    <td style="text-align: right; font-weight: 700;">2,000,000.00</td>
-                                </tr>
-                                <tr>
-                                    <td colspan="5" style="border: none !important; background: white !important;"></td>
-                                    <td style="font-weight: bold; text-align: right; background: #f9fafb !important;">Total:</td>
-                                    <td style="font-weight: bold; text-align: right; background: #f9fafb !important;">2,000,000.00</td>
-                                </tr>
-                            </tbody>
-                        </table>
-
-                        <!-- 4. BOTTOM LAYOUT (2 KOLOM: Keterangan & Syarat) -->
-                        <div class="inv-bottom-wrapper">
-                            
-                            <!-- KIRI: Keterangan Surat -->
-                            <div class="inv-bottom-left">
-                                <div class="inv-section-title">Keterangan</div>
-                                <div class="inv-section-line"></div>
-                                
-                                <p style="font-weight: 700; margin-bottom: 4px;">SURAT PEMBERITAHUAN JAMINAN LEGALITAS SEMENTARA</p>
-                                <p>Nomor: BC.MKS/SL-012/2026</p>
-                                <p>Tanggal: 29 Mei 2026</p>
-                                <br>
-                                <p>Kepada Yth.,</p>
-                                <p>Andi M di Tempat</p>
-                                <br>
-                                <p>Dengan hormat,</p>
-                                <p class="inv-text-content">Berdasarkan hasil pemeriksaan fisik dan administrasi barang kiriman pada fasilitas bongkar muat Pelabuhan Pangkalpinang, serta sesuai dengan Standar Operasional Prosedur (SOP) Pemeriksaan Internal, bersama ini kami sampaikan informasi sebagai berikut:</p>
-                                
-                                <ol class="inv-list">
-                                    <li><strong>DATA BARANG KIRIMAN:</strong> Jenis Barang: Rokok Tanpa Pita Cukai, Jumlah Kemasan 20 Slop, Jumlah Batang: 4.000 Btg, Status Kepabeanan: Ditemukan indikasi pelanggaran ketentuan cukai berupa rokok tanpa pita cukai resmi.</li>
-                                    <li><strong>IDENTITAS PENERIMA BARANG:</strong> Keterangan Data: Ekspedisi SiCepat Ekspres, Nomor Resi 001776527333, Nama Penerima Andi M, Nomor Telepon (+62) 812-6328-5947.</li>
-                                </ol>
-
-                                <p style="font-weight: 700; text-decoration: underline; margin-bottom: 2px;">TINDAKAN INTERNAL</p>
-                                <p>Adapun tindakan yang dilakukan untuk memastikan kejelasan legalitas barang adalah:</p>
-                                <ol class="inv-list">
-                                    <li>Menahan sementara paket untuk proses klarifikasi kepada pemilik barang.</li>
-                                    <li>Mengeluarkan pemberitahuan invoice jaminan sementara dengan perhitungan terlampir.</li>
-                                </ol>
-
-                                <p style="font-weight: 700; text-decoration: underline; margin-bottom: 2px;">DASAR PERHITUNGAN JAMINAN</p>
-                                <p class="inv-text-content">Uraian Nilai: 25% dari total 2x Nilai Cukai (Rp 500 x 4.000 batang = Rp 2.000.000,00 Total Jaminan Sementara yang harus dilunasi).</p>
-                            </div>
-
-                            <!-- KANAN: Syarat Ketentuan & TTD -->
-                            <div class="inv-bottom-right">
-                                <div class="inv-section-title">Syarat & Ketentuan</div>
-                                <div class="inv-section-line"></div>
-                                
-                                <p style="font-weight: 700; text-decoration: underline; margin-bottom: 2px;">OPSI REFUND (RESTITUSI)</p>
-                                <p class="inv-text-content">Setelah proses verifikasi sistem internal selesai dan legalitas disahkan, pemilik barang diberikan opsi restitusi (pengembalian) sebagai berikut:</p>
-                                
-                                <ol class="inv-list">
-                                    <li>Refund 70% dari total nilai jaminan: <strong>Rp 1.400.000,00</strong></li>
-                                    <li>Biaya Administrasi & PNBP 30%: <strong>Rp 600.000,00</strong></li>
-                                </ol>
-
-                                <p style="font-weight: 700; text-decoration: underline; margin-bottom: 2px;">KETERANGAN</p>
-                                <p class="inv-text-content">Biaya administrasi internal bukan merupakan denda pidana, melainkan biaya operasional Penerimaan Negara Bukan Pajak (PNBP) sesuai prosedur penanganan legalitas barang.</p>
-                                
-                                <p style="font-weight: 700; text-decoration: underline; margin-bottom: 2px; color: #dc2626;">KONSEKUENSI HUKUM</p>
-                                <p class="inv-text-content">Jika tagihan jaminan ini tidak diselesaikan dalam 1 (satu) hari kerja (1x24 Jam), barang akan disita penuh dan diproses secara hukum sesuai ketentuan <strong>UU Cukai No. 39 Tahun 2007.</strong></p>
-                                
-                                <!-- TANDA TANGAN (Dikunci di posisi bawah) -->
-                                <div class="inv-signature-box">
-                                    <p style="font-weight: 700; margin-bottom: 5px;">Hormat kami,</p>
-                                    
-                                    <!-- Container Image yang Fix Height agar tidak overlap teks atas/bawah -->
-                                    <div style="height: 70px; display: flex; justify-content: center; align-items: center; margin: 5px 0;">
-                                        <img src="https://i.ibb.co.com/M5ZWjB5R/IMG-20260120-162645.jpg" alt="TTD" style="height: 90px; object-fit: contain; mix-blend-multiply; transform: rotate(-2deg);" crossorigin="anonymous" />
-                                    </div>
-                                    
-                                    <p style="font-weight: 700; font-size: 9pt; text-decoration: underline;">ARIF KURNIAWAN</p>
-                                    <p style="font-size: 8pt; color: #555;">NIP. 19870311 201102 1 006</p>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div> <!-- End Content Layer -->
-                </div> <!-- End Document Container -->
+                <div class="bg-white/5 backdrop-blur-sm rounded-2xl p-4 border border-white/10">
+                    <div class="text-2xl font-black text-white">24/7</div>
+                    <div class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Layanan</div>
+                </div>
             </div>
         </div>
-    </main>
+        <div class="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#f8f9fc] dark:from-[#0a0f1a] to-transparent pointer-events-none"></div>
+    </section>
 
-    <!-- MOBILE ACTION BAR -->
-    <div class="mobile-action-bar">
-        <button onclick="generatePDF()" class="pdf-btn-class w-1/3 bg-white text-slate-700 font-bold py-3.5 rounded-xl border border-slate-300 text-[12px] flex justify-center items-center gap-2 active:bg-slate-100 shadow-sm">
-            <i class="fas fa-file-pdf text-rose-600 text-base"></i> PDF
+    <!-- ============================================
+    FEATURED COLLECTION — Editorial Layout Asimetris
+    ============================================ -->
+    <section id="featured" class="py-12 md:py-20 bg-[#f8f9fc] dark:bg-[#0a0f1a] transition-colors duration-500">
+        <div class="container">
+            <div class="text-center max-w-2xl mx-auto mb-10 fade-on-scroll">
+                <span class="inline-block text-[10px] font-bold text-brand-500 bg-brand-50 dark:bg-brand-900/30 px-4 py-1 rounded-full uppercase tracking-widest mb-3">Pilihan Editor</span>
+                <h2 class="text-2xl md:text-4xl font-black text-brand-900 dark:text-white">Koleksi <span class="premium-text-gradient">Unggulan</span></h2>
+                <p class="text-slate-500 dark:text-slate-400 mt-2 text-sm">Produk pilihan dengan margin terbaik untuk grosir Anda.</p>
+            </div>
+
+            <!-- Layout asimetris: 1 besar kiri + 2 kecil kanan (atas/bawah) + 1 sedang -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 fade-on-scroll">
+                <!-- Large item (kiri, span 2 kolom) -->
+                <div class="md:col-span-2 relative rounded-3xl overflow-hidden bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 card-premium group">
+                    <div class="absolute inset-0 bg-gradient-to-t from-brand-900/90 via-brand-900/40 to-transparent z-10"></div>
+                    <div class="aspect-[16/9] md:aspect-[2/1] bg-brand-100 dark:bg-brand-900/30 flex items-center justify-center text-6xl text-brand-500">🔥</div>
+                    <div class="absolute bottom-0 left-0 right-0 p-6 z-20">
+                        <span class="inline-block px-3 py-1 rounded-lg text-[10px] font-bold bg-amber-500 text-white mb-2">R2 Premium</span>
+                        <h3 class="text-2xl font-black text-white mb-1">Absolute Bold</h3>
+                        <p class="text-sm text-slate-300">Rokok premium dengan cita rasa kuat, harga kompetitif.</p>
+                        <div class="mt-3 flex items-center gap-3">
+                            <span class="text-xl font-black text-white font-mono">Rp 118.000</span>
+                            <button onclick="window.__addCart('r2-1')" class="px-4 py-2 rounded-xl bg-white text-brand-900 font-bold text-xs hover:scale-105 transition-transform">+ Keranjang</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Kecil atas (kanan) -->
+                <div class="relative rounded-3xl overflow-hidden bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 card-premium group">
+                    <div class="aspect-[4/3] bg-brand-50 dark:bg-brand-900/20 flex items-center justify-center text-4xl text-brand-500">🏅</div>
+                    <div class="p-4">
+                        <span class="inline-block px-2 py-0.5 rounded text-[9px] font-bold bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 mb-1">Resmi · Segmen A</span>
+                        <h4 class="font-extrabold text-brand-900 dark:text-white text-base">Dji Sam Soe Filter</h4>
+                        <div class="flex items-center justify-between mt-2">
+                            <span class="font-black font-mono text-brand-900 dark:text-white">Rp 220.000</span>
+                            <button onclick="window.__addCart('resmi-4')" class="w-8 h-8 rounded-lg bg-brand-500 text-white flex items-center justify-center hover:scale-105 transition-transform"><i class="fa-solid fa-plus text-xs"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Kecil bawah (kanan) -->
+                <div class="relative rounded-3xl overflow-hidden bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 card-premium group">
+                    <div class="aspect-[4/3] bg-amber-50 dark:bg-amber-900/20 flex items-center justify-center text-4xl text-amber-500">🌿</div>
+                    <div class="p-4">
+                        <span class="inline-block px-2 py-0.5 rounded text-[9px] font-bold bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-300 mb-1">R2 · Hemat</span>
+                        <h4 class="font-extrabold text-brand-900 dark:text-white text-base">Luffman Merah</h4>
+                        <div class="flex items-center justify-between mt-2">
+                            <span class="font-black font-mono text-brand-900 dark:text-white">Rp 68.000</span>
+                            <button onclick="window.__addCart('r2-89')" class="w-8 h-8 rounded-lg bg-brand-500 text-white flex items-center justify-center hover:scale-105 transition-transform"><i class="fa-solid fa-plus text-xs"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sedang (baris kedua, span 2) -->
+                <div class="md:col-span-2 relative rounded-3xl overflow-hidden bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 card-premium group">
+                    <div class="absolute inset-0 bg-gradient-to-t from-brand-900/80 via-brand-900/30 to-transparent z-10"></div>
+                    <div class="aspect-[16/9] md:aspect-[3/1] bg-brand-50 dark:bg-brand-900/20 flex items-center justify-center text-5xl text-brand-500">🚀</div>
+                    <div class="absolute bottom-0 left-0 right-0 p-5 z-20">
+                        <span class="inline-block px-2 py-0.5 rounded text-[9px] font-bold bg-violet-500 text-white mb-1">R2 Populer</span>
+                        <h3 class="text-xl font-black text-white">Neo Mild</h3>
+                        <div class="flex items-center gap-4 mt-2">
+                            <span class="font-black font-mono text-white">Rp 220.000</span>
+                            <button onclick="window.__addCart('r2-117')" class="px-4 py-1.5 rounded-lg bg-white text-brand-900 font-bold text-xs hover:scale-105 transition-transform">Tambah</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Kecil ketiga (kanan) -->
+                <div class="relative rounded-3xl overflow-hidden bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 card-premium group">
+                    <div class="aspect-[4/3] bg-emerald-50 dark:bg-emerald-900/20 flex items-center justify-center text-4xl text-emerald-500">🌍</div>
+                    <div class="p-4">
+                        <span class="inline-block px-2 py-0.5 rounded text-[9px] font-bold bg-pink-100 dark:bg-pink-900/30 text-pink-700 dark:text-pink-300 mb-1">Resmi · Segmen D</span>
+                        <h4 class="font-extrabold text-brand-900 dark:text-white text-base">Marlboro Red</h4>
+                        <div class="flex items-center justify-between mt-2">
+                            <span class="font-black font-mono text-brand-900 dark:text-white">Rp 300.000</span>
+                            <button onclick="window.__addCart('resmi-10')" class="w-8 h-8 rounded-lg bg-brand-500 text-white flex items-center justify-center hover:scale-105 transition-transform"><i class="fa-solid fa-plus text-xs"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+    WHY R2
+    ============================================ -->
+    <section id="why" class="py-12 md:py-20 bg-white dark:bg-[#0a0f1a] transition-colors duration-500">
+        <div class="container">
+            <div class="text-center max-w-2xl mx-auto mb-12 fade-on-scroll">
+                <span class="inline-block text-[10px] font-bold text-brand-500 bg-brand-50 dark:bg-brand-900/30 px-4 py-1 rounded-full uppercase tracking-widest mb-3">Why R2</span>
+                <h2 class="text-2xl md:text-4xl font-black text-brand-900 dark:text-white">Distributor Pilihan <br class="sm:hidden" /><span class="premium-text-gradient">Grosir Malang</span></h2>
+                <p class="text-slate-500 dark:text-slate-400 mt-3 text-sm">Solusi lengkap untuk kebutuhan rokok grosir dengan harga terbaik.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-[#f8f9fc] dark:bg-white/5 rounded-3xl p-6 border border-slate-200 dark:border-white/10 fade-on-scroll card-premium text-center">
+                    <div class="w-14 h-14 rounded-2xl bg-brand-50 dark:bg-brand-900/30 flex items-center justify-center text-2xl mx-auto mb-4">🔥</div>
+                    <h3 class="font-extrabold text-brand-900 dark:text-white text-lg mb-2">167+ Merek R2</h3>
+                    <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">Katalog lokal dengan harga kompetitif. Hemat, Populer, Premium — semua tersedia.</p>
+                </div>
+                <div class="bg-[#f8f9fc] dark:bg-white/5 rounded-3xl p-6 border border-slate-200 dark:border-white/10 fade-on-scroll card-premium text-center" style="animation-delay:100ms">
+                    <div class="w-14 h-14 rounded-2xl bg-amber-50 dark:bg-amber-900/30 flex items-center justify-center text-2xl mx-auto mb-4">🏅</div>
+                    <h3 class="font-extrabold text-brand-900 dark:text-white text-lg mb-2">66 Merek Resmi</h3>
+                    <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">Brand nasional & internasional terbagi dalam 5 segmen. Harga grosir per slop.</p>
+                </div>
+                <div class="bg-[#f8f9fc] dark:bg-white/5 rounded-3xl p-6 border border-slate-200 dark:border-white/10 fade-on-scroll card-premium text-center" style="animation-delay:200ms">
+                    <div class="w-14 h-14 rounded-2xl bg-emerald-50 dark:bg-emerald-900/30 flex items-center justify-center text-2xl mx-auto mb-4">🚚</div>
+                    <h3 class="font-extrabold text-brand-900 dark:text-white text-lg mb-2">Gratis Ongkir</h3>
+                    <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">Minimal 20 slop. Subsidi ongkir untuk order grosir. Target tercapai otomatis.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+    PRODUK — KATALOG
+    ============================================ -->
+    <section id="produk" class="py-12 md:py-20 bg-[#f8f9fc] dark:bg-[#0a0f1a] transition-colors duration-500">
+        <div class="container">
+
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6 fade-on-scroll">
+                <div>
+                    <span class="inline-block text-[10px] font-bold text-brand-500 bg-brand-50 dark:bg-brand-900/30 px-4 py-1 rounded-full uppercase tracking-widest mb-2">Katalog</span>
+                    <h2 class="text-2xl md:text-3xl font-black text-brand-900 dark:text-white">Pilih <span class="premium-text-gradient">Katalog</span></h2>
+                </div>
+                <div class="flex items-center gap-3 flex-wrap">
+                    <div class="catalog-tab-switcher" role="tablist">
+                        <button class="catalog-tab active" data-tab="r2" role="tab" aria-selected="true" onclick="window.switchCatalog('r2')">
+                            <i class="fa-solid fa-fire-flame-curved"></i> R2
+                            <span class="tab-count" id="r2TabCount">167</span>
+                        </button>
+                        <button class="catalog-tab" data-tab="resmi" role="tab" aria-selected="false" onclick="window.switchCatalog('resmi')">
+                            <i class="fa-solid fa-certificate"></i> Resmi
+                            <span class="tab-count" id="resmiTabCount">66</span>
+                        </button>
+                    </div>
+                    <div class="view-toggle-switcher">
+                        <button id="viewModeGridBtn" class="view-toggle-btn active" onclick="window.setViewMode('grid')"><i class="fa-solid fa-grip"></i></button>
+                        <button id="viewModeTableBtn" class="view-toggle-btn" onclick="window.setViewMode('table')"><i class="fa-solid fa-list"></i></button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="catalogInfoBanner" class="catalog-info-banner mb-6 fade-on-scroll">
+                <i id="catalogInfoIcon" class="fa-solid fa-fire-flame-curved text-lg text-brand-500"></i>
+                <div class="flex-1 min-w-0">
+                    <div id="catalogInfoTitle" class="font-extrabold text-brand-900 dark:text-white text-sm">Katalog R2 Nusantara</div>
+                    <div id="catalogInfoDesc" class="text-xs text-slate-500 dark:text-slate-400">167 merek lokal pilihan dengan harga kompetitif untuk margin maksimal.</div>
+                </div>
+                <span class="text-[10px] font-bold text-slate-400 hidden sm:block">Harga / slop</span>
+            </div>
+
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6 fade-on-scroll">
+                <div id="filterChipsContainer" class="flex flex-wrap items-center gap-2"></div>
+                <div class="flex items-center gap-3 flex-wrap">
+                    <div class="relative">
+                        <input id="searchInput" type="search" placeholder="Cari produk..." class="w-48 md:w-60 px-4 py-2.5 rounded-xl border border-slate-200 dark:border-white/10 bg-white dark:bg-[#0d1522] text-sm font-medium text-brand-900 dark:text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-brand-500/30 transition-all" />
+                        <div id="searchSuggestions" class="search-suggestions-box hidden"></div>
+                    </div>
+                    <select id="sortSelect" class="px-3 py-2.5 rounded-xl border border-slate-200 dark:border-white/10 bg-white dark:bg-[#0d1522] text-sm font-bold text-brand-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-brand-500/30 transition-all" onchange="window.applySort(this.value)">
+                        <option value="name-asc">Nama A-Z</option>
+                        <option value="price-asc">Harga ↑</option>
+                        <option value="price-desc">Harga ↓</option>
+                    </select>
+                </div>
+            </div>
+
+            <div id="activeFilterIndicator" class="hidden mb-4 text-xs font-bold text-brand-600 dark:text-brand-300 bg-brand-50 dark:bg-brand-900/30 px-4 py-2 rounded-xl inline-flex items-center gap-2 fade-on-scroll">
+                <i class="fa-solid fa-sliders"></i>
+                <span id="activeFilterText">Filter: Hemat</span>
+            </div>
+
+            <div id="productGrid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6"></div>
+            <div id="productTableWrap" class="product-table-wrap hidden">
+                <div class="product-table-head">
+                    <span>Nama Produk</span>
+                    <span>Harga</span>
+                    <span class="hidden md:block">ID</span>
+                    <span class="text-right">Aksi</span>
+                </div>
+                <div id="productTableBody"></div>
+            </div>
+            <div id="noProductFound" class="no-product-empty hidden">
+                <i class="fa-solid fa-box-open text-4xl text-slate-300 mb-4"></i>
+                <p class="font-bold text-slate-600 dark:text-slate-400">Produk tidak ditemukan</p>
+            </div>
+            <div id="paginationContainer" class="flex items-center justify-center gap-2 mt-8"></div>
+
+            <div id="shippingProgressBanner" class="mt-8 bg-brand-900 rounded-2xl p-4 md:p-6 text-white flex flex-col md:flex-row md:items-center justify-between gap-4 transition-all duration-500 fade-on-scroll">
+                <div>
+                    <div id="bannerTitle" class="font-extrabold text-sm">Target Gratis Ongkir</div>
+                    <div id="bannerSubtitle" class="text-xs text-slate-300 mt-0.5">Pilih <b class="text-emerald-300">20 slop</b> lagi untuk subsidi.</div>
+                </div>
+                <div class="flex items-center gap-4 w-full md:w-auto">
+                    <span class="text-2xl font-black font-mono" id="bannerQty">0</span>
+                    <div class="flex-1 md:w-48 h-2 bg-white/20 rounded-full overflow-hidden">
+                        <div id="progressFill" class="h-full bg-emerald-400 rounded-full transition-all duration-700" style="width:0%"></div>
+                    </div>
+                    <span class="text-[10px] font-bold uppercase tracking-widest text-slate-300">/ 20</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+    TESTIMONIAL
+    ============================================ -->
+    <section id="testimoni" class="py-12 md:py-20 bg-white dark:bg-[#0a0f1a] transition-colors duration-500">
+        <div class="container">
+            <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8 fade-on-scroll">
+                <div>
+                    <span class="inline-block text-[10px] font-bold text-brand-500 bg-brand-50 dark:bg-brand-900/30 px-4 py-1 rounded-full uppercase tracking-widest mb-2">Testimoni</span>
+                    <h2 class="text-2xl md:text-3xl font-black text-brand-900 dark:text-white">Apa Kata <span class="premium-text-gradient">Pelanggan</span></h2>
+                </div>
+                <div class="flex items-center gap-2">
+                    <button id="sliderPrevBtn" class="slider-nav-btn"><i class="fa-solid fa-chevron-left text-xs"></i></button>
+                    <button id="sliderNextBtn" class="slider-nav-btn"><i class="fa-solid fa-chevron-right text-xs"></i></button>
+                    <button onclick="window.openReviewModal()" class="px-4 py-2.5 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-bold text-xs transition-all flex items-center gap-2">
+                        <i class="fa-solid fa-pen"></i> Tulis Ulasan
+                    </button>
+                </div>
+            </div>
+            <div class="relative">
+                <div id="testimonialSlider" class="testimonial-slider-container no-scrollbar">
+                    <!-- Static testimonials will be populated by JS -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+    FAQ
+    ============================================ -->
+    <section id="faq" class="py-12 md:py-20 bg-[#f8f9fc] dark:bg-[#0a0f1a] transition-colors duration-500">
+        <div class="container max-w-3xl">
+            <div class="text-center mb-10 fade-on-scroll">
+                <span class="inline-block text-[10px] font-bold text-brand-500 bg-brand-50 dark:bg-brand-900/30 px-4 py-1 rounded-full uppercase tracking-widest mb-2">FAQ</span>
+                <h2 class="text-2xl md:text-3xl font-black text-brand-900 dark:text-white">Pertanyaan <span class="premium-text-gradient">Umum</span></h2>
+            </div>
+            <div class="space-y-3">
+                <details class="faq-item bg-white dark:bg-white/5 rounded-2xl border border-slate-200 dark:border-white/10 p-4 md:p-6">
+                    <summary class="flex items-center justify-between cursor-pointer list-none font-bold text-brand-900 dark:text-white text-sm">
+                        <span>Bagaimana cara memesan?</span>
+                        <i class="fa-solid fa-plus faq-icon text-slate-400 text-xs"></i>
+                    </summary>
+                    <div class="faq-content text-sm text-slate-500 dark:text-slate-400 leading-relaxed">Pilih produk dari katalog R2 atau Resmi, tambahkan ke keranjang, lalu lanjutkan ke checkout. Kami akan menghubungi Anda via WhatsApp untuk konfirmasi.</div>
+                </details>
+                <details class="faq-item bg-white dark:bg-white/5 rounded-2xl border border-slate-200 dark:border-white/10 p-4 md:p-6">
+                    <summary class="flex items-center justify-between cursor-pointer list-none font-bold text-brand-900 dark:text-white text-sm">
+                        <span>Apakah harga sudah termasuk pajak?</span>
+                        <i class="fa-solid fa-plus faq-icon text-slate-400 text-xs"></i>
+                    </summary>
+                    <div class="faq-content text-sm text-slate-500 dark:text-slate-400 leading-relaxed">Ya, semua harga sudah termasuk PPN dan cukai sesuai ketentuan. Harga per slop.</div>
+                </details>
+                <details class="faq-item bg-white dark:bg-white/5 rounded-2xl border border-slate-200 dark:border-white/10 p-4 md:p-6">
+                    <summary class="flex items-center justify-between cursor-pointer list-none font-bold text-brand-900 dark:text-white text-sm">
+                        <span>Minimal pemesanan berapa?</span>
+                        <i class="fa-solid fa-plus faq-icon text-slate-400 text-xs"></i>
+                    </summary>
+                    <div class="faq-content text-sm text-slate-500 dark:text-slate-400 leading-relaxed">Minimal 1 slop per produk. Untuk gratis ongkir minimal 20 slop (kombinasi produk).</div>
+                </details>
+                <details class="faq-item bg-white dark:bg-white/5 rounded-2xl border border-slate-200 dark:border-white/10 p-4 md:p-6">
+                    <summary class="flex items-center justify-between cursor-pointer list-none font-bold text-brand-900 dark:text-white text-sm">
+                        <span>Apakah bisa kirim ke luar Malang?</span>
+                        <i class="fa-solid fa-plus faq-icon text-slate-400 text-xs"></i>
+                    </summary>
+                    <div class="faq-content text-sm text-slate-500 dark:text-slate-400 leading-relaxed">Ya, kami melayani pengiriman ke seluruh Indonesia dengan ekspedisi pilihan. Ongkir akan dihitung saat checkout.</div>
+                </details>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+    FOOTER
+    ============================================ -->
+    <footer class="footer-enterprise pt-12 pb-24 md:pb-6">
+        <div class="container">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center gap-2 mb-4">
+                        <span class="text-2xl font-black premium-text-gradient">R2</span>
+                        <span class="text-[10px] font-bold text-slate-500">NUSANTARA</span>
+                    </div>
+                    <p class="text-xs text-slate-500 leading-relaxed max-w-xs">Distributor rokok grosir terpercaya di Malang. Menyediakan katalog R2 dan Resmi dengan harga kompetitif.</p>
+                    <div class="flex items-center gap-2 mt-4">
+                        <span class="badge-pill"><i class="fa-solid fa-location-dot text-emerald-400"></i> Malang, Indonesia</span>
+                        <span class="badge-pill"><i class="fa-regular fa-clock"></i> 24/7</span>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="footer-title">Katalog</h4>
+                    <ul class="space-y-2 text-xs">
+                        <li><a href="#produk" class="footer-link no-underline" onclick="window.switchCatalog('r2')">R2 Nusantara</a></li>
+                        <li><a href="#produk" class="footer-link no-underline" onclick="window.switchCatalog('resmi')">Katalog Resmi</a></li>
+                        <li><a href="#produk" class="footer-link no-underline">Semua Produk</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="footer-title">Layanan</h4>
+                    <ul class="space-y-2 text-xs">
+                        <li><a href="#why" class="footer-link no-underline">Tentang Kami</a></li>
+                        <li><a href="#testimoni" class="footer-link no-underline">Testimoni</a></li>
+                        <li><a href="#faq" class="footer-link no-underline">FAQ</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="footer-title">Kontak</h4>
+                    <div class="space-y-2 text-xs">
+                        <div class="sales-card">
+                            <div class="flex items-center gap-2"><div class="sales-avatar avatar-gradient-9">A</div><div><div class="font-bold text-white text-xs">Admin R2</div><div class="text-[10px] text-slate-500">+62 812 3456 7890</div></div></div>
+                            <a href="https://wa.me/6281234567890" target="_blank" class="wa-circle no-underline"><i class="fa-brands fa-whatsapp"></i></a>
+                        </div>
+                        <div class="flex items-center gap-2 flex-wrap">
+                            <span class="region-tag"><i class="fa-brands fa-whatsapp text-emerald-400"></i> WhatsApp</span>
+                            <span class="region-tag"><i class="fa-regular fa-envelope"></i> r2@distributor.com</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-divider"></div>
+            <div class="flex flex-col md:flex-row items-center justify-between gap-4 text-[10px] text-slate-500">
+                <span>&copy; 2026 R2 Nusantara. All rights reserved.</span>
+                <div class="flex items-center gap-4">
+                    <span class="flex items-center gap-1"><i class="fa-solid fa-shield text-emerald-400"></i> Aman & Terpercaya</span>
+                    <span class="flex items-center gap-1"><i class="fa-solid fa-credit-card text-brand-400"></i> Pembayaran Aman</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ============================================
+    BACK TO TOP
+    ============================================ -->
+    <button id="backToTop" class="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+        <i class="fa-solid fa-arrow-up text-sm"></i>
+    </button>
+
+    <!-- ============================================
+    WHATSAPP FLOATING BUTTON PREMIUM
+    ============================================ -->
+    <a id="waFloatBtn" href="https://wa.me/6281234567890" target="_blank" class="fixed bottom-6 right-4 z-40 w-14 h-14 rounded-full bg-[#25D366] text-white shadow-xl hover:scale-110 transition-transform duration-300 flex items-center justify-center wa-float-btn pulse-ring" aria-label="Chat WhatsApp">
+        <i class="fa-brands fa-whatsapp text-2xl"></i>
+        <span class="absolute -top-1 -right-1 w-4 h-4 bg-emerald-400 rounded-full border-2 border-white dark:border-[#0a0f1a] animate-pulse"></span>
+        <span class="absolute inset-0 rounded-full border-2 border-[#25D366] animate-ping opacity-0"></span>
+    </a>
+
+    <!-- ============================================
+    MOBILE BOTTOM NAVIGATION
+    ============================================ -->
+    <nav id="bottomNav" class="md:hidden fixed bottom-0 left-0 right-0 z-50 glass-pill border-t border-white/20 dark:border-white/5 px-2 py-2 flex items-center justify-around safe-area-bottom">
+        <a href="#" class="bottom-nav-item flex flex-col items-center gap-0.5 text-[9px] font-bold text-slate-400 hover:text-brand-600 dark:hover:text-brand-400 transition-colors no-underline">
+            <i class="fa-solid fa-house text-lg"></i>
+            <span>Beranda</span>
+        </a>
+        <a href="#produk" class="bottom-nav-item flex flex-col items-center gap-0.5 text-[9px] font-bold text-slate-400 hover:text-brand-600 dark:hover:text-brand-400 transition-colors no-underline">
+            <i class="fa-solid fa-store text-lg"></i>
+            <span>Katalog</span>
+        </a>
+        <button onclick="window.toggleCart()" class="bottom-nav-item flex flex-col items-center gap-0.5 text-[9px] font-bold text-slate-400 hover:text-brand-600 dark:hover:text-brand-400 transition-colors bg-transparent border-none relative">
+            <i class="fa-solid fa-cart-shopping text-lg"></i>
+            <span>Keranjang</span>
+            <span id="bottomCartBadge" class="absolute -top-0.5 -right-0.5 w-4 h-4 rounded-full bg-emerald-400 text-brand-900 text-[8px] font-bold flex items-center justify-center scale-0 transition-transform">0</span>
         </button>
-        <button onclick="simulatePayment()" class="pay-btn-class w-2/3 bg-gradient-to-r from-[var(--primary-navy)] to-[var(--primary-dark)] text-white font-bold py-3.5 px-2 rounded-xl shadow-lg flex justify-center items-center gap-2 text-[13px] active:scale-[0.98]">
-            <i class="fas fa-wallet text-accent-gold text-base"></i> PELUNASAN
+        <button onclick="window.toggleWishlistSidebar()" class="bottom-nav-item flex flex-col items-center gap-0.5 text-[9px] font-bold text-slate-400 hover:text-brand-600 dark:hover:text-brand-400 transition-colors bg-transparent border-none relative">
+            <i class="fa-regular fa-heart text-lg"></i>
+            <span>Wishlist</span>
+            <span id="bottomWishlistBadge" class="absolute -top-0.5 -right-0.5 w-4 h-4 rounded-full bg-red-500 text-white text-[8px] font-bold flex items-center justify-center scale-0 transition-transform">0</span>
         </button>
+        <a href="https://wa.me/6281234567890" target="_blank" class="bottom-nav-item flex flex-col items-center gap-0.5 text-[9px] font-bold text-slate-400 hover:text-emerald-500 transition-colors no-underline">
+            <i class="fa-brands fa-whatsapp text-lg"></i>
+            <span>WhatsApp</span>
+        </a>
+    </nav>
+
+    <!-- ============================================
+    SIDEBAR CART
+    ============================================ -->
+    <div id="cartOverlay" class="fixed inset-0 z-[70] bg-brand-900/50 backdrop-blur-sm hidden opacity-0 transition-opacity duration-300 pointer-events-none" onclick="window.toggleCart()"></div>
+    <div id="cartSidebar" class="fixed top-0 right-0 z-[80] h-full w-full max-w-md bg-white/95 dark:bg-[#0a0f1a]/95 backdrop-blur-xl shadow-2xl transform translate-x-full transition-transform duration-400 ease-[cubic-bezier(0.16,1,0.3,1)] flex flex-col glass-dark border-l border-white/10">
+        <div class="flex items-center justify-between p-4 border-b border-slate-200 dark:border-white/10 shrink-0">
+            <span class="font-extrabold text-brand-900 dark:text-white text-sm flex items-center gap-2"><i class="fa-solid fa-cart-shopping text-brand-500"></i> Keranjang</span>
+            <button onclick="window.toggleCart()" class="w-8 h-8 rounded-lg bg-slate-100 dark:bg-white/5 flex items-center justify-center text-slate-500 hover:bg-slate-200 transition-colors"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div id="cartItemsContainer" class="flex-1 overflow-y-auto p-4 space-y-3"></div>
+        <div id="cartSummary" class="border-t border-slate-200 dark:border-white/10 p-4 shrink-0 hidden">
+            <div class="flex justify-between items-center mb-3">
+                <span class="text-sm text-slate-500 dark:text-slate-400 font-medium">Total</span>
+                <div>
+                    <span id="totalItemsDisplay" class="text-xs font-bold text-slate-400 mr-2">0 item</span>
+                    <span id="totalPriceDisplay" class="text-xl font-black font-mono text-brand-900 dark:text-white">Rp0</span>
+                </div>
+            </div>
+            <button onclick="window.openCheckoutModal()" class="w-full py-3 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-bold text-sm transition-all flex items-center justify-center gap-2 btn-glow">
+                <i class="fa-brands fa-whatsapp"></i> Checkout via WhatsApp
+            </button>
+        </div>
     </div>
 
-    <!-- JAVASCRIPT -->
+    <!-- ============================================
+    SIDEBAR WISHLIST
+    ============================================ -->
+    <div id="wishlistOverlay" class="fixed inset-0 z-[70] bg-brand-900/50 backdrop-blur-sm hidden opacity-0 transition-opacity duration-300 pointer-events-none" onclick="window.toggleWishlistSidebar()"></div>
+    <div id="wishlistSidebar" class="fixed top-0 right-0 z-[80] h-full w-full max-w-md bg-white/95 dark:bg-[#0a0f1a]/95 backdrop-blur-xl shadow-2xl transform translate-x-full transition-transform duration-400 ease-[cubic-bezier(0.16,1,0.3,1)] flex flex-col glass-dark border-l border-white/10">
+        <div class="flex items-center justify-between p-4 border-b border-slate-200 dark:border-white/10 shrink-0">
+            <span class="font-extrabold text-brand-900 dark:text-white text-sm flex items-center gap-2"><i class="fa-regular fa-heart text-red-400"></i> Wishlist</span>
+            <button onclick="window.toggleWishlistSidebar()" class="w-8 h-8 rounded-lg bg-slate-100 dark:bg-white/5 flex items-center justify-center text-slate-500 hover:bg-slate-200 transition-colors"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div id="wishlistItemsContainer" class="flex-1 overflow-y-auto p-4 space-y-3"></div>
+    </div>
+
+    <!-- ============================================
+    QUICK VIEW MODAL
+    ============================================ -->
+    <div id="quickViewOverlay" class="fixed inset-0 z-[85] bg-brand-900/70 backdrop-blur-sm hidden opacity-0 transition-opacity duration-300 pointer-events-none" onclick="window.closeQuickView()"></div>
+    <div id="quickViewModal" class="fixed top-1/2 left-1/2 z-[90] w-[92%] max-w-lg bg-white dark:bg-[#0a0f1a] rounded-3xl shadow-2xl p-6 transform -translate-x-1/2 -translate-y-1/2 scale-95 opacity-0 transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] pointer-events-none">
+        <button onclick="window.closeQuickView()" class="absolute top-4 right-4 w-8 h-8 rounded-lg bg-slate-100 dark:bg-white/5 flex items-center justify-center text-slate-500 hover:bg-slate-200 transition-colors"><i class="fa-solid fa-xmark"></i></button>
+        <div class="flex flex-col gap-4">
+            <div id="qvBadge" class="inline-block px-3 py-1 rounded-lg text-xs font-bold">Populer</div>
+            <h3 id="qvTitle" class="text-xl font-extrabold text-brand-900 dark:text-white">Nama Produk</h3>
+            <p id="qvPrice" class="text-3xl font-black font-mono text-brand-900 dark:text-white">Rp0</p>
+            <p id="qvDesc" class="text-sm text-slate-500 dark:text-slate-400">Deskripsi produk</p>
+            <p class="text-[10px] font-mono text-slate-400">ID: <span id="qvId">-</span></p>
+            <div class="flex items-center gap-3 mt-2">
+                <button id="qvAddToCartBtn" class="flex-1 py-3 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-bold text-sm transition-all flex items-center justify-center gap-2"><i class="fa-solid fa-cart-plus"></i> Tambah ke Keranjang</button>
+                <button id="qvWishlistBtn" class="w-12 h-12 rounded-xl border border-slate-200 dark:border-white/10 bg-white dark:bg-white/5 flex items-center justify-center text-slate-400 hover:text-red-500 transition-colors"><i class="fa-regular fa-heart"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================
+    CHECKOUT MODAL
+    ============================================ -->
+    <div id="checkoutModalOverlay" class="fixed inset-0 z-[90] bg-brand-900/70 backdrop-blur-sm hidden opacity-0 transition-opacity duration-300 pointer-events-none" onclick="window.closeCheckoutModal()"></div>
+    <div id="checkoutModal" class="fixed top-1/2 left-1/2 z-[95] w-[94%] max-w-2xl bg-white dark:bg-[#0a0f1a] rounded-3xl shadow-2xl p-4 md:p-8 max-h-[90vh] overflow-y-auto transform -translate-x-1/2 -translate-y-1/2 scale-95 opacity-0 transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] pointer-events-none">
+        <button onclick="window.closeCheckoutModal()" class="absolute top-4 right-4 w-8 h-8 rounded-lg bg-slate-100 dark:bg-white/5 flex items-center justify-center text-slate-500 hover:bg-slate-200 transition-colors"><i class="fa-solid fa-xmark"></i></button>
+        <div class="mb-6">
+            <h3 class="text-xl font-extrabold text-brand-900 dark:text-white flex items-center gap-2"><i class="fa-brands fa-whatsapp text-emerald-400"></i> Checkout</h3>
+            <p class="text-xs text-slate-500 dark:text-slate-400">Lengkapi data pesanan untuk melanjutkan ke WhatsApp</p>
+        </div>
+        <div class="flex items-center gap-2 mb-6 relative">
+            <div id="step1Indicator" class="flex items-center gap-2"><div class="w-7 h-7 rounded-full text-xs font-bold flex items-center justify-center transition-colors duration-300 border-2 border-white ring-2 ring-slate-100 step-indicator active shadow-sm">1</div><span class="text-[9px] font-bold uppercase tracking-widest text-brand-900 dark:text-white">Data</span></div>
+            <div class="flex-1 h-0.5 bg-slate-200 dark:bg-white/10 relative"><div id="stepProgressLine" class="h-full bg-emerald-500 rounded-full transition-all duration-500" style="width:0%"></div></div>
+            <div id="step2Indicator" class="flex items-center gap-2"><div class="w-7 h-7 rounded-full text-xs font-bold flex items-center justify-center transition-colors duration-300 border-2 border-white ring-2 ring-slate-100 step-indicator bg-slate-100 text-slate-400">2</div><span class="text-[9px] font-bold uppercase tracking-widest text-slate-400">Alamat</span></div>
+            <div class="flex-1 h-0.5 bg-slate-200 dark:bg-white/10"></div>
+            <div id="step3Indicator" class="flex items-center gap-2"><div class="w-7 h-7 rounded-full text-xs font-bold flex items-center justify-center transition-colors duration-300 border-2 border-white ring-2 ring-slate-100 step-indicator bg-slate-100 text-slate-400">3</div><span class="text-[9px] font-bold uppercase tracking-widest text-slate-400">Kirim</span></div>
+        </div>
+        <form id="checkoutFormFull" class="space-y-4" onsubmit="event.preventDefault()">
+            <div data-step="1" class="space-y-3">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                    <div>
+                        <label class="text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest block mb-1">Nama Lengkap</label>
+                        <input id="newCustName" type="text" placeholder="Nama pembeli" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-white/10 bg-white dark:bg-[#0d1522] text-sm text-brand-900 dark:text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-brand-500/30 transition-all" required />
+                        <div id="newErrName" class="error-message"><i class="fa-solid fa-circle-exclamation"></i> <span>Minimal 2 karakter</span></div>
+                    </div>
+                    <div>
+                        <label class="text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest block mb-1">No. HP (WA)</label>
+                        <input id="newCustPhone" type="tel" placeholder="812 3456 7890" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-white/10 bg-white dark:bg-[#0d1522] text-sm text-brand-900 dark:text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-brand-500/30 transition-all" required />
+                        <div id="newErrPhone" class="error-message"><i class="fa-solid fa-circle-exclamation"></i> <span>Nomor tidak valid</span></div>
+                    </div>
+                </div>
+                <div>
+                    <label class="text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest block mb-1">Alamat Lengkap</label>
+                    <textarea id="newAlamat" rows="2" placeholder="Jalan, RT/RW, Perumahan..." class="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-white/10 bg-white dark:bg-[#0d1522] text-sm text-brand-900 dark:text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-brand-500/30 transition-all resize-none" required></textarea>
+                    <div id="newErrAlamat" class="error-message"><i class="fa-solid fa-circle-exclamation"></i> <span>Minimal 20 karakter</span></div>
+                </div>
+                <div>
+                    <label class="text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest block mb-1">Patokan</label>
+                    <input id="newPatokan" type="text" placeholder="Patokan (warung, masjid, dll)" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-white/10 bg-white dark:bg-[#0d1522] text-sm text-brand-900 dark:text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-brand-500/30 transition-all" />
+                </div>
+            </div>
+            <div data-step="2" class="space-y-3">
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
+                    <div>
+                        <label class="text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest block mb-1">Provinsi</label>
+                        <input id="newProvinsi" type="text" placeholder="Provinsi" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-white/10 bg-white dark:bg-[#0d1522] text-sm text-brand-900 dark:text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-brand-500/30 transition-all" required />
+                    </div>
+                    <div>
+                        <label class="text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest block mb-1">Kota</label>
+                        <input id="newKota" type="text" placeholder="Kota/Kab" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-white/10 bg-white dark:bg-[#0d1522] text-sm text-brand-900 dark:text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-brand-500/30 transition-all" required />
+                    </div>
+                    <div>
+                        <label class="text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest block mb-1">Kecamatan</label>
+                        <input id="newKecamatan" type="text" placeholder="Kecamatan" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-white/10 bg-white dark:bg-[#0d1522] text-sm text-brand-900 dark:text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-brand-500/30 transition-all" required />
+                    </div>
+                    <div>
+                        <label class="text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest block mb-1">Kelurahan</label>
+                        <input id="newKelurahan" type="text" placeholder="Kelurahan/Desa" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-white/10 bg-white dark:bg-[#0d1522] text-sm text-brand-900 dark:text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-brand-500/30 transition-all" required />
+                    </div>
+                    <div>
+                        <label class="text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest block mb-1">Kode Pos</label>
+                        <input id="newKodePos" type="text" placeholder="Kode Pos" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-white/10 bg-white dark:bg-[#0d1522] text-sm text-brand-900 dark:text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-brand-500/30 transition-all" required />
+                    </div>
+                </div>
+            </div>
+            <div data-step="3" class="space-y-3">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+                    <div>
+                        <label class="text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest block mb-1">Ekspedisi</label>
+                        <select id="newEkspedisi" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-white/10 bg-white dark:bg-[#0d1522] text-sm text-brand-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-brand-500/30 transition-all" required>
+                            <option value="">Pilih</option>
+                            <option value="JNE">JNE</option>
+                            <option value="J&T">J&T</option>
+                            <option value="SiCepat">SiCepat</option>
+                            <option value="Anteraja">Anteraja</option>
+                            <option value="Lion Parcel">Lion Parcel</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest block mb-1">Pembayaran</label>
+                        <select id="newMetode" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-white/10 bg-white dark:bg-[#0d1522] text-sm text-brand-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-brand-500/30 transition-all" required>
+                            <option value="">Pilih</option>
+                            <option value="Transfer Bank">Transfer Bank</option>
+                            <option value="QRIS">QRIS</option>
+                            <option value="Cash">Cash</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest block mb-1">Admin WhatsApp</label>
+                        <select id="newAdmin" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-white/10 bg-white dark:bg-[#0d1522] text-sm text-brand-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-brand-500/30 transition-all" required>
+                            <option value="">Pilih Admin</option>
+                            <option value="6281234567890">Admin 1 (+62 812 3456 7890)</option>
+                            <option value="6281234567891">Admin 2 (+62 812 3456 7891)</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="bg-slate-50 dark:bg-white/5 rounded-xl p-4">
+                    <div class="flex justify-between text-sm font-bold text-brand-900 dark:text-white">
+                        <span>Total Order</span>
+                        <span id="modalTotalPrice" class="font-mono">Rp0</span>
+                    </div>
+                </div>
+                <button id="finalCheckoutBtn" type="button" onclick="window.submitOrder()" disabled class="w-full py-3.5 rounded-xl bg-slate-200 dark:bg-white/10 text-slate-400 font-bold text-sm transition-all flex items-center justify-center gap-2">
+                    <i id="finalBtnIcon" class="fa-brands fa-whatsapp text-lg"></i>
+                    <span id="finalBtnText">Konfirmasi Pesanan</span>
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <!-- ============================================
+    REVIEW MODAL
+    ============================================ -->
+    <div id="reviewModalOverlay" class="fixed inset-0 z-[85] bg-brand-900/70 backdrop-blur-sm hidden opacity-0 transition-opacity duration-300 pointer-events-none" onclick="window.closeReviewModal()"></div>
+    <div id="reviewModal" class="fixed top-1/2 left-1/2 z-[90] w-[92%] max-w-lg bg-white dark:bg-[#0a0f1a] rounded-3xl shadow-2xl p-6 transform -translate-x-1/2 -translate-y-1/2 scale-95 opacity-0 transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] pointer-events-none">
+        <button onclick="window.closeReviewModal()" class="absolute top-4 right-4 w-8 h-8 rounded-lg bg-slate-100 dark:bg-white/5 flex items-center justify-center text-slate-500 hover:bg-slate-200 transition-colors"><i class="fa-solid fa-xmark"></i></button>
+        <h3 class="text-xl font-extrabold text-brand-900 dark:text-white mb-4 flex items-center gap-2"><i class="fa-regular fa-star text-amber-400"></i> Tulis Ulasan</h3>
+        <form id="reviewForm" onsubmit="event.preventDefault(); window.submitReview()">
+            <div class="space-y-4">
+                <div>
+                    <label class="text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest block mb-1">Nama</label>
+                    <input id="reviewName" type="text" placeholder="Nama Anda" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-white/10 bg-white dark:bg-[#0d1522] text-sm text-brand-900 dark:text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-brand-500/30 transition-all" required />
+                </div>
+                <div>
+                    <label class="text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest block mb-1">Toko / Usaha</label>
+                    <input id="reviewStore" type="text" placeholder="Nama toko" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-white/10 bg-white dark:bg-[#0d1522] text-sm text-brand-900 dark:text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-brand-500/30 transition-all" required />
+                </div>
+                <div>
+                    <label class="text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest block mb-1">Rating</label>
+                    <div id="starRatingSelector" class="star-rating-input">
+                        <i data-rating="5" class="fa-regular fa-star" onclick="window.setRating(5)"></i>
+                        <i data-rating="4" class="fa-regular fa-star" onclick="window.setRating(4)"></i>
+                        <i data-rating="3" class="fa-regular fa-star" onclick="window.setRating(3)"></i>
+                        <i data-rating="2" class="fa-regular fa-star" onclick="window.setRating(2)"></i>
+                        <i data-rating="1" class="fa-regular fa-star" onclick="window.setRating(1)"></i>
+                        <input id="reviewRating" type="hidden" value="5" />
+                    </div>
+                </div>
+                <div>
+                    <label class="text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest block mb-1">Ulasan</label>
+                    <textarea id="reviewText" rows="3" placeholder="Bagaimana pengalaman Anda berbelanja di R2 Nusantara?" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-white/10 bg-white dark:bg-[#0d1522] text-sm text-brand-900 dark:text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-brand-500/30 transition-all resize-none" required></textarea>
+                </div>
+                <button id="submitReviewBtn" type="submit" class="w-full py-3 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-bold text-sm transition-all flex items-center justify-center gap-2">
+                    <i class="fa-regular fa-paper-plane"></i> Kirim Ulasan
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <!-- SCRIPTS -->
+    <script src="data.js"></script>
+    <script src="app.js"></script>
+
+    <!-- Service Worker Registration -->
     <script>
-        // Set Server Clock
-        setInterval(() => {
-            const now = new Date();
-            const dateStr = now.toLocaleDateString('id-ID', { year: 'numeric', month: 'short', day: 'numeric' });
-            const timeStr = now.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' });
-            document.getElementById('server-clock').innerText = `${dateStr} ${timeStr}`;
-        }, 1000);
-
-        // Toast System
-        function showToast(msg, isError = false) {
-            const toast = document.getElementById('toast');
-            const icon = document.getElementById('toast-icon');
-            document.getElementById('toast-msg').innerText = msg;
-            
-            if(isError) {
-                toast.classList.add('error');
-                icon.className = 'w-6 h-6 rounded-full bg-rose-100 text-rose-600 flex items-center justify-center text-sm';
-                icon.innerHTML = '<i class="fas fa-times"></i>';
-            } else {
-                toast.classList.remove('error');
-                icon.className = 'w-6 h-6 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center text-sm';
-                icon.innerHTML = '<i class="fas fa-check"></i>';
-            }
-
-            toast.classList.add('show');
-            setTimeout(() => toast.classList.remove('show'), 4000);
-        }
-
-        // Countdown Timer Logic
-        let deadline = localStorage.getItem('bc_deadline_formal');
-        if (!deadline) {
-            deadline = new Date().getTime() + 23 * 60 * 60 * 1000 + 45 * 60 * 1000;
-            localStorage.setItem('bc_deadline_formal', deadline);
-        } else {
-            deadline = parseInt(deadline);
-        }
-
-        setInterval(() => {
-            const distance = deadline - new Date().getTime();
-            if (distance < 0) return;
-            document.getElementById('hours').innerText = String(Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))).padStart(2, '0');
-            document.getElementById('minutes').innerText = String(Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60))).padStart(2, '0');
-            document.getElementById('seconds').innerText = String(Math.floor((distance % (1000 * 60)) / 1000)).padStart(2, '0');
-        }, 1000);
-
-        // Simulasi Pembayaran
-        function simulatePayment() {
-            const payBtns = document.querySelectorAll('.pay-btn-class');
-            const paidStamp = document.getElementById('paidStamp');
-            
-            payBtns.forEach(btn => {
-                btn.disabled = true;
-                btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> MEMPROSES...';
-            });
-
-            setTimeout(() => {
-                payBtns.forEach(btn => {
-                    btn.innerHTML = '<i class="fas fa-check-circle"></i> STATUS: LUNAS';
-                    btn.classList.replace('from-[var(--primary-navy)]', 'from-emerald-600');
-                    btn.classList.replace('to-[var(--primary-dark)]', 'to-emerald-700');
-                    btn.style.cursor = 'default';
-                });
-                
-                paidStamp.classList.add('active');
-                
-                const stepPay = document.getElementById('step-payment');
-                stepPay.querySelector('div').className = 'absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-emerald-600 border-2 border-white shadow';
-                stepPay.querySelector('p').className = 'text-xs font-bold text-emerald-700';
-                stepPay.querySelectorAll('p')[1].innerText = 'Lunas • Menunggu Restitusi';
-
-                const stepFinal = document.getElementById('step-final');
-                stepFinal.querySelector('div').className = 'absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-amber-500 border-2 border-white shadow animate-pulse';
-                stepFinal.querySelector('p').className = 'text-xs font-bold text-amber-700';
-                
-                showToast('Pembayaran berhasil dikonfirmasi. Invoice telah dicap LUNAS.');
-            }, 2000);
-        }
-
-        // PDF Generation
-        function generatePDF() {
-            const pdfBtns = document.querySelectorAll('.pdf-btn-class');
-            const element = document.getElementById('pdfDocument');
-            
-            pdfBtns.forEach(btn => {
-                btn.dataset.original = btn.innerHTML;
-                btn.disabled = true;
-                btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Menyusun...';
-            });
-
-            const watermarkMain = document.querySelector('.watermark-main');
-            const originalMain = watermarkMain.style.opacity;
-            watermarkMain.style.opacity = '0.04'; 
-
-            const opt = {
-                margin: 0,
-                filename: 'Invoice_Jaminan_Legalisasi_BC.pdf',
-                image: { type: 'jpeg', quality: 1.0 },
-                html2canvas: { 
-                    scale: 2.5, 
-                    useCORS: true, 
-                    logging: false, 
-                    backgroundColor: '#ffffff'
-                }, 
-                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
-            };
-
-            html2pdf().set(opt).from(element).save().then(() => {
-                watermarkMain.style.opacity = originalMain;
-                pdfBtns.forEach(btn => {
-                    btn.disabled = false;
-                    btn.innerHTML = btn.dataset.original;
-                });
-                showToast('Dokumen PDF berhasil diunduh.');
-            }).catch(err => {
-                watermarkMain.style.opacity = originalMain;
-                pdfBtns.forEach(btn => {
-                    btn.disabled = false;
-                    btn.innerHTML = btn.dataset.original;
-                });
-                showToast('Gagal memproses PDF.', true);
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function() {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(function(reg) { console.log('SW registered:', reg.scope); })
+                    .catch(function(err) { console.log('SW registration failed:', err); });
             });
         }
     </script>
